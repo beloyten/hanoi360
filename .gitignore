@@ -39,3 +39,6 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# figma api dumps (local cache, avoid re-fetching)
+/.figma-cache/
