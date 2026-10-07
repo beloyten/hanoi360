@@ -1,13 +1,19 @@
 "use client";
 
 import Image from "next/image";
-import { useRouter } from "next/navigation";
-import { useLayoutEffect, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { useIsSaved, useToggleSaved } from "@/lib/store/use-saved-store";
-import { BackIcon, BookmarkIcon, CalendarIcon, FacebookIcon, InstagramIcon, PinIconV2 } from "../home/icons";
+import { BookmarkIcon, CalendarIcon, FacebookIcon, InstagramIcon, PinIconV2 } from "../home/icons";
 import { DirectionsButton } from "./directions-button";
 import { DetailContent, type DetailBlock } from "./detail-content";
 import { BottomNav } from "../home/bottom-nav";
+import { TopBar } from "./top-bar";
+
+const HERO_HEIGHT = 392;
+const BAR_HEIGHT = 56;
+// Figma "Top bar / chi tiet" (556:51864) fill, 112px tall over the hero photo.
+const DETAIL_BAR_GRADIENT =
+  "linear-gradient(180deg, rgba(39, 39, 45, 1) 0%, rgba(18, 18, 21, 0.32) 54%, rgba(0, 0, 0, 0) 100%)";
 
 export type DetailItem = {
   id: number | string;
@@ -41,7 +47,8 @@ export function DetailScreen({
   socials?: boolean;
   cta?: { label: string; href: string };
 }) {
-  const router = useRouter();
+  const scrollRef = useRef<HTMLElement>(null);
+  const [pastHero, setPastHero] = useState(false);
   const saved = useIsSaved(savedKey);
   const toggleSaved = useToggleSaved();
   const cardRef = useRef<HTMLDivElement>(null);
@@ -57,9 +64,26 @@ export function DetailScreen({
     return () => observer.disconnect();
   }, []);
 
+  useEffect(() => {
+    const el = scrollRef.current;
+    if (!el) return;
+    const onScroll = () => setPastHero(el.scrollTop > HERO_HEIGHT - BAR_HEIGHT);
+    el.addEventListener("scroll", onScroll, { passive: true });
+    return () => el.removeEventListener("scroll", onScroll);
+  }, []);
+
   return (
     <div className="relative h-dvh w-full overflow-hidden bg-white">
+      <TopBar
+        title={pastHero ? item.name : undefined}
+        tone={pastHero ? "dark" : "light"}
+        background={pastHero ? "#F3F3F3" : DETAIL_BAR_GRADIENT}
+        height={pastHero ? BAR_HEIGHT : 112}
+        className="pointer-events-none fixed inset-x-0 top-0 z-40"
+      />
+
       <main
+        ref={scrollRef}
         className="h-full overflow-y-auto"
         style={{
           paddingBottom: "calc(83px + env(safe-area-inset-bottom))",
@@ -75,15 +99,6 @@ export function DetailScreen({
             <div className="absolute inset-0" style={{ backgroundColor: item.logoBg ?? "#eef1ee" }} />
           )}
 
-          <button
-            type="button"
-            onClick={() => router.back()}
-            aria-label="Quay lại"
-            className="absolute left-4 flex h-10 w-10 items-center justify-center rounded-full text-[#FAF8F5]"
-            style={{ top: "calc(12px + env(safe-area-inset-top))" }}
-          >
-            <BackIcon className="h-5 w-5" />
-          </button>
         </div>
 
         <div className="relative z-10 px-6" style={{ marginTop: -overlap }}>

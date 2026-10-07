@@ -1,8 +1,7 @@
 "use client";
 
 import { useEffect, useState, type RefObject } from "react";
-import { useRouter } from "next/navigation";
-import { BackIcon } from "../../home/icons";
+import { TopBar } from "../top-bar";
 
 export function CategoryHeader({
   title,
@@ -11,7 +10,6 @@ export function CategoryHeader({
   title: string;
   scrollContainerRef: RefObject<HTMLElement | null>;
 }) {
-  const router = useRouter();
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
@@ -22,27 +20,15 @@ export function CategoryHeader({
     return () => el.removeEventListener("scroll", onScroll);
   }, [scrollContainerRef]);
 
-  const fg = scrolled ? "#252525" : "#ffffff";
-
+  // Over the hero the bar is transparent with white content; once scrolled it takes the
+  // Figma category state (#F3F3F3, #19264E). 56px keeps it flush with the sticky search bar (top-14).
   return (
-    <div
-      className="fixed inset-x-0 top-0 z-40 flex h-14 items-center gap-2 px-3 transition-colors duration-200"
-      style={{
-        backgroundColor: scrolled ? "#F3F3F3" : "transparent",
-      }}
-    >
-      <button
-        type="button"
-        onClick={() => router.back()}
-        aria-label="Quay lại"
-        className="flex h-10 w-10 items-center justify-center transition-colors duration-200"
-        style={{ color: fg }}
-      >
-        <BackIcon className="h-6 w-6" />
-      </button>
-      <span className="text-base leading-6 font-semibold tracking-normal transition-colors duration-200" style={{ color: scrolled ? "#19264E" : "#ffffff" }}>
-        {title}
-      </span>
-    </div>
+    <TopBar
+      title={title}
+      tone={scrolled ? "dark" : "light"}
+      background={scrolled ? "#F3F3F3" : "transparent"}
+      height={56}
+      className="fixed inset-x-0 top-0 z-40"
+    />
   );
 }

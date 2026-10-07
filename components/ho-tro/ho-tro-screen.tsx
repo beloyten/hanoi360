@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { InfoIcon, PhoneIcon, SettingsIcon } from "../home/icons";
 import { BottomNav } from "../home/bottom-nav";
+import { TopBar } from "../shared/top-bar";
 import { EmergencyTab } from "./emergency-tab";
 import { LegalTab } from "./legal-tab";
 import { SettingsTab } from "./settings-tab";
@@ -28,11 +29,9 @@ export function HoTroScreen() {
         className="h-full overflow-y-auto"
         style={{ paddingBottom: "calc(83px + env(safe-area-inset-bottom))" }}
       >
-        <div
-          className="sticky top-0 z-20 bg-white"
-          style={{ paddingTop: "calc(16px + env(safe-area-inset-top))" }}
-        >
-          <h1 className="pb-3 text-center text-lg font-bold text-[#252525]">Hỗ trợ</h1>
+        <div className="sticky top-0 z-20 bg-white">
+          {/* Figma "Top bar / Lưu" instance in Layout 10_Them: 52px, centered #27314D title. */}
+          <TopBar title="Hỗ trợ" align="center" showBack={false} color="#27314D" height={52} />
 
           <div className="px-4 pb-3">
             <div className="flex items-center justify-center gap-2">
