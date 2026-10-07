@@ -30,7 +30,7 @@ export function getRestaurantContent(restaurant: Restaurant): DetailBlock[] {
         { text: "Gợi ý: ", italic: true },
         {
           text: restaurant.hasVoucher
-            ? "quán hiện có voucher giảm giá khi đặt qua ứng dụng — nhớ kiểm tra trước khi thanh toán."
+            ? "quán hiện có voucher giảm giá khi đặt qua ứng dụng - nhớ kiểm tra trước khi thanh toán."
             : "giờ ăn trưa và tối cuối tuần thường đông, nên đến sớm hoặc đặt bàn trước.",
           italic: true,
         },
@@ -51,7 +51,7 @@ export function getRestaurantContent(restaurant: Restaurant): DetailBlock[] {
       type: "list",
       items: [
         [{ text: `Chuyên ${restaurant.description.charAt(0).toLowerCase()}${restaurant.description.slice(1)}` }],
-        [{ text: `Giờ mở cửa: ${restaurant.hours ?? "9h00 – 22h00"} (${restaurant.hoursNote ?? "Thứ 2 – Chủ nhật"})` }],
+        [{ text: `Giờ mở cửa: ${restaurant.hours ?? "9h00 - 22h00"} (${restaurant.hoursNote ?? "Thứ 2 - Chủ nhật"})` }],
         ...(restaurant.hasVoucher ? [[{ text: "Có ưu đãi voucher khi đặt qua ứng dụng" }]] : []),
         [{ text: "Nhân viên phục vụ nhanh, không gian sạch sẽ" }],
       ] as { text: string }[][],

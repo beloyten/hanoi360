@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { BottomNav } from "../home/bottom-nav";
+import { TopBar } from "../shared/top-bar";
 import { CategoryTabs } from "./category-tabs";
 import { GuideList } from "./guide-list";
 import { GUIDES } from "./guides";
@@ -17,11 +18,9 @@ export function CamNangScreen() {
         className="h-full overflow-y-auto bg-[#E3E2E0]"
         style={{ paddingBottom: "calc(83px + env(safe-area-inset-bottom))" }}
       >
-        <div
-          className="sticky top-0 z-20 bg-white"
-          style={{ paddingTop: "calc(16px + env(safe-area-inset-top))" }}
-        >
-          <h1 className="pb-3 text-center text-lg font-bold text-[#252525]">Cẩm nang du lịch Hà Nội</h1>
+        <div className="sticky top-0 z-20 bg-white">
+          {/* Figma "Top bar / Lưu" in Layout 2_Cẩm nang: 64px, centered #27314D title. */}
+          <TopBar title="Cẩm nang du lịch Hà Nội" align="center" showBack={false} color="#27314D" height={64} />
           <CategoryTabs activeCategory={activeCategory} onCategoryChange={setActiveCategory} />
         </div>
 

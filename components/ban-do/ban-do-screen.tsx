@@ -5,7 +5,6 @@ import { useState } from "react";
 import { BottomNav } from "../home/bottom-nav";
 import { SearchIcon } from "../home/icons";
 import { DirectionsButton } from "../shared/directions-button";
-import { MapCanvas } from "./map-canvas";
 import { CATEGORY_FILTERS, PLACES, type MapPlace, type PlaceCategory } from "./places";
 
 function PinIcon({ className }: { className?: string }) {
@@ -38,7 +37,8 @@ export function BanDoScreen() {
 
   return (
     <div className="relative h-dvh w-full overflow-hidden">
-      <MapCanvas />
+      {/* Map image from the Figma "Map" frame (720:29458). */}
+      <Image src="/ban-do/map.webp" alt="" fill priority className="object-cover" sizes="100vw" />
 
       {/* user location marker */}
       <div

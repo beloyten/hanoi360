@@ -1,5 +1,8 @@
 import { DetailScreen } from "@/components/shared/detail-screen";
+import { getExhibit } from "@/components/trien-lam/exhibits";
 import type { DetailBlock } from "@/components/shared/detail-content";
+
+const EXHIBIT = getExhibit("bien-do-tuong-lai");
 
 const CONTENT: DetailBlock[] = [
   {
@@ -90,15 +93,15 @@ export default function BienDoTuongLaiPage() {
   return (
     <DetailScreen
       item={{
-        id: "bien-do-tuong-lai",
-        name: "Triển Lãm Biên Độ Tương Lai",
-        photo: "/home/banner-6.png",
+        id: EXHIBIT.slug,
+        name: EXHIBIT.name,
+        photo: EXHIBIT.photo,
         hours: "06/06 - 28/06",
         hoursNote: "04/07 - 19/07",
-        address: "LOTTE Department Store, 54 Liễu Giai, Hà Nội",
+        address: EXHIBIT.address,
         content: CONTENT,
       }}
-      savedKey="exhibit:bien-do-tuong-lai"
+      savedKey={`exhibit:${EXHIBIT.slug}`}
       socials
     />
   );

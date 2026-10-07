@@ -16,6 +16,8 @@ const FILTERS: { key: FilterType; label: string }[] = [
   { key: "site", label: "Di tích" },
   { key: "museum", label: "Bảo tàng" },
   { key: "village", label: "Làng nghề" },
+  { key: "guide", label: "Cẩm nang" },
+  { key: "exhibit", label: "Triển lãm" },
 ];
 
 const SORTS: { key: SortBy; label: string }[] = [

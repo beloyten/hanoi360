@@ -30,7 +30,7 @@ const SITE_INFO: Record<number, { story: string; highlights: string[]; tip: stri
       "Phòng trưng bày về các chiến sĩ cách mạng",
       "Khu vực dành cho tù binh thời chiến tranh Việt Nam",
     ],
-    tip: "Nên dành ít nhất 1–1,5 giờ để tham quan trọn vẹn. Một số khu vực trưng bày mang nội dung nặng nề, cân nhắc khi đi cùng trẻ nhỏ.",
+    tip: "Nên dành ít nhất 1-1,5 giờ để tham quan trọn vẹn. Một số khu vực trưng bày mang nội dung nặng nề, cân nhắc khi đi cùng trẻ nhỏ.",
   },
   4: {
     story: "Chùa Một Cột (Diên Hựu tự) được vua Lý Thái Tông cho xây dựng năm 1049, mang kiến trúc độc đáo hình bông sen vươn lên trên trụ đá giữa ao, là một trong những biểu tượng của Hà Nội.",
@@ -39,22 +39,22 @@ const SITE_INFO: Record<number, { story: string; highlights: string[]; tip: stri
       "Nằm trong quần thể khu Ba Đình lịch sử",
       "Miễn phí tham quan, dễ kết hợp với Lăng Bác và Bảo tàng Hồ Chí Minh",
     ],
-    tip: "Khu vực quanh chùa có quy định về trang phục và giờ tham quan theo quần thể Ba Đình — nên đi vào buổi sáng.",
+    tip: "Khu vực quanh chùa có quy định về trang phục và giờ tham quan theo quần thể Ba Đình - nên đi vào buổi sáng.",
   },
   5: {
     story: "Hồ Hoàn Kiếm là trái tim của Hà Nội, gắn liền với truyền thuyết vua Lê Lợi trả gươm báu cho Rùa vàng. Giữa hồ là Tháp Rùa cổ kính, phía bắc là đền Ngọc Sơn nối với bờ qua cầu Thê Húc đỏ.",
     highlights: [
       "Cầu Thê Húc và đền Ngọc Sơn trên đảo nhỏ",
-      "Tháp Rùa giữa hồ — biểu tượng của thành phố",
+      "Tháp Rùa giữa hồ - biểu tượng của thành phố",
       "Phố đi bộ cuối tuần với nhiều hoạt động văn hóa",
     ],
-    tip: "Tối thứ 6 đến Chủ nhật, phố đi bộ quanh hồ rất sôi động. Sáng sớm là lúc người dân tập thể dục — trải nghiệm đời sống địa phương thú vị.",
+    tip: "Tối thứ 6 đến Chủ nhật, phố đi bộ quanh hồ rất sôi động. Sáng sớm là lúc người dân tập thể dục - trải nghiệm đời sống địa phương thú vị.",
   },
   6: {
     story: "Vườn Quốc gia Ba Vì nằm cách trung tâm Hà Nội khoảng 50km, nổi tiếng với núi cao, rừng nguyên sinh, nhà thờ cổ bỏ hoang giữa rừng và hệ thống đền thờ trên đỉnh Tản Viên.",
     highlights: [
       "Leo núi lên đền Thượng và nhìn toàn cảnh đồng bằng Bắc Bộ",
-      "Nhà thờ cổ phủ rêu giữa rừng — điểm chụp ảnh nổi tiếng",
+      "Nhà thờ cổ phủ rêu giữa rừng - điểm chụp ảnh nổi tiếng",
       "Vườn xương rồng và rừng thông xanh mát",
     ],
     tip: "Mang theo giày đi bộ và nước uống. Mùa đông trên đỉnh núi khá lạnh, nên mang áo ấm.",
@@ -66,12 +66,12 @@ const SITE_INFO: Record<number, { story: string; highlights: string[]; tip: stri
       "Đền Thượng thờ An Dương Vương",
       "Giếng Ngọc gắn với truyền thuyết nỏ thần",
     ],
-    tip: "Hội đền Thượng diễn ra vào ngày 6 tháng Giêng âm lịch — thời điểm lý tưởng để trải nghiệm văn hóa địa phương.",
+    tip: "Hội đền Thượng diễn ra vào ngày 6 tháng Giêng âm lịch - thời điểm lý tưởng để trải nghiệm văn hóa địa phương.",
   },
   8: {
     story: "Làng cổ Đường Lâm là 'quê hương của hai vị vua' Phùng Hưng và Ngô Quyền, nổi tiếng với các ngôi nhà cổ bằng đá ong hàng trăm năm tuổi, đình làng, giếng nước và lối sống làng quê Bắc Bộ nguyên vẹn.",
     highlights: [
-      "Nhà cổ đá ong 300–400 năm tuổi",
+      "Nhà cổ đá ong 300-400 năm tuổi",
       "Đình Mông Phụ và cây đa, bến nước, sân đình",
       "Đạp xe qua những con hẻm gạch đỏ yên bình",
       "Đặc sản chè lam, tương bần, gà mía",
@@ -97,7 +97,7 @@ export function getSiteContent(site: Site): DetailBlock[] {
       type: "text",
       parts: [
         {
-          text: "Đây là một trong những điểm đến văn hóa – lịch sử được yêu thích nhất của thủ đô, phù hợp cho chuyến tham quan nửa ngày hoặc cả ngày tùy lịch trình của bạn.",
+          text: "Đây là một trong những điểm đến văn hóa - lịch sử được yêu thích nhất của thủ đô, phù hợp cho chuyến tham quan nửa ngày hoặc cả ngày tùy lịch trình của bạn.",
         },
       ],
     },
@@ -123,7 +123,7 @@ export function getSiteContent(site: Site): DetailBlock[] {
       parts: [
         { text: "Địa chỉ: ", bold: true },
         { text: `${site.subtitle} Hà Nội. ` },
-        { text: `Cách bạn khoảng ${site.distance} — có thể đi bộ, xe máy hoặc ô tô tùy khoảng cách.` },
+        { text: `Cách bạn khoảng ${site.distance} - có thể đi bộ, xe máy hoặc ô tô tùy khoảng cách.` },
       ],
     },
     {

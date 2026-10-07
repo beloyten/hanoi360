@@ -65,10 +65,12 @@ export function CardItemVertical({
         <p className="max-w-[70%] truncate text-[16px] leading-tight font-bold text-[#252525]">{item.name}</p>
         <p className="mt-1 mb-11 max-w-[70%] truncate text-[13px] text-[#58585c]">{item.subtitle}</p>
 
-        <div className="absolute bottom-1 left-3.5 inline-flex items-center">
-          <PinIcon className="size-5 text-[#27314D]" />
-          <span className="flex h-5 items-center text-[11px] leading-none text-[#27314D]">{item.distance}</span>
-        </div>
+        {item.distance && (
+          <div className="absolute bottom-1 left-3.5 inline-flex items-center">
+            <PinIcon className="size-5 text-[#27314D]" />
+            <span className="flex h-5 items-center text-[11px] leading-none text-[#27314D]">{item.distance}</span>
+          </div>
+        )}
 
         <button
           type="button"

@@ -1,5 +1,8 @@
 import { DetailScreen } from "@/components/shared/detail-screen";
+import { getExhibit } from "@/components/trien-lam/exhibits";
 import type { DetailBlock } from "@/components/shared/detail-content";
+
+const EXHIBIT = getExhibit("workshop-hoa-gom");
 
 const CONTENT: DetailBlock[] = [
   {
@@ -68,15 +71,15 @@ export default function WorkshopHoaGomPage() {
   return (
     <DetailScreen
       item={{
-        id: "workshop-hoa-gom",
-        name: "Workshop hoạ gốm",
-        photo: "/home/banner-1.png",
+        id: EXHIBIT.slug,
+        name: EXHIBIT.name,
+        photo: EXHIBIT.photo,
         hours: "15h00 - 17h00",
         hoursNote: "Thứ 7, ngày 31/05",
-        address: "Tầng 2, AN Thuận An, số 53 Thuận An, Trâu Quỳ, Gia Lâm, Hà Nội",
+        address: EXHIBIT.address,
         content: CONTENT,
       }}
-      savedKey="exhibit:workshop-hoa-gom"
+      savedKey={`exhibit:${EXHIBIT.slug}`}
       socials
     />
   );

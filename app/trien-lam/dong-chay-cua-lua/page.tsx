@@ -1,5 +1,8 @@
 import { DetailScreen } from "@/components/shared/detail-screen";
+import { getExhibit } from "@/components/trien-lam/exhibits";
 import type { DetailBlock } from "@/components/shared/detail-content";
+
+const EXHIBIT = getExhibit("dong-chay-cua-lua");
 
 const CONTENT: DetailBlock[] = [
   {
@@ -59,14 +62,14 @@ export default function DongChayCuaLuaPage() {
   return (
     <DetailScreen
       item={{
-        id: "dong-chay-cua-lua",
-        name: "Triển lãm Trong dòng chảy của Lụa",
-        photo: "/home/banner-4.png",
+        id: EXHIBIT.slug,
+        name: EXHIBIT.name,
+        photo: EXHIBIT.photo,
         hours: "24/09 - 03/10",
-        address: "The Muse Artspace, 47 Tràng Tiền, Hà Nội",
+        address: EXHIBIT.address,
         content: CONTENT,
       }}
-      savedKey="exhibit:dong-chay-cua-lua"
+      savedKey={`exhibit:${EXHIBIT.slug}`}
       socials
     />
   );

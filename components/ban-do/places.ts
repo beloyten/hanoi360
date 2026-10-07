@@ -7,7 +7,7 @@ export type MapPlace = {
   distance: string;
   photo: string;
   category: PlaceCategory;
-  /** Position as percentage of the map canvas. */
+  /** Pin tip position as a percentage of the map image (public/ban-do/map.webp). */
   x: number;
   y: number;
 };
@@ -27,8 +27,8 @@ export const PLACES: MapPlace[] = [
     distance: "250m",
     photo: "/di-tich-lich-su/ho-tay.png",
     category: "di-tich",
-    x: 24,
-    y: 16,
+    x: 12,
+    y: 22,
   },
   {
     id: "chua-tran-quoc",
@@ -37,8 +37,8 @@ export const PLACES: MapPlace[] = [
     distance: "800m",
     photo: "/di-tich-lich-su/chua-tran-quoc.png",
     category: "di-tich",
-    x: 33,
-    y: 27,
+    x: 28,
+    y: 18,
   },
   {
     id: "bao-tang-dan-toc",
@@ -47,8 +47,8 @@ export const PLACES: MapPlace[] = [
     distance: "3.1km",
     photo: "/di-tich-lich-su/ho-tay.png",
     category: "bao-tang",
-    x: 14,
-    y: 38,
+    x: 18,
+    y: 45,
   },
   {
     id: "chua-mot-cot",
@@ -57,8 +57,8 @@ export const PLACES: MapPlace[] = [
     distance: "3.8km",
     photo: "/di-tich-lich-su/chua-mot-cot.png",
     category: "di-tich",
-    x: 45,
-    y: 40,
+    x: 43,
+    y: 24,
   },
   {
     id: "bao-tang-ha-noi",
@@ -67,8 +67,8 @@ export const PLACES: MapPlace[] = [
     distance: "7.5km",
     photo: "/di-tich-lich-su/chua-tran-quoc.png",
     category: "bao-tang",
-    x: 78,
-    y: 30,
+    x: 85,
+    y: 16,
   },
   {
     id: "kampong",
@@ -77,8 +77,8 @@ export const PLACES: MapPlace[] = [
     distance: "1.2km",
     photo: "/am-thuc/kam-pong.png",
     category: "am-thuc",
-    x: 72,
-    y: 44,
+    x: 62,
+    y: 50,
   },
   {
     id: "ho-guom",
@@ -87,8 +87,8 @@ export const PLACES: MapPlace[] = [
     distance: "4.5km",
     photo: "/di-tich-lich-su/ho-hoan-kiem.png",
     category: "di-tich",
-    x: 63,
-    y: 58,
+    x: 88,
+    y: 80,
   },
   {
     id: "crystal-jade",
@@ -97,8 +97,8 @@ export const PLACES: MapPlace[] = [
     distance: "2.4km",
     photo: "/am-thuc/crystal-jade.png",
     category: "am-thuc",
-    x: 40,
-    y: 52,
+    x: 38,
+    y: 60,
   },
   {
     id: "hoa-lo",
@@ -107,8 +107,8 @@ export const PLACES: MapPlace[] = [
     distance: "4.2km",
     photo: "/di-tich-lich-su/di-tich-hoa-lo.png",
     category: "di-tich",
-    x: 52,
-    y: 68,
+    x: 55,
+    y: 88,
   },
   {
     id: "bao-tang-lich-su",
@@ -117,7 +117,7 @@ export const PLACES: MapPlace[] = [
     distance: "4.8km",
     photo: "/di-tich-lich-su/chua-mot-cot.png",
     category: "bao-tang",
-    x: 80,
-    y: 64,
+    x: 75,
+    y: 63,
   },
 ];

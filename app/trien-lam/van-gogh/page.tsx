@@ -1,12 +1,15 @@
 import { DetailScreen } from "@/components/shared/detail-screen";
+import { getExhibit } from "@/components/trien-lam/exhibits";
 import type { DetailBlock } from "@/components/shared/detail-content";
+
+const EXHIBIT = getExhibit("van-gogh");
 
 const CONTENT: DetailBlock[] = [
   {
     type: "text",
     parts: [
       {
-        text: 'Từ 21/08/2026, không gian gần 4.000m² của Van Gogh Timeless tại Hà Nội chính thức mở cửa – mở ra một khoảng trời bình yên để cùng bạn đắm chìm, cảm nhận nghệ thuật theo cách của riêng mình, và để mỗi chúng ta được tự mình "bước vào trong tranh":',
+        text: 'Từ 21/08/2026, không gian gần 4.000m² của Van Gogh Timeless tại Hà Nội chính thức mở cửa - mở ra một khoảng trời bình yên để cùng bạn đắm chìm, cảm nhận nghệ thuật theo cách của riêng mình, và để mỗi chúng ta được tự mình "bước vào trong tranh":',
       },
     ],
   },
@@ -49,17 +52,17 @@ export default function VanGoghPage() {
   return (
     <DetailScreen
       item={{
-        id: "van-gogh-timeless",
-        name: "Triển lãm đa giác quan Van Gogh Timless",
-        photo: "/home/banner-5.png",
-        hours: "08:00 – 22:00",
+        id: EXHIBIT.slug,
+        name: EXHIBIT.name,
+        photo: EXHIBIT.photo,
+        hours: "08:00 - 22:00",
         hoursNote: "Thứ 2,3,5,6,7,CN.",
-        address: "Tầng 1, Tòa B - UDIC Westlake Building, Đ. Võ Chí Công, P. Phú Thượng, Hà Nội",
+        address: EXHIBIT.address,
         content: CONTENT,
       }}
-      savedKey="exhibit:van-gogh-timeless"
+      savedKey={`exhibit:${EXHIBIT.slug}`}
       socials
-      cta={{ label: "Mua Vé", href: "#" }}
+      cta={{ label: "Mua vé" }}
     />
   );
 }

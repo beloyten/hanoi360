@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { CheckIcon } from "../home/icons";
 import { useGeoPermission } from "../home/use-geo-permission";
 import { Switch } from "@/components/ui/switch";
@@ -14,11 +14,8 @@ const LANGUAGES = [
 function LocationToggle() {
   const { status, requestLocation } = useGeoPermission();
   const [override, setOverride] = useState<boolean | null>(null);
-  const enabled = override ?? status === "granted";
-
-  useEffect(() => {
-    if (status === "denied") setOverride(false);
-  }, [status]);
+  // A denied permission always shows as off, whatever the user toggled before.
+  const enabled = status === "denied" ? false : (override ?? status === "granted");
 
   const handleChange = (checked: boolean) => {
     setOverride(checked);

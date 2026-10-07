@@ -5,6 +5,8 @@ import { SHOPS } from "@/components/mua-sam/shops";
 import { SITES } from "@/components/di-tich/sites";
 import { MUSEUMS } from "@/components/bao-tang/museums";
 import { VILLAGES } from "@/components/lang-nghe/villages";
+import { GUIDES } from "@/components/cam-nang/guides";
+import { EXHIBITS } from "@/components/trien-lam/exhibits";
 
 export type SavedItemType =
   | "restaurant"
@@ -13,7 +15,9 @@ export type SavedItemType =
   | "shop"
   | "site"
   | "museum"
-  | "village";
+  | "village"
+  | "guide"
+  | "exhibit";
 
 export type SavedDisplayItem = {
   key: string;
@@ -28,6 +32,34 @@ export type SavedDisplayItem = {
 export function resolveSavedItem(key: string): SavedDisplayItem | null {
   const [type, idStr] = key.split(":");
   const id = Number(idStr);
+
+  if (type === "exhibit") {
+    const exhibit = EXHIBITS.find((item) => item.slug === idStr);
+    if (!exhibit) return null;
+    return {
+      key,
+      type,
+      name: exhibit.name,
+      subtitle: exhibit.address,
+      distance: "",
+      photo: exhibit.photo,
+      href: `/trien-lam/${exhibit.slug}`,
+    };
+  }
+
+  if (type === "guide") {
+    const guide = GUIDES.find((item) => item.id === id);
+    if (!guide) return null;
+    return {
+      key,
+      type,
+      name: guide.title,
+      subtitle: "Cẩm nang du lịch Hà Nội",
+      distance: "",
+      photo: guide.photo,
+      href: `/cam-nang/${guide.id}`,
+    };
+  }
 
   if (type === "restaurant") {
     const restaurant = RESTAURANTS.find((item) => item.id === id);

@@ -14,7 +14,7 @@ const IMAGES = [
 const HREFS: (string | null)[] = [
   "/trien-lam/workshop-hoa-gom",
   "/trien-lam/giao-chi",
-  null,
+  "/trien-lam/bien-do-tuong-lai",
   "/trien-lam/dong-chay-cua-lua",
   "/trien-lam/van-gogh",
 ];

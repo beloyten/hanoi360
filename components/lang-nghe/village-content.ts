@@ -9,7 +9,7 @@ const VILLAGE_INFO: Record<number, { story: string; highlights: string[]; tip: s
       "Xem nghệ nhân chế tác đồ đồng thủ công",
       "Mua lưu niệm: chuông, tượng, khay đồng nhỏ",
     ],
-    tip: "Làng nằm ngay cạnh hồ Trúc Bạch — kết hợp tham quan làng và dạo hồ trong cùng buổi.",
+    tip: "Làng nằm ngay cạnh hồ Trúc Bạch - kết hợp tham quan làng và dạo hồ trong cùng buổi.",
   },
   2: {
     story: "Làng cốm Vòng là cái nôi của thức quà mùa thu Hà Nội. Cốm xanh dẻo thơm gói trong lá sen được làm từ lúa nếp cái hoa vàng, theo bí quyết gia truyền hàng trăm năm.",
@@ -37,7 +37,7 @@ const VILLAGE_INFO: Record<number, { story: string; highlights: string[]; tip: s
       "Bảo tàng gốm sứ Bát Tràng kiến trúc ấn tượng",
       "Đi thuyền trên sông Hồng ngắm làng",
     ],
-    tip: "Nên thử nặn gốm (khoảng 30–45 phút) và thuê nướng chín sản phẩm mang về. Chợ gốm đông nhất vào cuối tuần.",
+    tip: "Nên thử nặn gốm (khoảng 30-45 phút) và thuê nướng chín sản phẩm mang về. Chợ gốm đông nhất vào cuối tuần.",
   },
   5: {
     story: "Làng khảm trai Chuôn Ngọ giữ nghề khảm xà cừ, khảm trai truyền thống hàng trăm năm, tạo ra những sản phẩm thủ công lấp lánh được đưa vào các công trình và đồ dùng cao cấp.",
@@ -46,7 +46,7 @@ const VILLAGE_INFO: Record<number, { story: string; highlights: string[]; tip: s
       "Sản phẩm khảm trai: hộp, khay, tranh, nội thất",
       "Nghe chuyện nghề từ chính những người thợ trong làng",
     ],
-    tip: "Sản phẩm khảm trai khá nặng và cần đóng gói cẩn thận — mang theo túi chắc hoặc nhờ xưởng đóng gói.",
+    tip: "Sản phẩm khảm trai khá nặng và cần đóng gói cẩn thận - mang theo túi chắc hoặc nhờ xưởng đóng gói.",
   },
   6: {
     story: "Làng mây tre đan Phú Vinh là trung tâm đan lát xuất khẩu lớn, nơi nghệ nhân biến mây, tre, cói thành giỏ, túi, nội thất xuất đi khắp thế giới.",
@@ -58,7 +58,7 @@ const VILLAGE_INFO: Record<number, { story: string; highlights: string[]; tip: s
     tip: "Sản phẩm ở làng rẻ hơn nhiều so với cửa hàng trong phố. Nên đi vào ngày thường để thấy quy trình sản xuất nhộn nhịp.",
   },
   7: {
-    story: "Làng hương tăm Quảng Phú Cầu là 'thủ phủ' hương đỏ nổi tiếng với những bó hương được phơi thành bông hoa rực rỡ — điểm chụp ảnh quen thuộc của du khách.",
+    story: "Làng hương tăm Quảng Phú Cầu là 'thủ phủ' hương đỏ nổi tiếng với những bó hương được phơi thành bông hoa rực rỡ - điểm chụp ảnh quen thuộc của du khách.",
     highlights: [
       "Những sân phơi hương đỏ rực như cánh đồng hoa",
       "Xem quy trình chẻ tre, tôm hương, phơi hương",
@@ -67,7 +67,7 @@ const VILLAGE_INFO: Record<number, { story: string; highlights: string[]; tip: s
     tip: "Hương phơi đẹp nhất vào ngày nắng và trước Tết. Hỏi người dân trước khi vào sân chụp ảnh.",
   },
   8: {
-    story: "Làng Cự Đà nổi tiếng với miến dong dai trong và tương bần đậm đà — hai đặc sản gói trọn hương vị đồng quê Bắc Bộ được bảo lưu qua nhiều thế hệ.",
+    story: "Làng Cự Đà nổi tiếng với miến dong dai trong và tương bần đậm đà - hai đặc sản gói trọn hương vị đồng quê Bắc Bộ được bảo lưu qua nhiều thế hệ.",
     highlights: [
       "Xem phơi miến dong trên các giàn trải dài",
       "Thưởng thức tương Cự Đà chấm rau sống",
@@ -82,7 +82,7 @@ const VILLAGE_INFO: Record<number, { story: string; highlights: string[]; tip: s
       "Xem chằm nón, viền nón thủ công tại các nhà trong làng",
       "Mua nón lá, nón quai thao làm quà",
     ],
-    tip: "Đi vào đúng phiên chợ để thấy không khí đông đúc đặc trưng. Phiên chợ diễn ra từ sáng sớm đến khoảng 8–9 giờ.",
+    tip: "Đi vào đúng phiên chợ để thấy không khí đông đúc đặc trưng. Phiên chợ diễn ra từ sáng sớm đến khoảng 8-9 giờ.",
   },
 };
 
@@ -137,7 +137,7 @@ export function getVillageContent(village: Village): DetailBlock[] {
       ordered: true,
       items: [
         [{ text: "Hỏi trước khi chụp ảnh hoặc quay phim tại xưởng sản xuất" }],
-        [{ text: "Mang theo tiền mặt — nhiều hộ gia đình chưa nhận chuyển khoản" }],
+        [{ text: "Mang theo tiền mặt - nhiều hộ gia đình chưa nhận chuyển khoản" }],
         [{ text: "Thương lượng nhẹ giá khi mua số lượng nhiều" }],
       ],
     },
@@ -146,7 +146,7 @@ export function getVillageContent(village: Village): DetailBlock[] {
       parts: [
         { text: "Địa chỉ: ", bold: true },
         { text: `${village.address}, Hà Nội. ` },
-        { text: `Cách bạn khoảng ${village.distance} — phù hợp đi xe máy hoặc ô tô.` },
+        { text: `Cách bạn khoảng ${village.distance} - phù hợp đi xe máy hoặc ô tô.` },
       ],
     },
   ];

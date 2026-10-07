@@ -1,5 +1,8 @@
 import { DetailScreen } from "@/components/shared/detail-screen";
+import { getExhibit } from "@/components/trien-lam/exhibits";
 import type { DetailBlock } from "@/components/shared/detail-content";
+
+const EXHIBIT = getExhibit("giao-chi");
 
 const CONTENT: DetailBlock[] = [
   {
@@ -24,7 +27,7 @@ const CONTENT: DetailBlock[] = [
     type: "text",
     parts: [
       {
-        text: "Các thiết kế dễ dàng hòa hợp vào nhiều bối cảnh không gian — từ góc phòng, bên đôn gỗ đến kệ sách — tạo nên những điểm dừng thị giác trong cách bài trí không gian sống.",
+        text: "Các thiết kế dễ dàng hòa hợp vào nhiều bối cảnh không gian - từ góc phòng, bên đôn gỗ đến kệ sách - tạo nên những điểm dừng thị giác trong cách bài trí không gian sống.",
       },
     ],
   },
@@ -34,14 +37,14 @@ export default function GiaoChiPage() {
   return (
     <DetailScreen
       item={{
-        id: "giao-chi",
-        name: "BST Giao Chỉ – Hình khối nguyên sơ của một ký ức",
-        photo: "/home/banner-2.png",
+        id: EXHIBIT.slug,
+        name: EXHIBIT.name,
+        photo: EXHIBIT.photo,
         hours: "24/09 - 03/10",
-        address: "Bát Tràng Museum Atelier, Số 1, đường 1–5, thôn 2, xã Bát Tràng, Hà Nội",
+        address: EXHIBIT.address,
         content: CONTENT,
       }}
-      savedKey="exhibit:giao-chi"
+      savedKey={`exhibit:${EXHIBIT.slug}`}
       socials
     />
   );

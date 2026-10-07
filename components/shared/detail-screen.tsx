@@ -9,6 +9,9 @@ import { DetailContent, type DetailBlock } from "./detail-content";
 import { BottomNav } from "../home/bottom-nav";
 import { TopBar } from "./top-bar";
 
+const CTA_CLASS =
+  "flex h-12 w-full items-center justify-center rounded-lg bg-[#AA6E00] text-base font-semibold text-white transition-transform duration-150 select-none active:scale-[0.98]";
+
 const HERO_HEIGHT = 392;
 const BAR_HEIGHT = 56;
 // Figma "Top bar / chi tiet" (556:51864) fill, 112px tall over the hero photo.
@@ -45,7 +48,8 @@ export function DetailScreen({
   hideActions?: boolean;
   squareHero?: boolean;
   socials?: boolean;
-  cta?: { label: string; href: string };
+  /** Without an href (no ticketing link yet) the button renders but does not navigate. */
+  cta?: { label: string; href?: string };
 }) {
   const scrollRef = useRef<HTMLElement>(null);
   const [pastHero, setPastHero] = useState(false);
@@ -203,14 +207,15 @@ export function DetailScreen({
 
         {cta && (
           <div className="px-3 pb-8">
-            <a
-              href={cta.href}
-              target="_blank"
-              rel="noreferrer"
-              className="flex h-12 w-full items-center justify-center rounded-lg bg-[#AA6E00] text-base font-semibold text-white transition-transform duration-150 select-none active:scale-[0.98]"
-            >
-              {cta.label}
-            </a>
+            {cta.href ? (
+              <a href={cta.href} target="_blank" rel="noreferrer" className={CTA_CLASS}>
+                {cta.label}
+              </a>
+            ) : (
+              <button type="button" className={CTA_CLASS}>
+                {cta.label}
+              </button>
+            )}
           </div>
         )}
       </main>

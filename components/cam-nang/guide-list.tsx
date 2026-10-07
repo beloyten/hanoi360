@@ -21,7 +21,7 @@ function GuideCard({ guide }: { guide: Guide }) {
       <div className="h-8" style={{ backgroundColor: guide.accentColor }} />
 
       <div className="absolute bottom-2 left-2 right-2 flex h-14 items-center justify-center overflow-hidden rounded bg-white/80 px-9 py-1 backdrop-blur-[15px]" style={{ height: '56px' }}>
-        <p className="line-clamp-2 text-center text-[16px] leading-snug font-bold text-[#252525]">{guide.title}</p>
+        <p className="line-clamp-2 text-center text-base leading-6 font-semibold text-[#141E3F]">{guide.title}</p>
       </div>
     </Link>
   );
@@ -29,7 +29,7 @@ function GuideCard({ guide }: { guide: Guide }) {
 
 export function GuideList({ guides }: { guides: Guide[] }) {
   return (
-    <div className="flex flex-col gap-2 px-3 py-2 pb-8">
+    <div className="flex flex-col gap-2 px-3 pt-[9px] pb-8">
       {guides.map((guide) => (
         <GuideCard key={guide.id} guide={guide} />
       ))}

@@ -19,8 +19,9 @@ export function CategoryTabs({
   const activeIndex = TABS.findIndex((tab) => tab.key === activeCategory);
 
   return (
-    <div className="px-4 pt-4 pb-2">
-      <div className="relative flex gap-2">
+    // Figma: tab row 361px wide (16px margins), 12px gaps, 8px bottom padding; labels 12px #141E3F.
+    <div className="px-4 pb-2">
+      <div className="relative flex gap-3">
         {TABS.map(({ key, label, Icon }) => {
           const isActive = key === activeCategory;
           return (
@@ -28,7 +29,7 @@ export function CategoryTabs({
               key={key}
               type="button"
               onClick={() => onCategoryChange(key)}
-              className="flex flex-1 flex-col items-center gap-1"
+              className="flex flex-1 flex-col items-center pb-1"
             >
               <div className="grid size-18 shrink-0 place-items-center">
                 <div className={`grid place-items-center ${isActive ? "size-18 bg-[#9B9B9B] p-0.5 animate-[tab-pop_0.3s_ease-in-out]" : "size-17 bg-transparent"}`}>
@@ -38,8 +39,8 @@ export function CategoryTabs({
                 </div>
               </div>
               <span
-                className="flex-1 text-center text-[11px] leading-tight whitespace-pre-line text-[#252525]"
-                style={{ fontWeight: isActive ? 600 : 500 }}
+                className="flex-1 text-center text-xs leading-[15px] whitespace-pre-line text-[#141E3F]"
+                style={{ fontWeight: isActive ? 600 : 400 }}
               >
                 {label}
               </span>
@@ -50,7 +51,7 @@ export function CategoryTabs({
           aria-hidden
           className="absolute top-[calc(100%+1px)] h-0 w-0 -translate-x-1/2 border-x-[7.5px] border-b-[7px] border-x-transparent border-b-[#E3E2E0] transition-[left] duration-300 ease-in-out"
           style={{
-            left: `calc(${(2 * activeIndex + 1)} * (100% - 24px) / 8 + ${8 * activeIndex}px)`,
+            left: `calc(${2 * activeIndex + 1} * (100% - 36px) / 8 + ${12 * activeIndex}px)`,
           }}
         />
       </div>

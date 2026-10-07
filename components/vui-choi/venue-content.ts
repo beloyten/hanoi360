@@ -27,7 +27,7 @@ const VENUE_INFO: Record<number, { story: string; highlights: string[]; tip: str
       "Trò chơi dân gian: ô ăn quan, nhảy bao bố, kéo co",
       "Hàng quán đặc sản và xe kem dạo quanh hồ",
     ],
-    tip: "Chỉ mở vào cuối tuần (từ tối thứ Sáu). Nên đi bộ — phương tiện không được vào khu phố đi bộ.",
+    tip: "Chỉ mở vào cuối tuần (từ tối thứ Sáu). Nên đi bộ - phương tiện không được vào khu phố đi bộ.",
   },
   4: {
     story: "Jump Arena là khu vui chơi nhảy bạt lò xo (trampoline) trong nhà, phù hợp cho trẻ em và người trẻ thích vận động mạnh với nhiều khu trò chơi khác nhau.",
@@ -39,16 +39,16 @@ const VENUE_INFO: Record<number, { story: string; highlights: string[]; tip: str
     tip: "Mang theo hoặc thuê tất chống trượt tại quầy. Đặt giờ chơi trước vào cuối tuần.",
   },
   5: {
-    story: "Complex 01 là khu tổ hợp sáng tạo trong hẻm Tây Sơn — quán cà phê, cửa hàng độc lập, không gian triển lãm và sự kiện âm nhạc nhỏ trong một tòa nhà cũ cải tạo.",
+    story: "Complex 01 là khu tổ hợp sáng tạo trong hẻm Tây Sơn - quán cà phê, cửa hàng độc lập, không gian triển lãm và sự kiện âm nhạc nhỏ trong một tòa nhà cũ cải tạo.",
     highlights: [
       "Cà phê độc lập và cửa hàng thiết kế local brand",
       "Không gian triển lãm, workshop và sự kiện cuối tuần",
       "Góc chụp ảnh theo phong cách công nghiệp cũ",
     ],
-    tip: "Theo dõi lịch sự kiện trên fanpage trước khi đến — các đêm nhạc nhỏ rất đáng thử.",
+    tip: "Theo dõi lịch sự kiện trên fanpage trước khi đến - các đêm nhạc nhỏ rất đáng thử.",
   },
   6: {
-    story: "Công viên Yên Sở là công viên rộng lớn phía nam Hà Nội với hồ trung tâm, đồi cỏ và khu cắm trại — nơi dã ngoại cuối tuần quen thuộc của người dân.",
+    story: "Công viên Yên Sở là công viên rộng lớn phía nam Hà Nội với hồ trung tâm, đồi cỏ và khu cắm trại - nơi dã ngoại cuối tuần quen thuộc của người dân.",
     highlights: [
       "Đồi cỏ rộng thoải thích hợp picnic và cắm trại",
       "Hồ trung tâm với đường dạo bộ vòng quanh",
@@ -77,11 +77,11 @@ const VENUE_INFO: Record<number, { story: string; highlights: string[]; tip: str
   9: {
     story: "Núi Hàm Lợn ('mũi của trời') là đỉnh núi trekking gần nhất Hà Nội, với đường lên đỉnh qua rừng thông và đồi bằng cắm trại nhìn ra hồ Suối Hai.",
     highlights: [
-      "Trekking lên đỉnh khoảng 3–4 giờ",
+      "Trekking lên đỉnh khoảng 3-4 giờ",
       "Đồi bằng cắm trại qua đêm ngắm sao",
       "View hồ Suối Hai và cánh rừng xanh",
     ],
-    tip: "Cung đường khá dốc ở đoạn cuối — cần giày trekking tốt. Cắm trại qua đêm nên đi nhóm và mang theo đồ cắm trại đầy đủ.",
+    tip: "Cung đường khá dốc ở đoạn cuối - cần giày trekking tốt. Cắm trại qua đêm nên đi nhóm và mang theo đồ cắm trại đầy đủ.",
   },
 };
 
@@ -102,7 +102,7 @@ export function getVenueContent(venue: Venue): DetailBlock[] {
       type: "text",
       parts: [
         {
-          text: "Đây là một trong những địa điểm vui chơi – giải trí được săn đón nhất của người dân Hà Nội và du khách, phù hợp cho cả đi chơi tự do lẫn tụ họp nhóm.",
+          text: "Đây là một trong những địa điểm vui chơi - giải trí được săn đón nhất của người dân Hà Nội và du khách, phù hợp cho cả đi chơi tự do lẫn tụ họp nhóm.",
         },
       ],
     },

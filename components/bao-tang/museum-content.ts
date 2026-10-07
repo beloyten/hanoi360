@@ -10,7 +10,7 @@ const MUSEUM_INFO: Record<number, { story: string; highlights: string[]; tip: st
       "Biểu diễn múa rối nước vào cuối tuần",
       "Khu trưng bày Đông Nam Á trong tòa nhà Cánh Diều",
     ],
-    tip: "Nên dành ít nhất nửa ngày — khu ngoài trời khá rộng và rất đáng khám phá. Mang theo mũ và nước vào mùa hè.",
+    tip: "Nên dành ít nhất nửa ngày - khu ngoài trời khá rộng và rất đáng khám phá. Mang theo mũ và nước vào mùa hè.",
   },
   2: {
     story: "Bảo tàng Hà Nội lưu giữ hành trình hơn nghìn năm của thành phố, với kiến trúc hình chóp úp độc đáo tại khu đô thị mới Nam Từ Liêm.",
@@ -19,7 +19,7 @@ const MUSEUM_INFO: Record<number, { story: string; highlights: string[]; tip: st
       "Kiến trúc chóp ngược biểu tượng của tòa nhà",
       "Triển lãm chuyên đề về văn hóa Thăng Long",
     ],
-    tip: "Tòa nhà nằm ở khu đô thị mới, cách trung tâm khá xa — nên kết hợp tham quan với các điểm lân cận trong cùng một chuyến đi.",
+    tip: "Tòa nhà nằm ở khu đô thị mới, cách trung tâm khá xa - nên kết hợp tham quan với các điểm lân cận trong cùng một chuyến đi.",
   },
   3: {
     story: "Bảo tàng Lịch sử Quốc gia là bảo tàng lâu đời nhất Việt Nam (khởi nguồn từ 1926), lưu giữ hơn 200.000 hiện vật qua các thời kỳ từ tiền sử đến hiện đại.",
@@ -28,7 +28,7 @@ const MUSEUM_INFO: Record<number, { story: string; highlights: string[]; tip: st
       "Trống đồng và bảo vật quốc gia",
       "Kiến trúc Pháp thuộc đặc sắc của tòa nhà chính",
     ],
-    tip: "Bảo tàng có hai cơ sở trên phố Tràng Tiền và Trần Quang Khải — đối diện nhau, mua một vé tham quan được cả hai.",
+    tip: "Bảo tàng có hai cơ sở trên phố Tràng Tiền và Trần Quang Khải - đối diện nhau, mua một vé tham quan được cả hai.",
   },
   4: {
     story: "Bảo tàng Mỹ thuật Việt Nam lưu giữ bộ sưu tập nghệ thuật lớn nhất cả nước, từ điêu khắc Chăm Pa, tranh sơn mài đến hội họa hiện đại.",
@@ -43,10 +43,10 @@ const MUSEUM_INFO: Record<number, { story: string; highlights: string[]; tip: st
     story: "Bảo tàng Lịch sử Quân sự Việt Nam trưng bày hiện vật quân sự qua các cuộc kháng chiến, nổi bật với xác máy bay, xe tăng và Cột cờ Hà Nội ngay trong khuôn viên.",
     highlights: [
       "Xác máy bay B-52 và các phương tiện chiến tranh thật",
-      "Cột cờ Hà Nội — di tích quốc gia trong khuôn viên",
+      "Cột cờ Hà Nội - di tích quốc gia trong khuôn viên",
       "Triển lãm về chiến dịch Điện Biên Phủ",
     ],
-    tip: "Khuôn viên ngoài trời nắng nóng — tham quan phần triển lãm trong nhà trước, ra ngoài trời vào chiều mát.",
+    tip: "Khuôn viên ngoài trời nắng nóng - tham quan phần triển lãm trong nhà trước, ra ngoài trời vào chiều mát.",
   },
   6: {
     story: "Bảo tàng Phụ nữ Việt Nam tôn vinh vai trò của phụ nữ qua các thời kỳ, với triển lãm về gia đình, lịch sử và thời trang truyền thống giàu cảm xúc.",
@@ -55,16 +55,16 @@ const MUSEUM_INFO: Record<number, { story: string; highlights: string[]; tip: st
       "Bộ sưu tập trang phục các dân tộc",
       "Không gian tương tác và triển lãm hiện đại",
     ],
-    tip: "Bảo tàng nằm ngay trung tâm, cách phố cổ vài phút đi bộ — dễ kết hợp trong ngày khám phá Hoàn Kiếm.",
+    tip: "Bảo tàng nằm ngay trung tâm, cách phố cổ vài phút đi bộ - dễ kết hợp trong ngày khám phá Hoàn Kiếm.",
   },
   7: {
     story: "Bảo tàng Hồ Chí Minh lưu giữ cuộc đời và sự nghiệp của Chủ tịch Hồ Chí Minh qua hiện vật, tư liệu và những mô hình trình bày nghệ thuật độc đáo.",
     highlights: [
       "Hiện vật và tư liệu về cuộc đời Bác Hồ",
       "Triển lãm nghệ thuật sắp đặt ấn tượng",
-      "Nằm trong quần thể Lăng Chủ tịch – chùa Một Cột",
+      "Nằm trong quần thể Lăng Chủ tịch - chùa Một Cột",
     ],
-    tip: "Khu Ba Đình có quy định trang phục lịch sự và kiểm tra an ninh — đến buổi sáng và mang theo giấy tờ tùy thân.",
+    tip: "Khu Ba Đình có quy định trang phục lịch sự và kiểm tra an ninh - đến buổi sáng và mang theo giấy tờ tùy thân.",
   },
   8: {
     story: "Bảo tàng Thiên nhiên Việt Nam trưng bày hệ sinh thái và khoáng sản đất nước, với bộ sưu tập hóa thạch, xương cá voi và mô hình động thực vật phong phú.",
@@ -94,7 +94,7 @@ export function getMuseumContent(museum: Museum): DetailBlock[] {
       type: "text",
       parts: [
         {
-          text: "Bảo tàng mở cửa hầu hết các ngày trong tuần (thường nghỉ thứ Hai), phù hợp cho chuyến tham quan 1–2 giờ tìm hiểu văn hóa và lịch sử.",
+          text: "Bảo tàng mở cửa hầu hết các ngày trong tuần (thường nghỉ thứ Hai), phù hợp cho chuyến tham quan 1-2 giờ tìm hiểu văn hóa và lịch sử.",
         },
       ],
     },

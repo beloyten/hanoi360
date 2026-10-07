@@ -2,6 +2,7 @@
 
 import type { CSSProperties } from "react";
 import { useRouter } from "next/navigation";
+import { canGoBackInApp } from "@/lib/navigation-history";
 import { BackIcon } from "../home/icons";
 
 // Figma "Top bar" (429:38288): a 40px row placed 8px from the top and 12px from the sides.
@@ -50,7 +51,8 @@ export function TopBar({
         {showBack && (
           <button
             type="button"
-            onClick={() => router.back()}
+            // Opened from a shared link there is no in-app page to return to, so go Home instead.
+            onClick={() => (canGoBackInApp() ? router.back() : router.push("/home"))}
             aria-label="Quay lại"
             className="pointer-events-auto flex size-10 shrink-0 items-center justify-center"
           >
