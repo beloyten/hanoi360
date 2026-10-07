@@ -1,26 +1,39 @@
 "use client";
 
-import { useMemo, useRef, useState } from "react";
-import { BottomNav } from "../home/bottom-nav";
-import { CategoryFilter } from "./category-filter";
-import { FACILITIES, type FacilityCategory } from "./facilities";
+import { useMemo, useState } from "react";
+import { CategoryFilter, toggleInSet } from "../shared/category/category-filter";
+import { CategoryLayout } from "../shared/category/category-layout";
+import { FilterBar } from "../shared/category/filter-bar";
+import { CATEGORIES, FACILITIES, type FacilityCategory } from "./facilities";
 import { FacilityList } from "./facility-list";
-import { FilterBar } from "./filter-bar";
-import { Header } from "./header";
-import { Hero } from "./hero";
+
+const HERO = {
+  title: "Y TẾ\nCHUYÊN\nNGHIỆP",
+  gradientFrom: "#009B8C",
+  gradientTo: "#004942",
+  illustration: "/co-so-y-te/hero-illustration.svg",
+  searchPlaceholder: "Tìm địa điểm bạn muốn đến",
+};
+
+const CHIPS = [
+  { key: "500m", label: "<500m" },
+  { key: "1000m", label: "<1000m" },
+];
+
+const SHEET_SECTIONS = [
+  {
+    title: "Lọc theo",
+    options: [
+      { key: "open-now", label: "Đang mở cửa" },
+      { key: "24-7", label: "Trực cấp cứu 24/7" },
+    ],
+  },
+];
+
+const CATEGORY_ITEMS = CATEGORIES.map(({ key, label, icon }) => ({ key, label, image: icon }));
 
 export function CoSoYTeScreen() {
-  const scrollRef = useRef<HTMLDivElement>(null);
   const [active, setActive] = useState<Set<FacilityCategory>>(new Set());
-
-  const toggle = (category: FacilityCategory) => {
-    setActive((prev) => {
-      const next = new Set(prev);
-      if (next.has(category)) next.delete(category);
-      else next.add(category);
-      return next;
-    });
-  };
 
   const facilities = useMemo(() => {
     if (active.size === 0) return FACILITIES;
@@ -28,25 +41,17 @@ export function CoSoYTeScreen() {
   }, [active]);
 
   return (
-    <div className="relative h-dvh w-full overflow-hidden bg-white">
-      <Header scrollContainerRef={scrollRef} />
-
-      <main
-        ref={scrollRef}
-        className="h-full overflow-y-auto"
-        style={{
-          paddingBottom: "calc(83px + env(safe-area-inset-bottom))",
-          background: "linear-gradient(rgb(250, 248, 245) 0%, rgb(239, 236, 231) 100%)",
-        }}
-      >
-        <Hero>
-          <FilterBar />
-          <CategoryFilter active={active} onToggle={toggle} />
-        </Hero>
-        <FacilityList facilities={facilities} />
-      </main>
-
-      <BottomNav />
-    </div>
+    <CategoryLayout
+      title="Cơ sở y tế"
+      hero={HERO}
+      filters={
+        <>
+          <FilterBar scope="co-so-y-te" chips={CHIPS} sheetSections={SHEET_SECTIONS} />
+          <CategoryFilter items={CATEGORY_ITEMS} active={active} onToggle={(key) => setActive((prev) => toggleInSet(prev, key))} />
+        </>
+      }
+    >
+      <FacilityList facilities={facilities} />
+    </CategoryLayout>
   );
 }

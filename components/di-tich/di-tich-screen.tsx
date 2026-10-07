@@ -1,35 +1,42 @@
 "use client";
 
-import { useRef } from "react";
-import { BottomNav } from "../home/bottom-nav";
-import { FilterBar } from "./filter-bar";
-import { Header } from "./header";
-import { Hero } from "./hero";
+import { CategoryLayout } from "../shared/category/category-layout";
+import { FilterBar } from "../shared/category/filter-bar";
 import { SiteList } from "./site-list";
 import { SITES } from "./sites";
 
+const HERO = {
+  title: "TÌM HIỂU\nLỊCH SỬ\nHÀ NỘI",
+  gradientFrom: "#DDB86B",
+  gradientTo: "#AA6E00",
+  illustration: "/di-tich-lich-su/hero-illustration.svg",
+  searchPlaceholder: "Tìm địa điểm bạn muốn đến",
+};
+
+const CHIPS = [
+  { key: "500m", label: "<500m" },
+  { key: "1km", label: "<1km" },
+];
+
+const SHEET_SECTIONS = [
+  {
+    title: "Loại địa điểm",
+    options: [
+      { key: "historical", label: "Di tích lịch sử" },
+      { key: "spiritual", label: "Di tích tâm linh" },
+      { key: "scenic", label: "Danh lam thắng cảnh" },
+    ],
+  },
+];
+
 export function DiTichScreen() {
-  const scrollRef = useRef<HTMLDivElement>(null);
-
   return (
-    <div className="relative h-dvh w-full overflow-hidden bg-white">
-      <Header scrollContainerRef={scrollRef} />
-
-      <main
-        ref={scrollRef}
-        className="h-full overflow-y-auto"
-        style={{
-          paddingBottom: "calc(83px + env(safe-area-inset-bottom))",
-          background: "linear-gradient(rgb(250, 248, 245) 0%, rgb(239, 236, 231) 100%)",
-        }}
-      >
-        <Hero>
-          <FilterBar />
-        </Hero>
-        <SiteList sites={SITES} />
-      </main>
-
-      <BottomNav />
-    </div>
+    <CategoryLayout
+      title="Di tích lịch sử"
+      hero={HERO}
+      filters={<FilterBar scope="di-tich" chips={CHIPS} sheetSections={SHEET_SECTIONS} />}
+    >
+      <SiteList sites={SITES} />
+    </CategoryLayout>
   );
 }

@@ -1,26 +1,41 @@
 "use client";
 
-import { useMemo, useRef, useState } from "react";
-import { BottomNav } from "../home/bottom-nav";
-import { CategoryFilter } from "../vui-choi/category-filter";
-import { FilterBar } from "../vui-choi/filter-bar";
+import { useMemo, useState } from "react";
+import { CategoryFilter, toggleInSet } from "../shared/category/category-filter";
+import { CategoryLayout } from "../shared/category/category-layout";
+import { FilterBar } from "../shared/category/filter-bar";
 import { VenueList } from "../vui-choi/venue-list";
-import { VENUES, type VenueCategory } from "../vui-choi/venues";
-import { Header } from "./header";
-import { Hero } from "./hero";
+import { CATEGORIES, VENUES, type VenueCategory } from "../vui-choi/venues";
+
+const HERO = {
+  title: "GIẢI TRÍ\nĐA DẠNG",
+  gradientFrom: "#009B8C",
+  gradientTo: "#004942",
+  illustration: "/giai-tri/hero-illustration.svg",
+  searchPlaceholder: "Tìm điểm vui chơi, giải trí...",
+};
+
+const CHIPS = [
+  { key: "500m", label: "<500m" },
+  { key: "1000m", label: "<1000m" },
+];
+
+const SHEET_SECTIONS = [
+  {
+    title: "Lọc theo",
+    options: [
+      { key: "discount", label: "Có mã giảm giá" },
+      { key: "under-12", label: "Dành cho trẻ em dưới 12 tuổi" },
+      { key: "12-18", label: "Dành cho trẻ em 12 - 18 tuổi" },
+      { key: "open-now", label: "Đang mở cửa" },
+    ],
+  },
+];
+
+const CATEGORY_ITEMS = CATEGORIES.map(({ key, label, icon }) => ({ key, label, image: icon }));
 
 export function GiaiTriScreen() {
-  const scrollRef = useRef<HTMLDivElement>(null);
   const [active, setActive] = useState<Set<VenueCategory>>(new Set());
-
-  const toggle = (category: VenueCategory) => {
-    setActive((prev) => {
-      const next = new Set(prev);
-      if (next.has(category)) next.delete(category);
-      else next.add(category);
-      return next;
-    });
-  };
 
   const venues = useMemo(() => {
     if (active.size === 0) return VENUES;
@@ -28,25 +43,17 @@ export function GiaiTriScreen() {
   }, [active]);
 
   return (
-    <div className="relative h-dvh w-full overflow-hidden bg-white">
-      <Header scrollContainerRef={scrollRef} />
-
-      <main
-        ref={scrollRef}
-        className="h-full overflow-y-auto"
-        style={{
-          paddingBottom: "calc(83px + env(safe-area-inset-bottom))",
-          background: "linear-gradient(rgb(250, 248, 245) 0%, rgb(239, 236, 231) 100%)",
-        }}
-      >
-        <Hero>
-          <FilterBar />
-          <CategoryFilter active={active} onToggle={toggle} />
-        </Hero>
-        <VenueList venues={venues} hrefPrefix="/giai-tri" />
-      </main>
-
-      <BottomNav />
-    </div>
+    <CategoryLayout
+      title="Giải trí"
+      hero={HERO}
+      filters={
+        <>
+          <FilterBar scope="giai-tri" chips={CHIPS} sheetSections={SHEET_SECTIONS} />
+          <CategoryFilter items={CATEGORY_ITEMS} active={active} onToggle={(key) => setActive((prev) => toggleInSet(prev, key))} />
+        </>
+      }
+    >
+      <VenueList venues={venues} hrefPrefix="/giai-tri" />
+    </CategoryLayout>
   );
 }

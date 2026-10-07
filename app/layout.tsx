@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Inter, Baloo_2 } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
@@ -19,6 +19,13 @@ const baloo2 = Baloo_2({
 export const metadata: Metadata = {
   title: "Hanoi 360",
   description: "Khám phá Hà Nội theo cách của bạn",
+};
+
+// "cover" lets the env(safe-area-inset-*) paddings used across screens take effect on notched iPhones.
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  viewportFit: "cover",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {

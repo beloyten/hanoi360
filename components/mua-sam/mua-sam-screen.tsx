@@ -1,52 +1,57 @@
 "use client";
 
-import { useMemo, useRef, useState } from "react";
-import { BottomNav } from "../home/bottom-nav";
-import { CategoryFilter } from "./category-filter";
-import { FilterBar } from "./filter-bar";
-import { Header } from "./header";
-import { Hero } from "./hero";
+import { useMemo, useState } from "react";
+import { CategoryFilter, toggleInSet } from "../shared/category/category-filter";
+import { CategoryLayout } from "../shared/category/category-layout";
+import { FilterBar } from "../shared/category/filter-bar";
 import { ShopList } from "./shop-list";
-import { SHOPS, type ShopCategory } from "./shops";
+import { CATEGORIES, SHOPS, type ShopCategory } from "./shops";
+
+const HERO = {
+  title: "MUA SẮM\nTHOẢ THÍCH",
+  gradientFrom: "#009B8C",
+  gradientTo: "#004942",
+  illustration: "/mua-sam/hero-illustration.svg",
+  searchPlaceholder: "Tìm địa điểm bạn muốn đến",
+};
+
+const CHIPS = [
+  { key: "500m", label: "<500m" },
+  { key: "1000m", label: "<1000m" },
+];
+
+const SHEET_SECTIONS = [
+  {
+    title: "Lọc theo",
+    options: [
+      { key: "discount", label: "Có khuyến mãi" },
+      { key: "open-now", label: "Đang mở cửa" },
+    ],
+  },
+];
+
+const CATEGORY_ITEMS = CATEGORIES.map(({ key, label, icon }) => ({ key, label, image: icon }));
 
 export function MuaSamScreen() {
-  const scrollRef = useRef<HTMLDivElement>(null);
   const [active, setActive] = useState<Set<ShopCategory>>(new Set());
 
-  const toggle = (category: ShopCategory) => {
-    setActive((prev) => {
-      const next = new Set(prev);
-      if (next.has(category)) next.delete(category);
-      else next.add(category);
-      return next;
-    });
-  };
-
-  const shops = useMemo(() => {
+  const items = useMemo(() => {
     if (active.size === 0) return SHOPS;
-    return SHOPS.filter((shop) => active.has(shop.category));
+    return SHOPS.filter((item) => active.has(item.category));
   }, [active]);
 
   return (
-    <div className="relative h-dvh w-full overflow-hidden bg-white">
-      <Header scrollContainerRef={scrollRef} />
-
-      <main
-        ref={scrollRef}
-        className="h-full overflow-y-auto"
-        style={{
-          paddingBottom: "calc(83px + env(safe-area-inset-bottom))",
-          background: "linear-gradient(rgb(250, 248, 245) 0%, rgb(239, 236, 231) 100%)",
-        }}
-      >
-        <Hero>
-          <FilterBar />
-          <CategoryFilter active={active} onToggle={toggle} />
-        </Hero>
-        <ShopList shops={shops} />
-      </main>
-
-      <BottomNav />
-    </div>
+    <CategoryLayout
+      title="Mua sắm"
+      hero={HERO}
+      filters={
+        <>
+          <FilterBar scope="mua-sam" chips={CHIPS} sheetSections={SHEET_SECTIONS} />
+          <CategoryFilter items={CATEGORY_ITEMS} active={active} onToggle={(key) => setActive((prev) => toggleInSet(prev, key))} />
+        </>
+      }
+    >
+      <ShopList shops={items} />
+    </CategoryLayout>
   );
 }

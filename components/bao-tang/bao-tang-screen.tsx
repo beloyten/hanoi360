@@ -1,26 +1,39 @@
 "use client";
 
-import { useMemo, useRef, useState } from "react";
-import { BottomNav } from "../home/bottom-nav";
-import { CategoryFilter } from "./category-filter";
-import { FilterBar } from "./filter-bar";
-import { Header } from "./header";
-import { Hero } from "./hero";
+import { useMemo, useState } from "react";
+import { CategoryFilter, toggleInSet } from "../shared/category/category-filter";
+import { CategoryLayout } from "../shared/category/category-layout";
+import { FilterBar } from "../shared/category/filter-bar";
 import { MuseumList } from "./museum-card";
-import { MUSEUMS, type MuseumCategory } from "./museums";
+import { CATEGORIES, MUSEUMS, type MuseumCategory } from "./museums";
+
+const HERO = {
+  title: "DẠO BƯỚC\nQUA KÝ ỨC",
+  gradientFrom: "#009B8C",
+  gradientTo: "#004942",
+  illustration: "/bao-tang/hero-illustration.svg",
+  searchPlaceholder: "Tìm địa điểm",
+};
+
+const CHIPS = [
+  { key: "500m", label: "<500m" },
+  { key: "1000m", label: "<1000m" },
+];
+
+const SHEET_SECTIONS = [
+  {
+    title: "Loại bảo tàng",
+    options: [
+      { key: "culture-art", label: "Văn hoá nghệ thuật" },
+      { key: "history-society", label: "Lịch sử xã hội" },
+      { key: "military-security", label: "Quân sự an ninh" },
+      { key: "natural-science", label: "Khoa học tự nhiên" },
+    ],
+  },
+];
 
 export function BaoTangScreen() {
-  const scrollRef = useRef<HTMLDivElement>(null);
   const [active, setActive] = useState<Set<MuseumCategory>>(new Set());
-
-  const toggle = (category: MuseumCategory) => {
-    setActive((prev) => {
-      const next = new Set(prev);
-      if (next.has(category)) next.delete(category);
-      else next.add(category);
-      return next;
-    });
-  };
 
   const museums = useMemo(() => {
     if (active.size === 0) return MUSEUMS;
@@ -28,25 +41,17 @@ export function BaoTangScreen() {
   }, [active]);
 
   return (
-    <div className="relative h-dvh w-full overflow-hidden bg-white">
-      <Header scrollContainerRef={scrollRef} />
-
-      <main
-        ref={scrollRef}
-        className="h-full overflow-y-auto"
-        style={{
-          paddingBottom: "calc(83px + env(safe-area-inset-bottom))",
-          background: "linear-gradient(rgb(250, 248, 245) 0%, rgb(239, 236, 231) 100%)",
-        }}
-      >
-        <Hero>
-          <FilterBar />
-          <CategoryFilter active={active} onToggle={toggle} />
-        </Hero>
-        <MuseumList museums={museums} />
-      </main>
-
-      <BottomNav />
-    </div>
+    <CategoryLayout
+      title="Bảo tàng"
+      hero={HERO}
+      filters={
+        <>
+          <FilterBar scope="bao-tang" chips={CHIPS} sheetSections={SHEET_SECTIONS} />
+          <CategoryFilter items={CATEGORIES} active={active} onToggle={(key) => setActive((prev) => toggleInSet(prev, key))} />
+        </>
+      }
+    >
+      <MuseumList museums={museums} />
+    </CategoryLayout>
   );
 }

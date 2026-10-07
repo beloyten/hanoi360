@@ -1,36 +1,40 @@
 "use client";
 
-import { useRef } from "react";
-import { BottomNav } from "../home/bottom-nav";
-import { FilterBar } from "./filter-bar";
-import { Header } from "./header";
-import { Hero } from "./hero";
+import { CategoryLayout } from "../shared/category/category-layout";
+import { FilterBar } from "../shared/category/filter-bar";
 import { QuickPicks } from "./quick-picks";
 import { RestaurantList } from "./restaurant-list";
 
+const HERO = {
+  title: "KHÁM PHÁ\nẨM THỰC",
+  gradientFrom: "#DDB86B",
+  gradientTo: "#AA6E00",
+  illustration: "/am-thuc/hero-illustration.svg",
+  searchPlaceholder: "Tìm địa điểm, quán ăn, nhà hàng...",
+};
+
+const CHIPS = [
+  { key: "500m", label: "<500m" },
+  { key: "1km", label: "<1km" },
+  { key: "veggie", label: "Đồ chay" },
+];
+
+const CUISINES = ["Ấn Độ", "Hàn Quốc", "Hi Lạp", "Hồng Kông", "Nhật Bản", "Parkistan", "Singapore", "Thái Lan", "Trung Quốc"];
+
+const SHEET_SECTIONS = [
+  { title: "Ưu đãi", options: [{ key: "discount", label: "Có mã giảm giá" }] },
+  { title: "Ẩm thực thế giới", options: CUISINES.map((cuisine) => ({ key: cuisine, label: cuisine })) },
+];
+
 export function AmThucScreen() {
-  const scrollRef = useRef<HTMLDivElement>(null);
-
   return (
-    <div className="relative h-dvh w-full overflow-hidden bg-white">
-      <Header scrollContainerRef={scrollRef} />
-
-      <main
-        ref={scrollRef}
-        className="h-full overflow-y-auto"
-        style={{
-          paddingBottom: "calc(83px + env(safe-area-inset-bottom))",
-          background: "linear-gradient(rgb(250, 248, 245) 0%, rgb(239, 236, 231) 100%)",
-        }}
-      >
-        <Hero>
-          <FilterBar />
-        </Hero>
-        <QuickPicks />
-        <RestaurantList />
-      </main>
-
-      <BottomNav />
-    </div>
+    <CategoryLayout
+      title="Ẩm thực"
+      hero={HERO}
+      filters={<FilterBar scope="am-thuc" chips={CHIPS} sheetSections={SHEET_SECTIONS} />}
+    >
+      <QuickPicks />
+      <RestaurantList />
+    </CategoryLayout>
   );
 }
