@@ -1,14 +1,14 @@
 "use client";
 
 import { useEffect, useRef, useState, type ReactNode } from "react";
-import { Hero } from "./hero";
+import { Hero, type HeroIllustration } from "./hero";
 import { SearchBar } from "./search-bar";
 
 type HeroSectionProps = {
   title: string;
   gradientFrom: string;
   gradientTo: string;
-  illustration?: string;
+  illustration?: HeroIllustration;
   searchPlaceholder: string;
   children?: ReactNode;
 };

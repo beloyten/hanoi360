@@ -11,7 +11,7 @@ const HERO = {
   title: "GIẢI TRÍ\nĐA DẠNG",
   gradientFrom: "#009B8C",
   gradientTo: "#004942",
-  illustration: "/giai-tri/hero-illustration.svg",
+  illustration: { src: "/figma/hero-giai-tri.png", width: 395, height: 181.7, hasTitle: true },
   searchPlaceholder: "Tìm điểm vui chơi, giải trí...",
 };
 

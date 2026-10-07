@@ -1,13 +1,19 @@
+import { getSite } from "../di-tich/sites";
+
 export type Place = {
-  id: number;
+  /** Di tích id: the card links to /di-tich/[siteId] and shares its saved state. */
+  siteId: number;
   title: string;
   address: string;
   distance: string;
+  photo: string;
 };
 
-export const PLACES: Place[] = [
-  { id: 1, title: "Di tích Nhà tù Hỏa Lò", address: "1 Phố Hoả Lò, phường Hoàn Kiếm.", distance: "250m" },
-  { id: 2, title: "Hồ Gươm", address: "Phố Đinh Tiên Hoàng, phường Hoàn Kiếm.", distance: "480m" },
-  { id: 3, title: "Chợ Đồng Xuân", address: "Phố Đồng Xuân, phường Hoàn Kiếm.", distance: "620m" },
-  { id: 4, title: "Nhà thờ Lớn Hà Nội", address: "40 Phố Nhà Chung, phường Hoàn Kiếm.", distance: "700m" },
+const NEARBY: Omit<Place, "photo">[] = [
+  { siteId: 3, title: "Di tích Nhà tù Hỏa Lò", address: "1 Phố Hoả Lò, phường Hoàn Kiếm.", distance: "250m" },
+  { siteId: 5, title: "Hồ Gươm", address: "Phố Đinh Tiên Hoàng, phường Hoàn Kiếm.", distance: "480m" },
+  { siteId: 4, title: "Chùa Một Cột", address: "Phố Chùa Một Cột, phường Ba Đình.", distance: "620m" },
+  { siteId: 2, title: "Chùa Trấn Quốc", address: "Đường Thanh Niên, phường Tây Hồ.", distance: "700m" },
 ];
+
+export const PLACES: Place[] = NEARBY.map((place) => ({ ...place, photo: getSite(place.siteId)?.photo ?? "" }));

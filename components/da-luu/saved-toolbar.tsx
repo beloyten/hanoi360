@@ -11,7 +11,6 @@ const FILTERS: { key: FilterType; label: string }[] = [
   { key: "all", label: "Tất cả" },
   { key: "restaurant", label: "Ẩm thực" },
   { key: "venue", label: "Vui chơi" },
-  { key: "place", label: "Địa điểm" },
   { key: "facility", label: "Y tế" },
   { key: "shop", label: "Mua sắm" },
   { key: "site", label: "Di tích" },

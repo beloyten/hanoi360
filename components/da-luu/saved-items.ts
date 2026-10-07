@@ -1,5 +1,4 @@
 import { RESTAURANTS } from "@/components/am-thuc/restaurants";
-import { PLACES } from "@/components/home/places";
 import { VENUES } from "@/components/vui-choi/venues";
 import { FACILITIES } from "@/components/co-so-y-te/facilities";
 import { SHOPS } from "@/components/mua-sam/shops";
@@ -10,7 +9,6 @@ import { VILLAGES } from "@/components/lang-nghe/villages";
 export type SavedItemType =
   | "restaurant"
   | "venue"
-  | "place"
   | "facility"
   | "shop"
   | "site"
@@ -126,18 +124,6 @@ export function resolveSavedItem(key: string): SavedDisplayItem | null {
       distance: village.distance,
       photo: village.photo,
       href: `/lang-nghe/${village.id}`,
-    };
-  }
-
-  if (type === "place") {
-    const place = PLACES.find((item) => item.id === id);
-    if (!place) return null;
-    return {
-      key,
-      type,
-      name: place.title,
-      subtitle: place.address,
-      distance: place.distance,
     };
   }
 

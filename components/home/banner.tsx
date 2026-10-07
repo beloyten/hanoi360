@@ -22,6 +22,14 @@ const HREFS: (string | null)[] = [
 const EASE = "cubic-bezier(0.45, 0, 0.15, 1)";
 const TRANSITION = `transform 320ms ${EASE}, opacity 320ms ${EASE}`;
 
+// Figma Home "Banner" (686:90000), 393x390: the focused card is a 303x378 frame (white 53% + blur)
+// holding a 295x370 image; side cards are 196x245 images at y 62.5, centered ~218px left/right.
+const CARD_W = 303;
+const CARD_H = 378;
+const SIDE_SCALE = 196 / CARD_W;
+const SIDE_SHIFT_X = 218;
+const SIDE_SHIFT_Y = 62.5 + 245 / 2 - CARD_H / 2;
+
 export function Banner() {
   const router = useRouter();
   const [active, setActive] = useState(2);
@@ -42,6 +50,7 @@ export function Banner() {
       style={{ touchAction: "pan-y" }}
       onPointerDown={(e) => {
         dragStartX.current = e.clientX;
+        didDrag.current = false;
       }}
       onPointerUp={(e) => {
         if (dragStartX.current === null) return;
@@ -72,12 +81,14 @@ export function Banner() {
             key={src}
             className="absolute"
             style={{
-              width: 295,
-              height: 354,
-              top: 23,
+              width: CARD_W,
+              height: CARD_H,
+              top: 0,
               left: "50%",
-              marginLeft: -147.5,
-              transform: `translateX(${offset * 280}px) scale(${isActive ? 1 : 0.82})`,
+              marginLeft: -CARD_W / 2,
+              transform: isActive
+                ? "none"
+                : `translate(${offset * SIDE_SHIFT_X}px, ${SIDE_SHIFT_Y}px) scale(${SIDE_SCALE})`,
               opacity: distance >= 2 ? 0 : 1,
               zIndex: 100 - distance * 10,
               transition: TRANSITION,
@@ -93,12 +104,11 @@ export function Banner() {
             }}
           >
             <div
-              className="pointer-events-none absolute"
+              className="pointer-events-none absolute inset-0"
               style={{
-                inset: -4,
-                backgroundColor: "rgba(255, 255, 255, 0.5)",
-                backdropFilter: "blur(6px)",
-                WebkitBackdropFilter: "blur(6px)",
+                backgroundColor: "rgba(255, 255, 255, 0.53)",
+                backdropFilter: "blur(3.75px)",
+                WebkitBackdropFilter: "blur(3.75px)",
                 opacity: isActive ? 1 : 0,
                 transition: TRANSITION,
               }}
@@ -108,31 +118,31 @@ export function Banner() {
               alt=""
               draggable={false}
               src={src}
-              className="pointer-events-none absolute inset-0 h-full w-full rounded object-cover shadow-xs select-none"
-            />
-            <div
-              className="pointer-events-none absolute inset-0 rounded"
+              className="pointer-events-none absolute object-cover select-none"
               style={{
-                backgroundColor: `rgba(255, 255, 255, ${isActive ? 0 : 0.2})`,
-                transition: TRANSITION,
+                // 4px frame when focused; side cards are image-only with a 4px radius after scaling.
+                inset: isActive ? 4 : 0,
+                width: isActive ? CARD_W - 8 : CARD_W,
+                height: isActive ? CARD_H - 8 : CARD_H,
+                borderRadius: isActive ? 0 : 4 / SIDE_SCALE,
+                transition: `inset 320ms ${EASE}, width 320ms ${EASE}, height 320ms ${EASE}, border-radius 320ms ${EASE}`,
               }}
             />
           </div>
         );
       })}
 
-      <div className="absolute bottom-[2px] left-1/2 z-[200] flex -translate-x-1/2 items-center gap-1">
+      <div className="absolute bottom-0 left-1/2 z-[200] flex -translate-x-1/2 items-center gap-1">
         {IMAGES.map((src, i) => (
           <button
             key={src}
             type="button"
             aria-label={`Đi tới banner ${i + 1}`}
             onClick={() => setActive(i)}
-            className="h-1 rounded-[9px]"
+            className="h-1 w-3 rounded-[9px]"
             style={{
-              width: i === active ? 20 : 12,
-              backgroundColor: i === active ? "#aa6e00" : "#d4d4d3",
-              transition: `width 320ms ${EASE}, background-color 320ms ${EASE}`,
+              backgroundColor: i === active ? "#AA6E00" : "#D4D4D3",
+              transition: `background-color 320ms ${EASE}`,
             }}
           />
         ))}

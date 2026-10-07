@@ -11,7 +11,7 @@ const HERO = {
   title: "TINH HOA\nLÀNG NGHỀ",
   gradientFrom: "#DDB86B",
   gradientTo: "#AA6E00",
-  illustration: "/lang-nghe/hero-illustration.svg",
+  illustration: { src: "/figma/hero-lang-nghe.png", width: 413, height: 171.3, hasTitle: true },
   searchPlaceholder: "Tìm địa điểm bạn muốn đến",
 };
 

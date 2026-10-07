@@ -146,7 +146,8 @@ export function CardItemHorizontal({
         </button>
         <p className="truncate text-base leading-6 font-semibold text-[#27314D]">{item.name}</p>
 
-        <p className="max-w-[90%] text-sm text-[#141E3D]">{item.description}</p>
+        {/* Figma "card list_2": fixed 132px card, subtitle box 170x34 (two lines of Body 2). */}
+        <p className="line-clamp-2 w-[170px] max-w-full text-sm leading-[17px] text-[#141E3F]/80">{item.description}</p>
 
         <div className="mt-auto inline-flex items-center pt-2.5">
           <PinIcon className="size-5 text-[#27314D]" />
@@ -163,7 +164,7 @@ export function CardItemHorizontal({
   );
 
   return (
-    <Link href={href} aria-label={item.name} className="relative flex">
+    <Link href={href} aria-label={item.name} className="relative flex h-33">
       {card}
     </Link>
   );

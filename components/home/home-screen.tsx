@@ -11,15 +11,16 @@ export function HomeScreen() {
       <Header />
 
       <main
-        className="h-full space-y-7 overflow-y-auto pb-6"
+        className="h-full overflow-y-auto"
         style={{
-          paddingTop: "calc(64px + env(safe-area-inset-top))",
+          paddingTop: "calc(68px + env(safe-area-inset-top))",
           paddingBottom: "calc(83px + env(safe-area-inset-bottom))",
-          background: "linear-gradient(rgb(250, 248, 245) 0%, rgb(239, 236, 231) 100%)",
+          background: "linear-gradient(rgb(250, 248, 245) 0%, rgb(227, 226, 224) 100%)",
           touchAction: "pan-y",
         }}
       >
-        <div>
+        {/* Figma Home "Content" (686:89999): a column with 28px between sections. */}
+        <div className="flex flex-col gap-7 pb-6">
           <Banner />
           <CategoryGrid />
           <NearYou />

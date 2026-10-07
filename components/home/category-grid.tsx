@@ -3,44 +3,41 @@
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 
+// Icons are PNG @3x exports: the Figma SVGs use a texture filter that browsers rasterize blurry.
 const CATEGORIES = [
-  { label: "Di tích lịch sử", icon: "/home/categories/di-tich.svg", href: "/di-tich" },
-  { label: "Ẩm thực", icon: "/home/categories/am-thuc.svg", href: "/am-thuc" },
-  { label: "Bảo tàng", icon: "/home/categories/bao-tang.svg", href: "/bao-tang" },
-  { label: "Làng nghề", icon: "/home/categories/lang-nghe.svg", href: "/lang-nghe" },
-  { label: "Giải trí", icon: "/home/categories/giai-tri.svg", href: "/giai-tri" },
-  { label: "Vui chơi", icon: "/home/categories/vui-choi.svg", href: "/vui-choi" },
-  { label: "Mua sắm", icon: "/home/categories/mua-sam.svg", href: "/mua-sam" },
-  { label: "Cơ sở Y tế", icon: "/home/categories/co-so-y-te.svg", href: "/co-so-y-te" },
+  { label: "Di tích lịch sử", icon: "/home/figma/cat-di-tich.png", href: "/di-tich" },
+  { label: "Ẩm thực", icon: "/home/figma/cat-am-thuc.png", href: "/am-thuc" },
+  { label: "Bảo tàng", icon: "/home/figma/cat-bao-tang.png", href: "/bao-tang" },
+  { label: "Làng nghề", icon: "/home/figma/cat-lang-nghe.png", href: "/lang-nghe" },
+  { label: "Giải trí", icon: "/home/figma/cat-giai-tri.png", href: "/giai-tri" },
+  { label: "Vui chơi", icon: "/home/figma/cat-vui-choi.png", href: "/vui-choi" },
+  { label: "Mua sắm", icon: "/home/figma/cat-mua-sam.png", href: "/mua-sam" },
+  { label: "Cơ sở Y tế", icon: "/home/figma/cat-co-so-y-te.png", href: "/co-so-y-te" },
 ];
 
 export function CategoryGrid() {
   const router = useRouter();
 
+  // Figma "Category" (686:90013): 369x214, 4 columns of 83.25px with 12px gaps, rows 115px apart.
   return (
-    <div className="relative grid grid-cols-4 gap-x-2 gap-y-4 px-3 pt-4 pb-3 mt-[28px]">
-      <div className="pointer-events-none absolute inset-x-3 top-0 bottom-0">
-        <span className="absolute inset-x-0 top-1/2 h-px -translate-y-1/2 bg-[#d6d6d6]" />
-        <span className="absolute top-0 bottom-0 left-1/4 w-px -translate-x-1/2 bg-[#d6d6d6]" />
-        <span className="absolute top-0 bottom-0 left-1/2 w-px -translate-x-1/2 bg-[#d6d6d6]" />
-        <span className="absolute top-0 bottom-0 left-3/4 w-px -translate-x-1/2 bg-[#d6d6d6]" />
-
-        <span className="absolute top-1/2 left-1/4 h-2 w-2 -translate-x-1/2 -translate-y-1/2 rotate-45 bg-[#d6d6d6]" />
-        <span className="absolute top-1/2 left-1/2 h-2 w-2 -translate-x-1/2 -translate-y-1/2 rotate-45 bg-[#d6d6d6]" />
-        <span className="absolute top-1/2 left-3/4 h-2 w-2 -translate-x-1/2 -translate-y-1/2 rotate-45 bg-[#d6d6d6]" />
-      </div>
+    <div className="relative mx-3 grid grid-cols-4 gap-x-3 gap-y-4">
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        src="/home/figma/category-bg.svg"
+        alt=""
+        className="pointer-events-none absolute top-0.5 left-0 h-[212px] w-full select-none"
+        draggable={false}
+      />
 
       {CATEGORIES.map((category) => (
         <button
           key={category.label}
           type="button"
-          onClick={() => category.href && router.push(category.href)}
-          className="flex flex-col items-center gap-2 transition-transform duration-150 select-none active:scale-90"
+          onClick={() => router.push(category.href)}
+          className="relative flex flex-col items-center gap-2 pb-1 transition-transform duration-150 select-none active:scale-90"
         >
-          <div className="relative flex h-[72px] w-[72px] items-center justify-center overflow-hidden rounded-lg">
-            <Image src={category.icon} alt="" width={72} height={72} className="h-full w-full object-contain" />
-          </div>
-          <span className="text-center text-xs leading-tight text-[#141E3F]">{category.label}</span>
+          <Image src={category.icon} alt="" width={72} height={72} unoptimized className="size-18 rounded" />
+          <span className="text-center text-xs leading-[15px] text-[#141E3F]">{category.label}</span>
         </button>
       ))}
     </div>

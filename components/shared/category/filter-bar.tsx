@@ -13,7 +13,7 @@ const chipStyle = (active: boolean): CSSProperties => ({
 });
 
 const CHIP_CLASS =
-  "flex shrink-0 items-center gap-1 rounded-[32px] border bg-white px-[13px] py-1 text-xs whitespace-nowrap transition-colors duration-150";
+  "flex shrink-0 items-center justify-center gap-1 rounded-[32px] border bg-white px-[13px] py-1 text-xs whitespace-nowrap transition-colors duration-150";
 
 export function FilterBar({
   scope,
@@ -50,7 +50,8 @@ export function FilterBar({
             key={chip.key}
             type="button"
             onClick={() => toggle(chip.key)}
-            className={CHIP_CLASS}
+            // Distance chips fill the row width left after "Lọc theo" (Figma sizing: fill).
+            className={`${CHIP_CLASS} min-w-fit flex-1`}
             style={chipStyle(active.has(chip.key))}
           >
             {chip.label}

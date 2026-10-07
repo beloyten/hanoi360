@@ -11,7 +11,7 @@ const HERO = {
   title: "DẠO BƯỚC\nQUA KÝ ỨC",
   gradientFrom: "#009B8C",
   gradientTo: "#004942",
-  illustration: "/bao-tang/hero-illustration.svg",
+  illustration: { src: "/figma/hero-bao-tang.png", width: 394, height: 171 },
   searchPlaceholder: "Tìm địa điểm",
 };
 

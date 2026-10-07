@@ -1,35 +1,48 @@
 import Image from "next/image";
 
+export type HeroIllustration = {
+  src: string;
+  width: number;
+  height: number;
+  /** The Figma artwork already contains the Headline 1 title, so the text is kept for screen readers only. */
+  hasTitle?: boolean;
+};
+
 type HeroProps = {
   title: string;
   gradientFrom: string;
   gradientTo: string;
-  illustration?: string;
+  illustration?: HeroIllustration;
 };
 
+// Figma category hero components ("Bảo tàng" 389:29785, ...): 393x258, the artwork sits at y 56,
+// the title uses Headline 1 (Inter Black 30/40, white) on the left.
 export function Hero({ title, gradientFrom, gradientTo, illustration }: HeroProps) {
   return (
     <div
-      className="flex h-64.5 flex-col overflow-hidden rounded-b-[20px]"
+      className="relative h-64.5 overflow-hidden rounded-b-[20px]"
       style={{ background: `linear-gradient(to bottom, ${gradientFrom}, ${gradientTo})` }}
     >
-      <div className="h-14 shrink-0" />
-
-      <div className="relative flex-1">
-        {illustration && (
-          <Image
-            src={illustration}
-            alt=""
-            width={393}
-            height={174}
-            className="absolute bottom-5 left-0 h-auto w-full"
-            priority
-          />
-        )}
-        <h1 className="pointer-events-none absolute top-1/2 left-4 -translate-y-1/2 text-[28px] leading-[40px] font-extrabold whitespace-pre-line text-white uppercase">
-          {title}
-        </h1>
-      </div>
+      {illustration && (
+        // PNG @3x exports: the Figma SVGs rely on texture filters that browsers render blurry.
+        <Image
+          src={illustration.src}
+          alt=""
+          width={illustration.width}
+          height={illustration.height}
+          unoptimized
+          priority
+          className="pointer-events-none absolute top-14 -left-px max-w-none select-none"
+          style={{ width: illustration.width, height: illustration.height }}
+        />
+      )}
+      {illustration?.hasTitle ? (
+        <h1 className="sr-only">{title}</h1>
+      ) : (
+        <div className="pointer-events-none absolute top-14 bottom-4 left-4 flex items-center">
+          <h1 className="text-[30px] leading-10 font-black whitespace-pre-line text-white uppercase">{title}</h1>
+        </div>
+      )}
     </div>
   );
 }

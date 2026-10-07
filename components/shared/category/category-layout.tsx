@@ -2,6 +2,7 @@
 
 import { useRef, type ReactNode } from "react";
 import { BottomNav } from "../../home/bottom-nav";
+import type { HeroIllustration } from "../hero";
 import { HeroSection } from "../hero-section";
 import { CategoryHeader } from "./category-header";
 
@@ -9,7 +10,7 @@ export type CategoryHero = {
   title: string;
   gradientFrom: string;
   gradientTo: string;
-  illustration?: string;
+  illustration?: HeroIllustration;
   searchPlaceholder: string;
 };
 
