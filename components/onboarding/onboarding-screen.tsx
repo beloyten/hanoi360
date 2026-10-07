@@ -3,11 +3,13 @@
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
-import { ArrowNarrowRightIcon, CheckIcon } from "./icons";
+import { CheckIcon } from "./icons";
 import { LogoAnimation } from "./logo-animation";
 
 type Slide = {
   image: string;
+  /** object-position matching the crop in the Figma welcome frames. */
+  position: string;
   alt: string;
   heading: [string, string];
   subheading: string;
@@ -15,25 +17,29 @@ type Slide = {
 
 const SLIDES: Slide[] = [
   {
-    image: "/onboarding/slide-1.png",
+    image: "/onboarding/slide-1.webp",
+    position: "55% 58%",
     alt: "Hoàng hôn trên Hồ Tây với chùa Trấn Quốc",
     heading: ["Chào mừng", "đến với Hà Nội"],
     subheading: "Bắt đầu hành trình của bạn",
   },
   {
-    image: "/onboarding/slide-2.png",
+    image: "/onboarding/slide-2.webp",
+    position: "64% 50%",
     alt: "Một bát phở bò Hà Nội truyền thống",
     heading: ["Nếm vị", "của Hà Nội"],
     subheading: "Từ gánh phở sớm mai đến ly cà phê phố Cổ",
   },
   {
-    image: "/onboarding/slide-3.jpg",
+    image: "/onboarding/slide-3.webp",
+    position: "42% 43%",
     alt: "Khuê Văn Các tại Văn Miếu - Quốc Tử Giám",
     heading: ["Chạm vào", "ngàn năm văn hiến"],
     subheading: "Mỗi địa danh kể một câu chuyện",
   },
   {
-    image: "/onboarding/slide-4.jpg",
+    image: "/onboarding/slide-4.webp",
+    position: "66% 50%",
     alt: "Cầu Long Biên với dòng người qua lại",
     heading: ["Hoà vào", "nhịp sống phố thị"],
     subheading: "Nơi truyền thống và hiện đại cùng hiện diện",
@@ -45,16 +51,19 @@ const WHEEL_THRESHOLD = 40;
 const WHEEL_LOCK_MS = 550;
 const SWIPE_CONFIRM_RATIO = 0.5;
 const CIRCLE_SIZE = 54;
+// Figma track: the pill starts 4px from the left edge, the target circle sits 5px from the right.
+const TRACK_INSET = 4 + 5;
 const MORPH_EASE = "cubic-bezier(0.22,1,0.36,1)";
 const BOUNCE_EASE = "cubic-bezier(0.34,1.56,0.64,1)";
 const EDGE_RESISTANCE = 0.35;
 
 type RGBA = { r: number; g: number; b: number; a: number };
 
-const DOT_INACTIVE: RGBA = { r: 255, g: 255, b: 255, a: 0.3 };
+// Figma "Layout 1_welcome" (369:7574): dots #F2D79F / #9698AB; the pill darkens to #805300 while pressed.
+const DOT_INACTIVE: RGBA = { r: 150, g: 152, b: 171, a: 1 };
 const DOT_ACTIVE: RGBA = { r: 242, g: 215, b: 159, a: 1 };
 const PILL_START: RGBA = { r: 170, g: 110, b: 0, a: 1 };
-const PILL_END: RGBA = { r: 0, g: 155, b: 140, a: 1 };
+const PILL_END: RGBA = { r: 128, g: 83, b: 0, a: 1 };
 
 const clamp01 = (t: number) => Math.min(Math.max(t, 0), 1);
 const lerp = (a: number, b: number, t: number) => a + (b - a) * t;
@@ -89,6 +98,7 @@ export function OnboardingScreen() {
   const pillRef = useRef<HTMLButtonElement>(null);
   const pillDragStartX = useRef(0);
   const pillMoved = useRef(false);
+  const pillCommitted = useRef(false);
 
   useLayoutEffect(() => {
     const measure = () => {
@@ -103,9 +113,10 @@ export function OnboardingScreen() {
   const isLast = index === SLIDES.length - 1;
 
   useEffect(() => {
+    if (isDragging) return;
     const id = setInterval(() => setIndex((prev) => (prev + 1) % SLIDES.length), 5000);
     return () => clearInterval(id);
-  }, [index]);
+  }, [index, isDragging]);
 
   const goTo = (next: number) => {
     setIndex(Math.min(Math.max(next, 0), SLIDES.length - 1));
@@ -176,7 +187,7 @@ export function OnboardingScreen() {
 
   const getSlotOffset = () => {
     const trackWidth = pillTrackRef.current?.offsetWidth || 0;
-    return Math.max(trackWidth - CIRCLE_SIZE, 0);
+    return Math.max(trackWidth - CIRCLE_SIZE - TRACK_INSET, 0);
   };
 
   // Matches getSlotOffset(): the button's left edge travels exactly as far as its
@@ -186,7 +197,8 @@ export function OnboardingScreen() {
   const getConfirmThreshold = () => Math.min(getDragMax() * SWIPE_CONFIRM_RATIO, 160);
 
   const commitPill = () => {
-    if (isConfirmed) return;
+    if (pillCommitted.current) return;
+    pillCommitted.current = true;
     setIsPillDragging(false);
     setPillOffset(getDragMax());
     window.setTimeout(() => {
@@ -231,7 +243,7 @@ export function OnboardingScreen() {
     commitPill();
   };
 
-  const pillDragMax = Math.max(pillTrackWidth - CIRCLE_SIZE, 0);
+  const pillDragMax = Math.max(pillTrackWidth - CIRCLE_SIZE - TRACK_INSET, 0);
   const pillProgress = pillDragMax > 0 ? Math.min(Math.max(pillOffset / pillDragMax, 0), 1) : 0;
   const pillWidth =
     pillNaturalWidth > 0
@@ -241,7 +253,7 @@ export function OnboardingScreen() {
       : undefined;
 
   return (
-    <div className="relative h-svh max-h-dvh w-full overflow-hidden overscroll-none bg-black font-heading">
+    <div className="relative h-svh max-h-dvh w-full overflow-hidden overscroll-none bg-black">
       <div
         ref={trackRef}
         className="flex h-full w-full touch-none select-none"
@@ -253,7 +265,6 @@ export function OnboardingScreen() {
         onPointerMove={handlePointerMove}
         onPointerUp={endDrag}
         onPointerCancel={endDrag}
-        onPointerLeave={endDrag}
         onWheel={handleWheel}
         onDragStart={(event) => event.preventDefault()}
       >
@@ -273,16 +284,22 @@ export function OnboardingScreen() {
                   : "transform 500ms cubic-bezier(0.22,1,0.36,1), opacity 500ms cubic-bezier(0.22,1,0.36,1)",
               }}
             >
+              {/* Served as-is: next/image's 100vw width would upscale the cover crop on a portrait screen. */}
               <Image
                 src={slide.image}
                 alt={slide.alt}
                 fill
+                unoptimized
                 priority={i === 0}
                 draggable={false}
-                sizes="100vw"
                 className="object-cover"
+                style={{ objectPosition: slide.position }}
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black via-black/45 via-45% to-transparent" />
+              {/* Figma: gradient from y 415 of 736, transparent to black 90% at 85%. */}
+              <div
+                className="absolute inset-x-0 bottom-0 h-[59%]"
+                style={{ background: "linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.9) 85%)" }}
+              />
             </div>
           );
         })}
@@ -292,28 +309,26 @@ export function OnboardingScreen() {
         <div
           className="pointer-events-none absolute left-1/2 -translate-x-1/2 transition-opacity duration-300"
           style={{
-            top: "max(3.5rem, env(safe-area-inset-top))",
+            // Figma: 109px logo at y 97 of the 736px frame.
+            top: "max(calc(97 / 736 * 100%), env(safe-area-inset-top))",
             opacity: index === 0 ? 1 : 0,
           }}
         >
-          <LogoAnimation size={88} />
+          <LogoAnimation size={109} />
         </div>
 
+        {/* Text stays pointer-transparent so swipes starting on it still reach the slide track. */}
         <div
-          className="pointer-events-auto flex flex-col gap-4 px-6"
-          style={{ paddingBottom: "max(1.75rem, env(safe-area-inset-bottom))" }}
+          className="flex flex-col px-[25px]"
+          style={{ paddingBottom: "max(32px, env(safe-area-inset-bottom))" }}
         >
-          <div className="space-y-1.5">
-            <h1 className="text-[32px] font-bold leading-[1.15] text-[#eaebf2]/90">
-              <span className="block">{SLIDES[index].heading[0]}</span>
-              <span className="block">{SLIDES[index].heading[1]}</span>
-            </h1>
-            <p className="text-[15px] font-medium text-[#eaebf2]/80">
-              {SLIDES[index].subheading}
-            </p>
-          </div>
+          <h1 className="text-[36px] leading-[44px] font-bold text-[#EAEBF2]/90">
+            <span className="block">{SLIDES[index].heading[0]}</span>
+            <span className="block">{SLIDES[index].heading[1]}</span>
+          </h1>
+          <p className="mt-2 text-[15px] leading-[18px] text-[#EAEBF2]/90">{SLIDES[index].subheading}</p>
 
-          <div className="flex gap-1.5" role="tablist" aria-label="Điều hướng giới thiệu">
+          <div className="pointer-events-auto mt-4 flex gap-1" role="tablist" aria-label="Điều hướng giới thiệu">
             {SLIDES.map((slide, i) => {
               const activeness = 1 - clamp01(Math.abs(continuousIndex - i));
               return (
@@ -324,13 +339,10 @@ export function OnboardingScreen() {
                   aria-selected={i === index}
                   aria-label={`Đi tới slide ${i + 1}`}
                   onClick={() => goTo(i)}
-                  className="h-1 rounded-full"
+                  className="h-1 w-5 rounded-[9px]"
                   style={{
-                    width: `${24 + activeness * 6}px`,
                     backgroundColor: mixRGBA(DOT_INACTIVE, DOT_ACTIVE, activeness),
-                    transition: isDragging
-                      ? "none"
-                      : "background-color 300ms, width 300ms cubic-bezier(0.22,1,0.36,1)",
+                    transition: isDragging ? "none" : "background-color 300ms",
                   }}
                 />
               );
@@ -339,31 +351,14 @@ export function OnboardingScreen() {
 
           <div
             ref={pillTrackRef}
-            className="relative h-[62px] w-full rounded-full backdrop-blur-sm select-none"
+            className="pointer-events-auto relative mt-[45px] h-[62px] w-full rounded-[40px] select-none"
             style={{
-              background:
-                "linear-gradient(270deg, rgba(217, 217, 217, 0.45) 0%, rgba(0, 0, 0, 0) 100%)",
+              background: "linear-gradient(270deg, rgba(217, 217, 217, 0.45) 0%, rgba(0, 0, 0, 0) 100%)",
+              backdropFilter: "blur(6.9px)",
+              WebkitBackdropFilter: "blur(6.9px)",
             }}
           >
-            <div
-              className="pointer-events-none absolute inset-y-1 right-[76px] left-[152px] flex items-center justify-center"
-              style={{
-                animation: "swipe-hint 1.6s ease-in-out infinite",
-                animationPlayState: isPillDragging || pillProgress > 0 ? "paused" : "running",
-                opacity: Math.max(1 - pillProgress * 3, 0),
-                transition: isPillDragging ? "none" : "opacity 150ms",
-              }}
-            >
-              <div className="-mr-6">
-                <ArrowNarrowRightIcon width={40} height={40} opacity={0.09} />
-              </div>
-              <div className="-mr-6">
-                <ArrowNarrowRightIcon width={40} height={40} opacity={0.22} />
-              </div>
-              <ArrowNarrowRightIcon width={40} height={40} opacity={0.38} />
-            </div>
-
-            <div className="pointer-events-none absolute top-1 right-0 flex size-13.5 items-center justify-center rounded-full bg-white/20 backdrop-blur-sm">
+            <div className="pointer-events-none absolute top-1 right-[5px] flex size-13.5 items-center justify-center rounded-full bg-[rgba(217,217,217,0.36)]">
               <Image src="/onboarding/chevron.svg" alt="" width={13} height={8} />
             </div>
 
@@ -376,10 +371,10 @@ export function OnboardingScreen() {
               onPointerCancel={handlePillPointerUp}
               onClick={handlePillClick}
               aria-label="Vuốt hoặc nhấn để khám phá ngay"
-              className="absolute top-1 left-0 flex h-[54px] shrink-0 cursor-grab touch-none items-center justify-center overflow-hidden rounded-full text-[15px] font-semibold whitespace-nowrap text-[#f3ebd9] active:cursor-grabbing"
+              className="absolute top-1 left-1 flex h-[54px] shrink-0 cursor-grab touch-none items-center justify-center overflow-hidden rounded-[43px] text-sm whitespace-nowrap text-[#f3ebd9] active:cursor-grabbing"
               style={{
                 width: pillWidth,
-                backgroundColor: isConfirmed ? "#009b8c" : mixRGBA(PILL_START, PILL_END, pillProgress),
+                backgroundColor: isConfirmed ? "#805300" : mixRGBA(PILL_START, PILL_END, pillProgress),
                 transform: `translateX(${pillOffset}px) scale(${isConfirmed ? 1.06 : 1 + pillProgress * 0.04})`,
                 transition: isPillDragging
                   ? "background-color 80ms linear"
@@ -387,7 +382,7 @@ export function OnboardingScreen() {
               }}
             >
               <span
-                className="shrink-0 px-8"
+                className="shrink-0 px-4"
                 style={{
                   opacity: isConfirmed ? 0 : Math.max(1 - pillProgress * 1.6, 0),
                   transition: isPillDragging ? "none" : "opacity 200ms",
