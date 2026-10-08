@@ -7,14 +7,25 @@ import { SearchIcon } from "../home/icons";
 import { DirectionsButton } from "../shared/directions-button";
 import { CATEGORY_FILTERS, PLACES, type MapPlace, type PlaceCategory } from "./places";
 
+// Figma map pin (720:29461): 22x33 #AA6E00 marker with a see-through hole.
 function PinIcon({ className }: { className?: string }) {
   return (
-    <svg className={className} viewBox="0 0 24 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg className={className} viewBox="0 0 22 33" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path
-        d="M12 0C5.37258 0 0 5.37258 0 12C0 20.4 12 32 12 32C12 32 24 20.4 24 12C24 5.37258 18.6274 0 12 0Z"
+        d="M10.7649 0C12.9358 6.1427e-05 15.0583 0.691448 16.8632 1.98644C18.6681 3.28148 20.0745 5.12233 20.9051 7.27575C21.7357 9.42919 21.9535 13.481 20.9051 16.4995C18.7511 22.7 12.9611 30.6428 10.7649 33C8.57084 30.6429 2.42491 22.4316 0.624823 16.4995C-0.209509 13.7496 -0.20671 9.42921 0.623837 7.27575C1.45446 5.1222 2.86168 3.2815 4.66668 1.98644C6.47167 0.691431 8.59406 0 10.7649 0ZM10.7659 4.71386C7.12893 4.71386 4.17995 7.88027 4.17993 11.7856C4.17993 15.691 7.12892 18.8574 10.7659 18.8574C14.4028 18.8573 17.351 15.6909 17.351 11.7856C17.3509 7.88037 14.4028 4.71402 10.7659 4.71386Z"
         fill="currentColor"
       />
-      <circle cx="12" cy="12" r="4.5" fill="#FFFFFF" />
+    </svg>
+  );
+}
+
+// Figma "you are here" marker (720:28965): #863F00 dot with 23% and 10% halos, 46px.
+function MyLocationIcon({ className }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 46 46" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle opacity="0.23" cx="23" cy="23" r="16" fill="#863F00" />
+      <circle opacity="0.1" cx="23" cy="23" r="23" fill="#863F00" />
+      <circle cx="23" cy="23" r="8" fill="#863F00" />
     </svg>
   );
 }
@@ -45,8 +56,7 @@ export function BanDoScreen() {
         className="absolute z-10 -translate-x-1/2 -translate-y-1/2"
         style={{ left: "56%", top: "49%" }}
       >
-        <span className="absolute -inset-3 animate-ping rounded-full bg-[#3B82F6]/20" />
-        <span className="block h-4 w-4 rounded-full border-[3px] border-white bg-[#3B82F6] shadow-[0_1px_4px_rgba(0,0,0,0.3)]" />
+        <MyLocationIcon className="size-[46px]" />
       </div>
 
       {/* place pins */}
@@ -58,12 +68,12 @@ export function BanDoScreen() {
             type="button"
             onClick={() => setSelected(place)}
             aria-label={place.name}
-            className={`absolute z-10 -translate-x-1/2 -translate-y-full transition-transform ${
+            className={`absolute z-10 origin-bottom -translate-x-1/2 -translate-y-full transition-transform ${
               isSelected ? "z-20 scale-125" : "hover:scale-110"
             }`}
-            style={{ left: `${place.x}%`, top: `${place.y}%`, color: isSelected ? "#AA6E00" : "#19264E" }}
+            style={{ left: `${place.x}%`, top: `${place.y}%`, color: isSelected ? "#805300" : "#AA6E00" }}
           >
-            <PinIcon className="h-7 w-8 drop-shadow-[0_2px_3px_rgba(0,0,0,0.35)]" />
+            <PinIcon className="h-[33px] w-[22px]" />
           </button>
         );
       })}
