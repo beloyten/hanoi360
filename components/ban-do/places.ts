@@ -1,4 +1,21 @@
-export type PlaceCategory = "di-tich" | "bao-tang" | "am-thuc";
+import { getRestaurant } from "../am-thuc/restaurants";
+import { getMuseum } from "../bao-tang/museums";
+import { getFacility } from "../co-so-y-te/facilities";
+import { getSite } from "../di-tich/sites";
+import { getEntertainment } from "../giai-tri/entertainment";
+import { getVillage } from "../lang-nghe/villages";
+import { getShop } from "../mua-sam/shops";
+import { getVenue } from "../vui-choi/venues";
+
+export type PlaceCategory =
+  | "am-thuc"
+  | "di-tich"
+  | "bao-tang"
+  | "lang-nghe"
+  | "giai-tri"
+  | "vui-choi"
+  | "mua-sam"
+  | "co-so-y-te";
 
 export type MapPlace = {
   id: string;
@@ -6,118 +23,81 @@ export type MapPlace = {
   subtitle: string;
   distance: string;
   photo: string;
+  href: string;
   category: PlaceCategory;
-  /** Pin tip position as a percentage of the map image (public/ban-do/map.webp). */
+  /** Pin tip position as a percentage of the 393x630 Figma map area. */
   x: number;
   y: number;
 };
 
-export const CATEGORY_FILTERS: { key: PlaceCategory | "all"; label: string }[] = [
-  { key: "all", label: "Tất cả" },
-  { key: "di-tich", label: "Di tích" },
-  { key: "bao-tang", label: "Bảo tàng" },
+// Order and labels of the Figma "Tìm kiếm theo" dropdown (720:29064).
+export const CATEGORY_OPTIONS: { key: PlaceCategory; label: string }[] = [
   { key: "am-thuc", label: "Ẩm thực" },
+  { key: "di-tich", label: "Di tích lịch sử" },
+  { key: "bao-tang", label: "Bảo tàng" },
+  { key: "lang-nghe", label: "Làng nghề" },
+  { key: "giai-tri", label: "Giải trí" },
+  { key: "vui-choi", label: "Vui chơi" },
+  { key: "mua-sam", label: "Mua sắm" },
+  { key: "co-so-y-te", label: "Cơ sở y tế" },
 ];
 
-export const PLACES: MapPlace[] = [
-  {
-    id: "ho-tay",
-    name: "Hồ Tây",
-    subtitle: "Phường Tây Hồ.",
-    distance: "250m",
-    photo: "/di-tich-lich-su/ho-tay.png",
-    category: "di-tich",
-    x: 12,
-    y: 22,
-  },
-  {
-    id: "chua-tran-quoc",
-    name: "Chùa Trấn Quốc",
-    subtitle: "Phường Tây Hồ.",
-    distance: "800m",
-    photo: "/di-tich-lich-su/chua-tran-quoc.png",
-    category: "di-tich",
-    x: 28,
-    y: 18,
-  },
-  {
-    id: "bao-tang-dan-toc",
-    name: "Bảo tàng Dân tộc học Việt Nam",
-    subtitle: "Phường Cầu Giấy.",
-    distance: "3.1km",
-    photo: "/di-tich-lich-su/ho-tay.png",
-    category: "bao-tang",
-    x: 18,
-    y: 45,
-  },
-  {
-    id: "chua-mot-cot",
-    name: "Chùa Một Cột (Diên Hựu tự)",
-    subtitle: "Phường Ba Đình.",
-    distance: "3.8km",
-    photo: "/di-tich-lich-su/chua-mot-cot.png",
-    category: "di-tich",
-    x: 43,
-    y: 24,
-  },
-  {
-    id: "bao-tang-ha-noi",
-    name: "Bảo tàng Hà Nội",
-    subtitle: "Phường Nam Từ Liêm.",
-    distance: "7.5km",
-    photo: "/di-tich-lich-su/chua-tran-quoc.png",
-    category: "bao-tang",
-    x: 85,
-    y: 16,
-  },
-  {
-    id: "kampong",
-    name: "Kampong Chicken House",
-    subtitle: "Phường Mai, Đống Đa.",
-    distance: "1.2km",
-    photo: "/am-thuc/kam-pong.png",
-    category: "am-thuc",
-    x: 62,
-    y: 50,
-  },
-  {
-    id: "ho-guom",
-    name: "Hồ Hoàn Kiếm (Hồ Gươm)",
-    subtitle: "Phường Hoàn Kiếm.",
-    distance: "4.5km",
-    photo: "/di-tich-lich-su/ho-hoan-kiem.png",
-    category: "di-tich",
-    x: 88,
-    y: 80,
-  },
-  {
-    id: "crystal-jade",
-    name: "Crystal Jade Hong Kong Kitchen",
-    subtitle: "Phường Ba Đình.",
-    distance: "2.4km",
-    photo: "/am-thuc/crystal-jade.png",
-    category: "am-thuc",
-    x: 38,
-    y: 60,
-  },
-  {
-    id: "hoa-lo",
-    name: "Di tích Nhà tù Hỏa Lò",
-    subtitle: "Phường Hoàn Kiếm.",
-    distance: "4.2km",
-    photo: "/di-tich-lich-su/di-tich-hoa-lo.png",
-    category: "di-tich",
-    x: 55,
-    y: 88,
-  },
-  {
-    id: "bao-tang-lich-su",
-    name: "Bảo tàng Lịch sử Quốc gia",
-    subtitle: "Phường Hoàn Kiếm.",
-    distance: "4.8km",
-    photo: "/di-tich-lich-su/chua-mot-cot.png",
-    category: "bao-tang",
-    x: 75,
-    y: 63,
-  },
+// The 19 pin positions (top-left of the 21x33 pin) from the Figma map frame (720:28996).
+const PIN_SPOTS: [number, number][] = [
+  [264.48, 330], [281.25, 227], [257.03, 263], [239.34, 271], [257.03, 166], [112.69, 163], [128.52, 150],
+  [61.46, 184], [-11, 237], [4, 250], [-6, 271], [331.54, 366], [202.09, 493], [130.38, 443],
+  [139.69, 493], [108.96, 493], [122.93, 504], [67.05, 521], [35.39, 510],
 ];
+
+type Source = { name: string; subtitle: string; distance: string; photo: string; href: string };
+
+function from(category: PlaceCategory, id: number): Source | undefined {
+  switch (category) {
+    case "am-thuc": {
+      const r = getRestaurant(id);
+      return r && { name: r.name, subtitle: r.address ?? r.description, distance: r.distance, photo: r.photo ?? "", href: `/am-thuc/${id}` };
+    }
+    case "di-tich": {
+      const s = getSite(id);
+      return s && { name: s.name, subtitle: s.subtitle, distance: s.distance, photo: s.photo, href: `/di-tich/${id}` };
+    }
+    case "bao-tang": {
+      const m = getMuseum(id);
+      return m && { name: m.title, subtitle: m.address, distance: m.distance, photo: m.image, href: `/bao-tang/${id}` };
+    }
+    case "lang-nghe": {
+      const v = getVillage(id);
+      return v && { name: v.name, subtitle: v.address, distance: v.distance, photo: v.photo, href: `/lang-nghe/${id}` };
+    }
+    case "giai-tri": {
+      const e = getEntertainment(id);
+      return e && { name: e.name, subtitle: e.address, distance: e.distance, photo: e.photo, href: `/giai-tri/${id}` };
+    }
+    case "vui-choi": {
+      const v = getVenue(id);
+      return v && { name: v.name, subtitle: v.address, distance: v.distance, photo: v.photo, href: `/vui-choi/${id}` };
+    }
+    case "mua-sam": {
+      const s = getShop(id);
+      return s && { name: s.name, subtitle: s.address, distance: s.distance, photo: s.photo ?? "", href: `/mua-sam/${id}` };
+    }
+    case "co-so-y-te": {
+      const f = getFacility(id);
+      return f && { name: f.name, subtitle: f.address, distance: f.distance, photo: f.photo ?? "", href: `/co-so-y-te/${id}` };
+    }
+  }
+}
+
+// Which existing places sit on the 19 Figma pins (spread across all 8 categories).
+const ASSIGNMENTS: [PlaceCategory, number][] = [
+  ["di-tich", 4], ["bao-tang", 1], ["am-thuc", 1], ["mua-sam", 1], ["di-tich", 5], ["bao-tang", 2], ["giai-tri", 7],
+  ["am-thuc", 2], ["co-so-y-te", 1], ["vui-choi", 1], ["lang-nghe", 1], ["bao-tang", 3], ["di-tich", 3], ["am-thuc", 3],
+  ["giai-tri", 9], ["mua-sam", 2], ["vui-choi", 2], ["lang-nghe", 2], ["co-so-y-te", 2],
+];
+
+export const PLACES: MapPlace[] = ASSIGNMENTS.flatMap(([category, id], i) => {
+  const source = from(category, id);
+  if (!source) return [];
+  const [left, top] = PIN_SPOTS[i];
+  return [{ id: `${category}-${id}`, category, ...source, x: ((left + 10.7) / 393) * 100, y: ((top + 32.7) / 630) * 100 }];
+});

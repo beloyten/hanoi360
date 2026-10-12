@@ -9,7 +9,7 @@ export function SiteList({ sites }: { sites: Site[] }) {
   }
 
   return (
-    <div className="flex flex-col gap-4 px-4 pb-6">
+    <div className="flex flex-col gap-1 px-3 pb-6">
       {sites.map((site) => (
         <CardItem
           key={site.id}

@@ -10,6 +10,8 @@ export type HeroIllustration = {
 
 type HeroProps = {
   title: string;
+  /** Figma heroes without a headline (Bảo tàng, Mua sắm, Y tế): keep the title for screen readers only. */
+  hideTitle?: boolean;
   gradientFrom: string;
   gradientTo: string;
   illustration?: HeroIllustration;
@@ -17,7 +19,7 @@ type HeroProps = {
 
 // Figma category hero components ("Bảo tàng" 389:29785, ...): 393x258, the artwork sits at y 56,
 // the title uses Headline 1 (Inter Black 30/40, white) on the left.
-export function Hero({ title, gradientFrom, gradientTo, illustration }: HeroProps) {
+export function Hero({ title, hideTitle, gradientFrom, gradientTo, illustration }: HeroProps) {
   return (
     <div
       className="relative h-64.5 overflow-hidden rounded-b-[20px]"
@@ -36,7 +38,7 @@ export function Hero({ title, gradientFrom, gradientTo, illustration }: HeroProp
           style={{ width: illustration.width, height: illustration.height }}
         />
       )}
-      {illustration?.hasTitle ? (
+      {illustration?.hasTitle || hideTitle ? (
         <h1 className="sr-only">{title}</h1>
       ) : (
         <div className="pointer-events-none absolute top-14 bottom-4 left-4 flex items-center">

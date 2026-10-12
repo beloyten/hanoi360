@@ -13,11 +13,13 @@ export default async function SiteDetailPage(props: PageProps<"/di-tich/[id]">) 
     <DetailScreen
       item={{
         ...site,
-        address: site.subtitle,
+        address: site.address ?? site.subtitle,
         description: site.subtitle,
         content: getSiteContent(site),
       }}
       savedKey={`site:${site.id}`}
+      vrTour={site.vrTour}
+      audio={site.hasAudio ? {} : undefined}
     />
   );
 }

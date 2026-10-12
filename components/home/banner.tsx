@@ -11,12 +11,13 @@ const IMAGES = [
   "/home/banner-5.png",
 ];
 
+// Banner artwork -> event page (Figma "Banner sự kiện" section).
 const HREFS: (string | null)[] = [
   "/trien-lam/workshop-hoa-gom",
-  "/trien-lam/giao-chi",
+  "/trien-lam/van-gogh",
   "/trien-lam/bien-do-tuong-lai",
   "/trien-lam/dong-chay-cua-lua",
-  "/trien-lam/van-gogh",
+  "/trien-lam/nha-hat-ke-chuyen",
 ];
 
 const EASE = "cubic-bezier(0.45, 0, 0.15, 1)";
@@ -33,6 +34,8 @@ const SIDE_SHIFT_Y = 62.5 + 245 / 2 - CARD_H / 2;
 export function Banner() {
   const router = useRouter();
   const [active, setActive] = useState(2);
+  // Press feedback for the focused card (state, not :active, which iOS Safari skips without touch handlers).
+  const [pressed, setPressed] = useState(false);
   const dragStartX = useRef<number | null>(null);
   const didDrag = useRef(false);
   const count = IMAGES.length;
@@ -95,6 +98,10 @@ export function Banner() {
               pointerEvents: isActive ? "auto" : "none",
               cursor: isActive && HREFS[i] ? "pointer" : undefined,
             }}
+            onPointerDown={() => isActive && HREFS[i] && setPressed(true)}
+            onPointerUp={() => setPressed(false)}
+            onPointerCancel={() => setPressed(false)}
+            onPointerLeave={() => setPressed(false)}
             onClick={() => {
               if (didDrag.current) {
                 didDrag.current = false;
@@ -127,6 +134,10 @@ export function Banner() {
                 borderRadius: isActive ? 0 : 4 / SIDE_SCALE,
                 transition: `inset 320ms ${EASE}, width 320ms ${EASE}, height 320ms ${EASE}, border-radius 320ms ${EASE}`,
               }}
+            />
+            <div
+              className="pointer-events-none absolute inset-0 bg-white transition-opacity duration-100"
+              style={{ opacity: isActive && pressed ? 0.3 : 0 }}
             />
           </div>
         );

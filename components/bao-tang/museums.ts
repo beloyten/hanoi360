@@ -7,6 +7,11 @@ export type Museum = {
   image: string;
   distance: string;
   category: MuseumCategory;
+  /** Opening hours shown in the detail card (Figma Bảo tàng Lịch sử Quân sự). */
+  hours?: string;
+  hoursNote?: string;
+  /** Detail hero photo when it differs from the list photo. */
+  cover?: string;
 };
 
 export function getMuseum(id: number) {
@@ -20,12 +25,13 @@ export const CATEGORIES: { key: MuseumCategory; label: string; image: string }[]
   { key: "science-nature", label: "Khoa học\nTự nhiên", image: "/bao-tang/khtn.png" },
 ];
 
+// Order and photos follow the Figma "Bảo tàng" list (413:36526).
 export const MUSEUMS: Museum[] = [
   {
     id: 1,
     title: "Bảo tàng Dân tộc học Việt Nam",
     address: "Đường Nguyễn Văn Huyên, phường Cầu Giấy",
-    image: "/di-tich-lich-su/di-tich-hoa-lo.png",
+    image: "/figma/list/museum-1.webp",
     distance: "250m",
     category: "culture-art",
   },
@@ -33,56 +39,59 @@ export const MUSEUMS: Museum[] = [
     id: 2,
     title: "Bảo tàng Hà Nội",
     address: "Phạm Hùng, phường Nam Từ Liêm",
-    image: "/di-tich-lich-su/ho-tay.png",
-    distance: "250m",
+    image: "/figma/list/museum-2.webp",
+    distance: "400m",
     category: "history-society",
   },
   {
     id: 3,
     title: "Bảo tàng Lịch sử Quốc gia",
     address: "1 Tràng Tiền & 216 Trần Quang Khải, Hoàn Kiếm",
-    image: "/di-tich-lich-su/chua-mot-cot.png",
-    distance: "250m",
+    image: "/figma/list/museum-3.webp",
+    distance: "600m",
     category: "history-society",
   },
   {
     id: 4,
     title: "Bảo tàng Mỹ thuật Việt Nam",
     address: "66 Nguyễn Thái Học, phường Ba Đình",
-    image: "/di-tich-lich-su/chua-tran-quoc.png",
-    distance: "250m",
-    category: "culture-art",
-  },
-  {
-    id: 5,
-    title: "Bảo tàng Lịch sử Quân sự Việt Nam",
-    address: "Đại lộ Thăng Long, phường Nam Từ Liêm",
-    image: "/di-tich-lich-su/ho-hoan-kiem.png",
+    image: "/figma/list/museum-4.webp",
     distance: "800m",
-    category: "military-security",
-  },
-  {
-    id: 6,
-    title: "Bảo tàng Phụ nữ Việt Nam",
-    address: "36 Lý Thường Kiệt, Hoàn Kiếm",
-    image: "/di-tich-lich-su/lang-co-duong-lam.png",
-    distance: "600m",
-    category: "history-society",
-  },
-  {
-    id: 7,
-    title: "Bảo tàng Hồ Chí Minh",
-    address: "19 Ngọc Hà, phường Ba Đình",
-    image: "/di-tich-lich-su/thanh-co-loa.png",
-    distance: "1.5km",
-    category: "history-society",
+    category: "culture-art",
   },
   {
     id: 8,
     title: "Bảo tàng Thiên nhiên Việt Nam",
-    address: "18 Hoàng Quốc Việt, phường Cầu Giấy",
-    image: "/di-tich-lich-su/vuon-quoc-gia-ba-vi.png",
+    address: "18 Hoàng Quốc Việt, Cầu Giấy",
+    image: "/figma/list/museum-8.webp",
+    distance: "1.2km",
+    category: "science-nature",
+  },
+  {
+    id: 6,
+    title: "Bảo tàng Phòng không - Không quân",
+    address: "173C Trường Chinh, Thanh Xuân",
+    image: "/figma/list/museum-6.webp",
+    distance: "1.5km",
+    category: "military-security",
+  },
+  {
+    id: 5,
+    title: "Bảo tàng Lịch sử Quân sự Việt Nam",
+    address: "Km6+500 Đại lộ Thăng Long, Tây Mỗ, Nam Từ Liêm",
+    hours: "S: 7h00 - 11h30\nC: 13h00 - 16h30",
+    hoursNote: "Thứ 3, 4, 5, 7, CN",
+    image: "/figma/list/museum-5.webp",
+    cover: "/figma/list/quan-su-hero.webp",
     distance: "2km",
+    category: "military-security",
+  },
+  {
+    id: 7,
+    title: "Bảo tàng Vũ trụ Việt Nam",
+    address: "Khu Công nghệ cao Hòa Lạc, Thạch Thất",
+    image: "/figma/list/museum-7.webp",
+    distance: "28km",
     category: "science-nature",
   },
 ];

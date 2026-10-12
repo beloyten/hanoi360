@@ -11,7 +11,7 @@ export default async function ShopDetailPage(props: PageProps<"/am-thuc/[id]">) 
 
   return (
     <ShopDetailScreen
-      restaurant={{ ...restaurant, content: getRestaurantContent(restaurant) }}
+      restaurant={{ ...restaurant, photo: restaurant.cover ?? restaurant.photo, content: getRestaurantContent(restaurant) }}
     />
   );
 }

@@ -17,7 +17,7 @@ const HERO = {
 
 const CHIPS = [
   { key: "500m", label: "<500m" },
-  { key: "1000m", label: "<1000m" },
+  { key: "1km", label: "<1km" },
 ];
 
 const SHEET_SECTIONS = [

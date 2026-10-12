@@ -79,7 +79,7 @@ export const VILLAGES: Village[] = [
   },
   {
     id: 8,
-    name: "Làng miến dong, tương Cự Đà",
+    name: "Làng miến dong",
     address: "Xã Cự Khê, Huyện Thanh Oai",
     distance: "1.4km",
     category: "luong-thuc-thuc-pham",

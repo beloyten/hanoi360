@@ -6,7 +6,7 @@ import Link from "next/link";
 export function HistoryBanner() {
   return (
     <Link
-      href="/di-tich"
+      href="/lich-su-ha-noi"
       aria-label="Ngược Dòng Thời Gian - Khám Phá Trọn Vẹn Lịch Sử Hà Nội"
       className="mx-3 block transition-transform duration-150 select-none active:scale-[0.98]"
     >

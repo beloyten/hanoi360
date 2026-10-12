@@ -6,6 +6,7 @@ import { SearchBar } from "./search-bar";
 
 type HeroSectionProps = {
   title: string;
+  hideTitle?: boolean;
   gradientFrom: string;
   gradientTo: string;
   illustration?: HeroIllustration;
@@ -13,7 +14,7 @@ type HeroSectionProps = {
   children?: ReactNode;
 };
 
-export function HeroSection({ title, gradientFrom, gradientTo, illustration, searchPlaceholder, children }: HeroSectionProps) {
+export function HeroSection({ title, hideTitle, gradientFrom, gradientTo, illustration, searchPlaceholder, children }: HeroSectionProps) {
   const [stuck, setStuck] = useState(false);
   const stickyRef = useRef<HTMLDivElement>(null);
 
@@ -32,7 +33,7 @@ export function HeroSection({ title, gradientFrom, gradientTo, illustration, sea
 
   return (
     <>
-      <Hero title={title} gradientFrom={gradientFrom} gradientTo={gradientTo} illustration={illustration} />
+      <Hero title={title} hideTitle={hideTitle} gradientFrom={gradientFrom} gradientTo={gradientTo} illustration={illustration} />
       <div ref={stickyRef} className={`sticky top-14 z-30 transition-colors duration-200 ${stuck ? "bg-[#F3F3F3]" : ""}`}>
         <SearchBar placeholder={searchPlaceholder} stuck={stuck} />
         {children}

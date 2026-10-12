@@ -7,6 +7,7 @@ import { MUSEUMS } from "@/components/bao-tang/museums";
 import { VILLAGES } from "@/components/lang-nghe/villages";
 import { GUIDES } from "@/components/cam-nang/guides";
 import { EXHIBITS } from "@/components/trien-lam/exhibits";
+import { ENTERTAINMENTS } from "@/components/giai-tri/entertainment";
 
 export type SavedItemType =
   | "restaurant"
@@ -17,7 +18,8 @@ export type SavedItemType =
   | "museum"
   | "village"
   | "guide"
-  | "exhibit";
+  | "exhibit"
+  | "entertainment";
 
 export type SavedDisplayItem = {
   key: string;
@@ -44,6 +46,20 @@ export function resolveSavedItem(key: string): SavedDisplayItem | null {
       distance: "",
       photo: exhibit.photo,
       href: `/trien-lam/${exhibit.slug}`,
+    };
+  }
+
+  if (type === "entertainment") {
+    const item = ENTERTAINMENTS.find((entry) => entry.id === id);
+    if (!item) return null;
+    return {
+      key,
+      type,
+      name: item.name,
+      subtitle: item.address,
+      distance: item.distance,
+      photo: item.photo,
+      href: `/giai-tri/${item.id}`,
     };
   }
 

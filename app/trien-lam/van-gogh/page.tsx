@@ -4,6 +4,7 @@ import type { DetailBlock } from "@/components/shared/detail-content";
 
 const EXHIBIT = getExhibit("van-gogh");
 
+// Figma (431:50977): the text runs first, the photos follow.
 const CONTENT: DetailBlock[] = [
   {
     type: "text",
@@ -13,14 +14,12 @@ const CONTENT: DetailBlock[] = [
       },
     ],
   },
-  { type: "image", src: "/home/banner-5/img-1.png", alt: "Van Gogh Timeless" },
   {
     type: "text",
     parts: [
       { text: "Đắm chìm giữa vũ trụ kiệt tác bản quyền Van Gogh từ Pháp." },
     ],
   },
-  { type: "image", src: "/home/banner-5/img-2.png", alt: "Van Gogh Timeless" },
   {
     type: "text",
     parts: [
@@ -37,7 +36,6 @@ const CONTENT: DetailBlock[] = [
       },
     ],
   },
-  { type: "image", src: "/home/banner-5/img-3.png", alt: "Van Gogh Timeless" },
   {
     type: "text",
     parts: [
@@ -46,6 +44,9 @@ const CONTENT: DetailBlock[] = [
       },
     ],
   },
+  { type: "image", src: "/home/banner-5/img-1.png", alt: "Van Gogh Timeless" },
+  { type: "image", src: "/home/banner-5/img-2.png", alt: "Van Gogh Timeless" },
+  { type: "image", src: "/home/banner-5/img-3.png", alt: "Van Gogh Timeless" },
 ];
 
 export default function VanGoghPage() {

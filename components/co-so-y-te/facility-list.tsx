@@ -7,7 +7,7 @@ export function FacilityList({ facilities }: { facilities: Facility[] }) {
   }
 
   return (
-    <div className="flex flex-col gap-1 px-4 pb-6">
+    <div className="flex flex-col gap-1 px-3 pb-6">
       {facilities.map((facility) => (
         <CardItem
           key={facility.id}

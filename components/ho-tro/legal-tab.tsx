@@ -45,7 +45,7 @@ export function LegalTab() {
               onClick={() => setOpenKey((prev) => (prev === section.key ? null : section.key))}
               className="flex w-full items-center justify-between gap-2 py-3.5 text-left"
             >
-              <span className="text-sm font-medium text-[#252525]">{section.title}</span>
+              <span className={`text-sm font-medium ${isOpen ? "text-[#AA6E00]" : "text-[#252525]"}`}>{section.title}</span>
               <span
                 className={`shrink-0 transition-transform ${isOpen ? "text-[#aa6e00]" : "text-[#27314d]"}`}
                 style={{ transform: isOpen ? "rotate(180deg)" : "rotate(0deg)" }}

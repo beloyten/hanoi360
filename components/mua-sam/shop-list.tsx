@@ -7,7 +7,7 @@ export function ShopList({ shops }: { shops: Shop[] }) {
   }
 
   return (
-    <div className="flex flex-col gap-1 px-4 pb-6">
+    <div className="flex flex-col gap-1 px-3 pb-6">
       {shops.map((shop) => (
         <CardItem
           key={shop.id}

@@ -5,7 +5,9 @@ import { useState } from "react";
 import { BottomNav } from "../home/bottom-nav";
 import { SearchIcon } from "../home/icons";
 import { DirectionsButton } from "../shared/directions-button";
-import { CATEGORY_FILTERS, PLACES, type MapPlace, type PlaceCategory } from "./places";
+import { TopBar } from "../shared/top-bar";
+import { useShowDistance } from "../home/use-geo-permission";
+import { CATEGORY_OPTIONS, PLACES, type MapPlace, type PlaceCategory } from "./places";
 
 // Figma map pin (720:29461): 22x33 #AA6E00 marker with a see-through hole.
 function PinIcon({ className }: { className?: string }) {
@@ -30,99 +32,120 @@ function MyLocationIcon({ className }: { className?: string }) {
   );
 }
 
-function LocateIcon({ className }: { className?: string }) {
+function CaretIcon({ open }: { open: boolean }) {
+  // Figma: caret points up while closed, down while the list is open.
   return (
-    <svg className={className} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <circle cx="12" cy="12" r="7" stroke="currentColor" strokeWidth="1.8" />
-      <circle cx="12" cy="12" r="2.5" fill="currentColor" />
-      <path d="M12 1.5V5M12 19V22.5M1.5 12H5M19 12H22.5" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
+    <svg className="size-5" viewBox="0 0 20 20" fill="none" style={{ transform: open ? "rotate(180deg)" : undefined }}>
+      <path d="M4 13L10 7L16 13H4Z" fill="currentColor" />
     </svg>
   );
 }
 
-export function BanDoScreen() {
-  const [category, setCategory] = useState<PlaceCategory | "all">("all");
-  const [selected, setSelected] = useState<MapPlace | null>(null);
+function Radio({ checked }: { checked: boolean }) {
+  return checked ? (
+    <svg className="size-5" viewBox="0 0 20 20" fill="none">
+      <circle cx="10" cy="10" r="10" fill="#AA6E00" />
+      <path d="M5.5 10.2L8.6 13.2L14.5 7.3" stroke="#FFFFFF" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  ) : (
+    <span className="block size-5 rounded-full border-2 border-[#9B9B9B]" />
+  );
+}
 
-  const visiblePlaces = PLACES.filter((place) => category === "all" || place.category === category);
+// Figma "Bản đồ" (720:28903 / 720:28993): category top bar with search, map below from y 98,
+// a 200px "Tìm kiếm theo" dropdown with radio options, 19 pins and the "you are here" dot.
+export function BanDoScreen() {
+  const [category, setCategory] = useState<PlaceCategory | null>(null);
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [selected, setSelected] = useState<MapPlace | null>(null);
+  const showDistance = useShowDistance();
+
+  const visiblePlaces = PLACES.filter((place) => !category || place.category === category);
 
   return (
-    <div className="relative h-dvh w-full overflow-hidden">
-      {/* Map image from the Figma "Map" frame (720:29458). */}
-      <Image src="/ban-do/map.webp" alt="" fill priority className="object-cover" sizes="100vw" />
-
-      {/* user location marker */}
-      <div
-        className="absolute z-10 -translate-x-1/2 -translate-y-1/2"
-        style={{ left: "56%", top: "49%" }}
-      >
-        <MyLocationIcon className="size-[46px]" />
+    <div
+      className="relative h-dvh w-full overflow-hidden"
+      style={{ background: "linear-gradient(180deg, #F3F3F3 0%, #E3E2E0 100%)" }}
+    >
+      <div className="absolute inset-x-0 top-0 z-30">
+        <TopBar title="Bản đồ" tone="dark" />
+        <div className="mx-3 mt-[3px] flex h-10 items-center gap-3 rounded bg-[#E3E2E0] px-2">
+          <SearchIcon className="size-5 shrink-0 text-[#19264E]" />
+          <span className="truncate text-xs text-[#19264E]/70">Tìm địa điểm, quán ăn, nhà hàng...</span>
+        </div>
       </div>
 
-      {/* place pins */}
-      {visiblePlaces.map((place) => {
-        const isSelected = selected?.id === place.id;
-        return (
+      <div
+        className="absolute inset-x-0 bottom-0 overflow-hidden"
+        style={{ top: "calc(98px + env(safe-area-inset-top))" }}
+        onClick={() => setMenuOpen(false)}
+      >
+        <Image src="/ban-do/map.webp" alt="" fill priority className="object-cover" sizes="100vw" />
+
+        {/* "you are here" (Figma 224,362 in the map area) */}
+        <div
+          className="absolute z-10 -translate-x-1/2 -translate-y-1/2"
+          style={{ left: `${(247 / 393) * 100}%`, top: `${(385 / 630) * 100}%` }}
+        >
+          {/* Pulsing halo like the current demo (client asked to keep the animation). */}
+          <span className="absolute inset-[7px] animate-ping rounded-full bg-[#863F00]/25" />
+          <MyLocationIcon className="relative size-[46px]" />
+        </div>
+
+        {visiblePlaces.map((place) => {
+          const isSelected = selected?.id === place.id;
+          return (
+            <button
+              key={place.id}
+              type="button"
+              onClick={(e) => {
+                e.stopPropagation();
+                setSelected(place);
+              }}
+              aria-label={place.name}
+              className={`absolute z-10 origin-bottom -translate-x-1/2 -translate-y-full transition-transform ${
+                isSelected ? "z-20 scale-125" : "hover:scale-110"
+              }`}
+              style={{ left: `${place.x}%`, top: `${place.y}%`, color: isSelected ? "#805300" : "#AA6E00" }}
+            >
+              <PinIcon className="h-[33px] w-[22px]" />
+            </button>
+          );
+        })}
+
+        <div className="absolute top-1 left-3 z-20 w-[200px]" onClick={(e) => e.stopPropagation()}>
           <button
-            key={place.id}
             type="button"
-            onClick={() => setSelected(place)}
-            aria-label={place.name}
-            className={`absolute z-10 origin-bottom -translate-x-1/2 -translate-y-full transition-transform ${
-              isSelected ? "z-20 scale-125" : "hover:scale-110"
-            }`}
-            style={{ left: `${place.x}%`, top: `${place.y}%`, color: isSelected ? "#805300" : "#AA6E00" }}
+            onClick={() => setMenuOpen((open) => !open)}
+            aria-expanded={menuOpen}
+            className="flex h-[50px] w-full items-center justify-between rounded bg-white pr-[21px] pl-[18px] text-sm"
+            style={{ color: menuOpen ? "#AA6E00" : "#19264E" }}
           >
-            <PinIcon className="h-[33px] w-[22px]" />
+            {category ? CATEGORY_OPTIONS.find((option) => option.key === category)?.label : "Tìm kiếm theo"}
+            <CaretIcon open={menuOpen} />
           </button>
-        );
-      })}
 
-      {/* top overlay: search + category chips */}
-      <div
-        className="absolute inset-x-0 top-0 z-10"
-        style={{ paddingTop: "calc(12px + env(safe-area-inset-top))" }}
-      >
-        <div className="px-4">
-          <div className="flex h-10 items-center gap-3 rounded-lg bg-white px-3 shadow-[0_2px_8px_rgba(0,0,0,0.12)]">
-            <SearchIcon className="h-5 w-5 shrink-0 text-[#58585c]" />
-            <span className="truncate text-xs leading-none text-[#58585c]/70">Tìm địa điểm bạn muốn đến</span>
-          </div>
-        </div>
-        <div className="mt-3 flex gap-2 overflow-x-auto px-4 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-          {CATEGORY_FILTERS.map((filter) => {
-            const isActive = category === filter.key;
-            return (
-              <button
-                key={filter.key}
-                type="button"
-                onClick={() => setCategory(filter.key)}
-                className={`shrink-0 rounded-full border px-4 py-1.5 text-xs font-medium shadow-[0_1px_4px_rgba(0,0,0,0.08)] transition-colors ${
-                  isActive
-                    ? "border-[#AA6E00] bg-[#AA6E00] text-white"
-                    : "border-[#E3E2E0] bg-white text-[#252525]"
-                }`}
-              >
-                {filter.label}
-              </button>
-            );
-          })}
+          {menuOpen && (
+            <div className="mt-2 rounded bg-white px-3">
+              {CATEGORY_OPTIONS.map((option) => (
+                <button
+                  key={option.key}
+                  type="button"
+                  onClick={() => {
+                    setCategory((current) => (current === option.key ? null : option.key));
+                    setSelected(null);
+                    setMenuOpen(false);
+                  }}
+                  className="flex h-[50px] w-full items-center justify-between border-b border-[#D5D5D5] pr-6 pl-1.5 text-left text-base text-[#19264E] last:border-b-0"
+                >
+                  {option.label}
+                  <Radio checked={category === option.key} />
+                </button>
+              ))}
+            </div>
+          )}
         </div>
       </div>
-
-      {/* locate-me FAB */}
-      <button
-        type="button"
-        aria-label="Vị trí của tôi"
-        className="absolute right-4 z-10 flex h-11 w-11 items-center justify-center rounded-full bg-white text-[#19264E] shadow-[0_2px_8px_rgba(0,0,0,0.18)]"
-        style={{
-          bottom: selected
-            ? "calc(216px + env(safe-area-inset-bottom))"
-            : "calc(88px + env(safe-area-inset-bottom))",
-        }}
-      >
-        <LocateIcon className="h-6 w-6" />
-      </button>
 
       {/* selected place card */}
       {selected && (
@@ -147,7 +170,7 @@ export function BanDoScreen() {
             <div className="min-w-0 flex-1">
               <p className="truncate text-sm font-semibold text-[#252525]">{selected.name}</p>
               <p className="mt-0.5 text-xs text-[#58585c]">{selected.subtitle}</p>
-              <p className="mt-1 text-xs font-medium text-[#AA6E00]">{selected.distance}</p>
+              {showDistance && <p className="mt-1 text-xs font-medium text-[#AA6E00]">{selected.distance}</p>}
             </div>
             <DirectionsButton
               query={`${selected.name}, ${selected.subtitle} Hà Nội`}

@@ -6,7 +6,9 @@ import { useIsSaved, useToggleSaved } from "@/lib/store/use-saved-store";
 import { BookmarkIcon, CalendarIcon, FacebookIcon, InstagramIcon, PinIconV2 } from "../home/icons";
 import { DirectionsButton } from "./directions-button";
 import { DetailContent, type DetailBlock } from "./detail-content";
+import Link from "next/link";
 import { BottomNav } from "../home/bottom-nav";
+import { AudioGuide } from "./audio-guide";
 import { TopBar } from "./top-bar";
 
 const CTA_CLASS =
@@ -41,6 +43,8 @@ export function DetailScreen({
   squareHero,
   socials,
   cta,
+  vrTour,
+  audio,
 }: {
   item: DetailItem;
   savedKey: string;
@@ -50,6 +54,10 @@ export function DetailScreen({
   socials?: boolean;
   /** Without an href (no ticketing link yet) the button renders but does not navigate. */
   cta?: { label: string; href?: string };
+  /** Slug in lib/vr-tours: shows the Figma "Xem 360°" button that opens the full-screen tour. */
+  vrTour?: string;
+  /** Shows the Figma "Audio guide" player (the file comes from the client; empty until provided). */
+  audio?: { src?: string };
 }) {
   const scrollRef = useRef<HTMLElement>(null);
   const [pastHero, setPastHero] = useState(false);
@@ -129,7 +137,7 @@ export function DetailScreen({
                       <CalendarIcon className="h-5 w-5 text-[#19264E]" />
                       <span className="text-xs leading-none font-semibold text-[#141E3F]">Mở cửa</span>
                     </div>
-                    <p className="mt-2 text-sm leading-none text-[#141E3F]">{item.hours}</p>
+                    <p className="mt-2 text-sm leading-[17px] whitespace-pre-line text-[#141E3F]">{item.hours}</p>
                     {item.hoursNote && (
                       <p className="mt-1.5 text-sm leading-none text-[#141E3F]">{item.hoursNote}</p>
                     )}
@@ -177,6 +185,26 @@ export function DetailScreen({
             </button>
           )}
         </div>
+
+        {(vrTour || audio) && (
+          // Figma "Chi tiet/bao tang" (720:27067): 347x44 "Xem 360°" button, then "Audio guide" (Title 2) + player.
+          <div className="mt-3 flex flex-col gap-3 px-6 pb-4">
+            {vrTour && (
+              <Link
+                href={`/xem-360/${vrTour}`}
+                className="flex h-11 w-full items-center justify-center rounded bg-[#AA6E00] text-sm font-semibold text-[#F3EBD9] transition-transform duration-150 select-none active:scale-[0.98]"
+              >
+                Xem 360°
+              </Link>
+            )}
+            {audio && (
+              <div className="flex flex-col gap-3">
+                <h2 className="text-base leading-6 font-semibold text-[#27314D]">Audio guide</h2>
+                <AudioGuide src={audio.src} />
+              </div>
+            )}
+          </div>
+        )}
 
         {item.content ? (
           <DetailContent blocks={item.content} />

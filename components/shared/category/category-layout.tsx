@@ -8,6 +8,7 @@ import { CategoryHeader } from "./category-header";
 
 export type CategoryHero = {
   title: string;
+  hideTitle?: boolean;
   gradientFrom: string;
   gradientTo: string;
   illustration?: HeroIllustration;

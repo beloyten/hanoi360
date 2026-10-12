@@ -9,8 +9,9 @@ import { CATEGORIES, SHOPS, type ShopCategory } from "./shops";
 
 const HERO = {
   title: "MUA SẮM\nTHOẢ THÍCH",
-  gradientFrom: "#009B8C",
-  gradientTo: "#004942",
+  hideTitle: true,
+  gradientFrom: "#DDB86B",
+  gradientTo: "#AA6E00",
   illustration: { src: "/figma/hero-mua-sam.png", width: 394, height: 171 },
   searchPlaceholder: "Tìm địa điểm bạn muốn đến",
 };

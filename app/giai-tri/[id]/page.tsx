@@ -1,26 +1,24 @@
 import { notFound } from "next/navigation";
+import { getEntertainment, getEntertainmentContent } from "@/components/giai-tri/entertainment";
 import { DetailScreen } from "@/components/shared/detail-screen";
-import { getVenue } from "@/components/vui-choi/venues";
-import { getVenueContent } from "@/components/vui-choi/venue-content";
 
 export default async function EntertainmentDetailPage(props: PageProps<"/giai-tri/[id]">) {
   const { id } = await props.params;
-  const venue = getVenue(Number(id));
+  const item = getEntertainment(Number(id));
 
-  if (!venue) notFound();
+  if (!item) notFound();
 
   return (
     <DetailScreen
       item={{
-        id: venue.id,
-        name: venue.name,
-        photo: venue.photo,
-        address: venue.address,
-        description: venue.address,
-        distance: venue.distance,
-        content: getVenueContent(venue),
+        id: item.id,
+        name: item.name,
+        photo: item.cover ?? item.photo,
+        address: item.address,
+        distance: item.distance,
+        content: getEntertainmentContent(item),
       }}
-      savedKey={`venue:${venue.id}`}
+      savedKey={`entertainment:${item.id}`}
     />
   );
 }

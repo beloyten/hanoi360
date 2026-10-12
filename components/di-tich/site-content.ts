@@ -1,9 +1,25 @@
 import type { DetailBlock } from "../shared/detail-content";
 import type { Site } from "./sites";
 
-const VR_TOUR_URL = "https://tour.panoee.net/6ab6316982ffd76ee6cf67f8/dien-kinh-thien";
-
 const SITE_INFO: Record<number, { story: string; highlights: string[]; tip: string }> = {
+  2: {
+    story: "Vườn quốc gia Ba Vì là khu rừng nguyên sinh rộng lớn phía tây Hà Nội, nổi tiếng với khí hậu mát mẻ quanh năm, những thung lũng xanh và các khu cắm trại bên hồ.",
+    highlights: [
+      "Cắm trại và dã ngoại bên hồ giữa thung lũng",
+      "Rừng thông, đồi cỏ và các cung đường trekking",
+      "Đền Thượng trên đỉnh núi Vua với tầm nhìn toàn cảnh",
+    ],
+    tip: "Nên đi xe máy hoặc ô tô riêng và mang theo áo khoác mỏng - nhiệt độ trên núi thấp hơn nội thành vài độ.",
+  },
+  10: {
+    story: "Chùa Tây Phương nằm trên đỉnh núi Câu Lâu, nổi tiếng với kiến trúc gỗ chồng diêm cổ kính và hệ thống tượng Phật được xem là đỉnh cao của nghệ thuật điêu khắc Việt Nam thế kỷ 18.",
+    highlights: [
+      "Bộ tượng 18 vị La Hán được chạm khắc sống động",
+      "Kiến trúc ba tòa chùa xếp hình chữ Tam, mái cong chồng diêm",
+      "Con đường 239 bậc đá ong dẫn lên đỉnh núi",
+    ],
+    tip: "Đường lên chùa khá dốc - nên đi giày thoải mái và đến vào buổi sáng để tránh nắng.",
+  },
   1: {
     story: "Hồ Tây là hồ nước ngọt lớn nhất Hà Nội, hình thành từ một khúc cũ của sông Hồng. Quanh hồ là những con đường đẹp, quán cà phê view hồ và nhiều đền chùa cổ kính.",
     highlights: [
@@ -14,7 +30,7 @@ const SITE_INFO: Record<number, { story: string; highlights: string[]; tip: stri
     ],
     tip: "Chiều muộn là thời điểm đẹp nhất để ngắm hoàng hôn và chụp ảnh. Cuối tuần khu vực quanh hồ khá đông, hãy đến sớm nếu muốn không gian yên tĩnh.",
   },
-  2: {
+  11: {
     story: "Chùa Trấn Quốc là ngôi chùa cổ nhất Hà Nội, được xây dựng từ thế kỷ thứ 6 dưới triều vua Lý Nam Đế, sau đó dời về đảo cá của Hồ Tây vào thế kỷ 17.",
     highlights: [
       "Tháp Bảo Tháp 11 tầng nổi bật giữa lòng hồ",
@@ -80,7 +96,30 @@ const SITE_INFO: Record<number, { story: string; highlights: string[]; tip: stri
   },
 };
 
+// Copy and photos from the Figma Hoàng Thành detail frame (720:27067).
+const HOANG_THANH: DetailBlock[] = [
+  {
+    type: "text",
+    parts: [
+      {
+        text: "Khu di tích trung tâm Hoàng thành Thăng Long - Hà Nội có diện tích 20ha, bao gồm khu khảo cổ học 18 Hoàng Diệu và các di tích còn sót lại trong khu di tích thành cổ Hà Nội như Bắc Môn, Đoan Môn, Hậu Lâu, rồng đá điện Kính Thiên, nhà con rồng, nhà D67 và cột cờ Hà Nội. Cụm di tích này được bao bọc bởi 4 con đường: phía Bắc là đường Phan Đình Phùng, phía Nam là đường Điện Biên Phủ, phía Đông là đường Nguyễn Tri Phương và phía Tây là đường Hoàng Diệu. Khu di tích Hoàng thành Thăng Long được UNESCO công nhận là Di sản Văn hóa thế giới năm 2010, với những giá trị di sản, kiến trúc, văn hóa được kết tinh qua hàng nghìn năm lịch sử.",
+      },
+    ],
+  },
+  { type: "image", src: "/figma/hoang-thanh-1.webp", alt: "Hoàng Thành Thăng Long" },
+  {
+    type: "text",
+    parts: [
+      {
+        text: "Những di tích trên mặt đất và khai quật được trong lòng đất tại khu trung tâm Hoàng thành Thăng Long - Hà Nội là minh chứng đặc sắc về quá trình giao lưu văn hóa lâu dài, là nơi tiếp nhận nhiều ảnh hưởng văn hóa từ bên ngoài, nhiều học thuyết, tư tưởng có giá trị toàn cầu của văn minh nhân loại, đặc biệt Phật giáo, Nho giáo, thuyết phong thủy, mô hình vương thành phương Đông, mô hình kiến trúc quân sự phương Tây, đến từ Trung Hoa, Champa, Pháp, để tạo dựng nên những nét độc đáo, sáng tạo của một Trung tâm chính trị, kinh tế, văn hóa của một quốc gia vùng châu thổ sông Hồng. Kết quả giao thoa, tiếp biến văn hóa đó được biểu đạt trong tạo dựng cảnh quan, qui hoạch các khu cung điện, trong nghệ thuật kiến trúc và nghệ thuật trang trí cung đình với diễn biến văn hóa đa dạng qua các thời kỳ lịch sử.",
+      },
+    ],
+  },
+  { type: "image", src: "/figma/hoang-thanh-2.webp", alt: "Hoàng Thành Thăng Long" },
+];
+
 export function getSiteContent(site: Site): DetailBlock[] {
+  if (site.id === 9) return HOANG_THANH;
   const info = SITE_INFO[site.id];
 
   return [
@@ -109,7 +148,6 @@ export function getSiteContent(site: Site): DetailBlock[] {
       ],
     },
     { type: "image", src: site.photo, alt: site.name },
-    { type: "vr", src: VR_TOUR_URL },
     {
       type: "text",
       parts: [{ text: "Trải nghiệm nổi bật", bold: true }],

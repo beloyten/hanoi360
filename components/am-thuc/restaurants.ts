@@ -17,6 +17,8 @@ export type Restaurant = {
   hours?: string;
   hoursNote?: string;
   address?: string;
+  /** Detail hero photo when it differs from the list logo (Figma Kampong detail). */
+  cover?: string;
   detail?: string;
   dishes?: Dish[];
   content?: DetailBlock[];
@@ -25,6 +27,7 @@ export type Restaurant = {
 export const RESTAURANTS: Restaurant[] = [
   {
     id: 1,
+    cover: "/figma/kampong-hero.webp",
     name: "Kampong Chicken House",
     description: "Gà nướng phong cách Đông Nam Á, cơm gà, nước chấm đặc trưng",
     distance: "250m",
@@ -34,7 +37,7 @@ export const RESTAURANTS: Restaurant[] = [
     hasVoucher: true,
     hours: "9h00 - 22h00",
     hoursNote: "Thứ 2 - Chủ nhật",
-    address: "09 Đào Duy Anh, Phường Mai, Đống Đa.",
+    address: "09 Đào Duy Anh, Phương Mai, Đống Đa.",
     detail:
       "Tiên phong mang mô hình Cơm gà Hải Nam chuẩn vị Singapore về Hà Nội. Không gian quán được thiết kế theo phong cách nhiệt đới (tropical) rất xanh mát và hiện đại, phù hợp cho cả gia đình và dân văn phòng.",
     dishes: [
@@ -54,7 +57,7 @@ export const RESTAURANTS: Restaurant[] = [
     hasVoucher: true,
     hours: "10h00 - 22h00",
     hoursNote: "Thứ 2 - Chủ nhật",
-    address: "Tầng 3, Vincom Bà Triệu, Hai Bà Trưng.",
+    address: "Tầng 5, Vincom Center Phạm Ngọc Thạch, Đống Đa.",
     detail:
       "Nhà hàng ẩm thực Hồng Kông với thực đơn dimsum đa dạng, mì trứng tươi và các món hấp truyền thống, không gian sang trọng chuẩn 5 sao.",
     dishes: [
@@ -74,7 +77,7 @@ export const RESTAURANTS: Restaurant[] = [
     hasVoucher: true,
     hours: "10h30 - 22h30",
     hoursNote: "Thứ 2 - Chủ nhật",
-    address: "18 Phạm Ngọc Thạch, Đống Đa.",
+    address: "B4 Phạm Ngọc Thạch, Đống Đa.",
     detail:
       "Chuỗi nhà hàng thịt nướng Hàn Quốc nổi tiếng với buffet đa dạng, lẩu kim chi cay nồng và không gian hiện đại phù hợp cho nhóm bạn, gia đình.",
     dishes: [
@@ -94,7 +97,7 @@ export const RESTAURANTS: Restaurant[] = [
     hasVoucher: true,
     hours: "10h00 - 21h30",
     hoursNote: "Thứ 2 - Chủ nhật",
-    address: "45 Trần Duy Hưng, Cầu Giấy.",
+    address: "34A Thái Hà, Đống Đa.",
     detail:
       "Ẩm thực Thái chuẩn vị với tom yum chua cay đặc trưng, pad thái đậm đà cùng không gian ấm cúng mang phong cách Đông Nam Á.",
     dishes: [
@@ -114,7 +117,7 @@ export const RESTAURANTS: Restaurant[] = [
     hasVoucher: true,
     hours: "11h00 - 22h00",
     hoursNote: "Thứ 2 - Chủ nhật",
-    address: "72 Linh Lang, Ba Đình.",
+    address: "Số 30 Thái Hà, Đống Đa.",
     detail:
       "Nhà hàng hải sản Nhật Bản với sashimi tươi sống mỗi ngày, buffet phong phú và không gian mang đậm phong cách Nhật truyền thống.",
     dishes: [
@@ -134,7 +137,7 @@ export const RESTAURANTS: Restaurant[] = [
     hasVoucher: true,
     hours: "10h30 - 22h00",
     hoursNote: "Thứ 2 - Chủ nhật",
-    address: "26 Xuân Diệu, Tây Hồ.",
+    address: "46 Thợ Nhuộm, Trần Hưng Đạo, Hoàn Kiếm.",
     detail:
       "Ẩm thực Ấn Độ chính thống với các món cà ri đậm đà, bánh naan nóng hổi cùng gia vị nhập khẩu trực tiếp từ Ấn Độ.",
     dishes: [
@@ -154,7 +157,7 @@ export const RESTAURANTS: Restaurant[] = [
     hasVoucher: true,
     hours: "10h00 - 21h30",
     hoursNote: "Thứ 2 - Chủ nhật",
-    address: "12 Kim Mã, Ba Đình.",
+    address: "Số 10 Hàng Trống, Hoàn Kiếm.",
     detail:
       "Nhà hàng Ấn Độ với hương vị cà ri gia vị đậm đà, thực đơn chay và mặn phong phú, phù hợp cho bữa trưa và tối cùng gia đình.",
     dishes: [
@@ -174,7 +177,7 @@ export const RESTAURANTS: Restaurant[] = [
     hasVoucher: true,
     hours: "9h30 - 22h00",
     hoursNote: "Thứ 2 - Chủ nhật",
-    address: "88 Phố Huế, Hai Bà Trưng.",
+    address: "26 Quảng Bá, Quảng An, Tây Hồ.",
     detail:
       "Quán ăn nhanh phong cách Trung Đông với bánh Pita mềm, kebab nướng thơm lừng và nước sốt đặc trưng.",
     dishes: [
@@ -214,7 +217,7 @@ export const RESTAURANTS: Restaurant[] = [
     hasVoucher: true,
     hours: "6h30 - 20h00",
     hoursNote: "Thứ 2 - Chủ nhật",
-    address: "15 Tống Duy Tân, Hoàn Kiếm.",
+    address: "36 Láng Hạ, Láng, Hà Nội.",
     detail:
       "Quán xôi, cơm bình dân với các món ăn sáng truyền thống, giá cả phải chăng, phù hợp cho bữa sáng nhanh gọn.",
     dishes: [
@@ -228,8 +231,10 @@ export const RESTAURANTS: Restaurant[] = [
     name: "Bún đậu Hương",
     description: "Bún đậu mắm tôm, đặc sản Hà Nội",
     distance: "250m",
+    address: "45 P. Phú Xá, Phú Xá, Phú Thượng.",
     logoText: "Bún Đậu Hương",
     logoBg: "#2f4d2f",
+    photo: "/figma/list/restaurant-11.webp",
     hasVoucher: true,
   },
   {
@@ -237,8 +242,10 @@ export const RESTAURANTS: Restaurant[] = [
     name: "Quán Nhậu Tự Do",
     description: "Đồ nhậu, món nướng, bia hơi bình dân",
     distance: "250m",
+    address: "Số 2 Lê Đức Thọ, Cầu Giấy.",
     logoText: "Tự Do",
     logoBg: "#1f5c3a",
+    photo: "/figma/list/restaurant-12.webp",
     hasVoucher: true,
   },
   {
@@ -246,8 +253,10 @@ export const RESTAURANTS: Restaurant[] = [
     name: "Phở Bò Hồ Lợi",
     description: "Phở bò truyền thống, nước dùng đậm đà",
     distance: "250m",
+    address: "28 209 An Vương, Phú Thượng.",
     logoText: "Hồ Lợi",
     logoBg: "#7a1f1f",
+    photo: "/figma/list/restaurant-13.webp",
     hasVoucher: true,
   },
   {
@@ -255,8 +264,10 @@ export const RESTAURANTS: Restaurant[] = [
     name: "Tiệm Bánh Mì Belly",
     description: "Bánh mì kiểu mới, nhân đa dạng, giòn thơm",
     distance: "250m",
+    address: "35 Ngõ 35 - Đặng Thai Mai, Tây Hồ.",
     logoText: "Belly",
     logoBg: "#c9a34e",
+    photo: "/figma/list/restaurant-14.webp",
     hasVoucher: true,
   },
 ];

@@ -29,7 +29,7 @@ function GuideCard({ guide }: { guide: Guide }) {
 
 export function GuideList({ guides }: { guides: Guide[] }) {
   return (
-    <div className="flex flex-col gap-2 px-3 pt-[9px] pb-8">
+    <div className="flex flex-col gap-2 px-3 pb-8">
       {guides.map((guide) => (
         <GuideCard key={guide.id} guide={guide} />
       ))}

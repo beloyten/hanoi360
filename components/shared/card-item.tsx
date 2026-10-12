@@ -6,6 +6,7 @@ import { useIsSaved, useToggleSaved } from "@/lib/store/use-saved-store";
 import { DirectionsButton } from "./directions-button";
 import { BookmarkIcon, PinIcon } from "../home/icons";
 import { DiscountBadge } from "../am-thuc/discount-badge";
+import { useShowDistance } from "../home/use-geo-permission";
 
 export type VerticalCardItem = {
   id: number | string;
@@ -37,12 +38,15 @@ export function CardItemVertical({
   href?: string;
 }) {
   const saved = useIsSaved(savedKey);
+  const showDistance = useShowDistance();
   const toggleSaved = useToggleSaved();
 
+  // Figma "card list" (413:37829): 369px card, 178px photo (8/8/20/20 radius) over a white panel;
+  // Title 2 #27314D + Body 2 #141E3F/80, 40px save target, grey (#727273) directions icon.
   const card = (
     <>
-      <div className="relative h-44.5 w-full overflow-hidden rounded-t-lg rounded-b-[20px] bg-[#f3f3f3]">
-        {item.photo ? (
+      <div className="relative h-44.5 w-full overflow-hidden rounded-t-lg rounded-b-[20px] bg-[#C0C0C0]">
+        {item.photo && (
           <Image
             src={item.photo}
             alt={item.name}
@@ -50,23 +54,23 @@ export function CardItemVertical({
             className="object-cover"
             sizes="(min-width: 640px) 560px, 100vw"
           />
-        ) : (
-          <div className="absolute inset-0 bg-gradient-to-br from-[#d6d6d6] to-[#ae996f]" />
         )}
-        <div className="pointer-events-none absolute inset-x-0 bottom-0 h-14 bg-linear-to-t from-black/20 to-transparent" />
       </div>
 
       <DirectionsButton
         query={`${item.name}, ${item.subtitle}, Hà Nội`}
-        className="absolute top-44.5 right-6 z-10 -translate-y-1/2"
+        className="absolute top-[153px] right-6 z-10"
+        iconClassName="text-[#727273]"
       />
 
-      <div className="relative rounded-t-[20px] rounded-b-lg bg-white px-3.5 pt-3 pb-1">
-        <p className="max-w-[70%] truncate text-[16px] leading-tight font-bold text-[#252525]">{item.name}</p>
-        <p className="mt-1 mb-11 max-w-[70%] truncate text-[13px] text-[#58585c]">{item.subtitle}</p>
+      <div className="relative min-h-[94px] rounded-t-[20px] rounded-b-lg bg-white pt-1 pr-14 pb-7 pl-3">
+        <div className="flex flex-col gap-1">
+          <p className="line-clamp-2 text-base leading-6 font-semibold text-[#27314D]">{item.name}</p>
+          <p className="line-clamp-2 text-sm leading-[17px] text-[#141E3F]/80">{item.subtitle}</p>
+        </div>
 
-        {item.distance && (
-          <div className="absolute bottom-1 left-3.5 inline-flex items-center">
+        {showDistance && item.distance && (
+          <div className="absolute bottom-1 left-3 inline-flex items-center">
             <PinIcon className="size-5 text-[#27314D]" />
             <span className="flex h-5 items-center text-[11px] leading-none text-[#27314D]">{item.distance}</span>
           </div>
@@ -81,9 +85,9 @@ export function CardItemVertical({
           }}
           aria-label={saved ? "Bỏ lưu địa điểm" : "Lưu địa điểm"}
           aria-pressed={saved}
-          className="absolute right-5 bottom-3 flex h-8 w-8 items-center justify-center text-[#27314D] transition-transform duration-150 select-none active:scale-90"
+          className="absolute top-[46px] right-4 flex size-10 items-center justify-center text-[#27314D] transition-transform duration-150 select-none active:scale-90"
         >
-          <BookmarkIcon className="h-4.5 w-4.5" filled={saved} />
+          <BookmarkIcon className="h-[22.3px] w-[18px]" filled={saved} />
         </button>
       </div>
     </>
@@ -110,6 +114,7 @@ export function CardItemHorizontal({
   directionsIconClassName?: string;
 }) {
   const saved = useIsSaved(savedKey);
+  const showDistance = useShowDistance();
   const toggleSaved = useToggleSaved();
   const logoBg = item.logoBg ?? "#eef1ee";
   const isDark = logoBg.toLowerCase() !== "#eef1ee" && !logoBg.startsWith("#f") && !logoBg.startsWith("#e");
@@ -151,16 +156,18 @@ export function CardItemHorizontal({
         {/* Figma "card list_2": fixed 132px card, subtitle box 170x34 (two lines of Body 2). */}
         <p className="line-clamp-2 w-[170px] max-w-full text-sm leading-[17px] text-[#141E3F]/80">{item.description}</p>
 
-        <div className="mt-auto inline-flex items-center pt-2.5">
-          <PinIcon className="size-5 text-[#27314D]" />
-          <span className="text-[11px] leading-none text-[#27314D]">{item.distance}</span>
-        </div>
+        {showDistance && (
+          <div className="mt-auto inline-flex items-center pt-2.5">
+            <PinIcon className="size-5 text-[#27314D]" />
+            <span className="text-[11px] leading-none text-[#27314D]">{item.distance}</span>
+          </div>
+        )}
       </div>
 
       <DirectionsButton
         query={`${item.name}${item.address ? `, ${item.address}` : ""}, Hà Nội`}
         className="absolute right-1.5 bottom-1 z-10"
-        iconClassName={directionsIconClassName}
+        iconClassName={directionsIconClassName ?? "text-[#727273]"}
       />
     </>
   );

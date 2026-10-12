@@ -13,12 +13,13 @@ export function SearchBar({ placeholder, onClick, stuck = false }: SearchBarProp
       <button
         type="button"
         onClick={onClick}
-        className={`flex h-10 w-full items-center gap-2.5 rounded border border-[#e5e5e4] px-4 transition-[background-color,box-shadow] duration-200 ${
+        // Figma "Search bar" (392:9275): 40px, 4px radius, no border; 20px icon at 8px, Nhãn text #19264E/70.
+        className={`flex h-10 w-full items-center gap-3 rounded px-2 transition-[background-color,box-shadow] duration-200 ${
           stuck ? "bg-[#E3E2E0]" : "bg-white shadow-[0px_4px_4px_0px_#00000017]"
         }`}
       >
-        <SearchIcon className="h-4 w-4 shrink-0 text-[#58585c]" />
-        <span className="flex-1 truncate text-left text-sm text-[#58585c]/70">{placeholder}</span>
+        <SearchIcon className="size-5 shrink-0 text-[#19264E]" />
+        <span className="flex-1 truncate text-left text-xs text-[#19264E]/70">{placeholder}</span>
       </button>
     </div>
   );

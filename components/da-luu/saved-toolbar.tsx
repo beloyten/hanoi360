@@ -11,6 +11,7 @@ const FILTERS: { key: FilterType; label: string }[] = [
   { key: "all", label: "Tất cả" },
   { key: "restaurant", label: "Ẩm thực" },
   { key: "venue", label: "Vui chơi" },
+  { key: "entertainment", label: "Giải trí" },
   { key: "facility", label: "Y tế" },
   { key: "shop", label: "Mua sắm" },
   { key: "site", label: "Di tích" },
@@ -54,7 +55,7 @@ export function SavedToolbar({
 
   if (selectMode) {
     return (
-      <div className="relative flex items-center gap-2 px-4 pb-3">
+      <div className="relative flex items-center gap-2 px-3">
         <button
           type="button"
           onClick={() => {
@@ -92,20 +93,20 @@ export function SavedToolbar({
   }
 
   return (
-    <div className="relative flex items-center gap-2 px-4 pb-3">
+    <div className="relative flex items-center gap-1 px-3">
       <div className="relative">
         <button
           type="button"
           disabled={disabled}
           onClick={() => setOpenMenu((m) => (m === "filter" ? null : "filter"))}
-          className="flex h-8 items-center gap-1.5 rounded-full border px-3 text-xs font-medium transition-colors disabled:opacity-40"
+          className="flex h-7 w-[99px] items-center gap-1 rounded-[32px] border px-2.5 text-xs transition-colors disabled:opacity-40"
           style={{
-            borderColor: openMenu === "filter" ? "#009b8c" : "#e5e5e4",
+            borderColor: openMenu === "filter" ? "#AA6E00" : "#BDBDBD",
             backgroundColor: "transparent",
-            color: "#252525",
+            color: "#27314D",
           }}
         >
-          <FilterIcon className="h-5 w-5 text-[#141E3F]" />
+          <FilterIcon className="h-5 w-5 text-[#141E3F] opacity-70" />
           Lọc theo
         </button>
 
@@ -120,7 +121,7 @@ export function SavedToolbar({
                   setOpenMenu(null);
                 }}
                 className="flex w-full items-center justify-between rounded-lg px-3 py-2 text-left text-sm"
-                style={{ color: filterType === filter.key ? "#009b8c" : "#252525" }}
+                style={{ color: filterType === filter.key ? "#AA6E00" : "#252525" }}
               >
                 {filter.label}
                 {filterType === filter.key && <CheckIcon className="h-4 w-4" />}
@@ -130,7 +131,7 @@ export function SavedToolbar({
         )}
       </div>
 
-      <div className="ml-auto flex items-center gap-2">
+      <div className="ml-auto flex items-center gap-1">
         <button
           type="button"
           disabled={disabled}
@@ -138,7 +139,7 @@ export function SavedToolbar({
             setOpenMenu(null);
             onToggleSelectMode();
           }}
-          className="flex h-7 w-[105px] items-center justify-center rounded border border-[#9b9b9b] text-center text-xs font-normal text-[#252525] disabled:opacity-40"
+          className="flex h-7 w-[105px] items-center justify-center rounded border border-[#BDBDBD] text-center text-xs font-normal text-[#27314D] disabled:opacity-40"
         >
           Chọn
         </button>
@@ -148,8 +149,8 @@ export function SavedToolbar({
             type="button"
             disabled={disabled}
             onClick={() => setOpenMenu((m) => (m === "sort" ? null : "sort"))}
-            className="flex h-7 w-[105px] items-center justify-center rounded border text-center text-xs font-normal text-[#252525] disabled:opacity-40"
-            style={{ borderColor: openMenu === "sort" ? "#009b8c" : "#9b9b9b" }}
+            className="flex h-7 w-[105px] items-center justify-center rounded border text-center text-xs font-normal text-[#27314D] disabled:opacity-40"
+            style={{ borderColor: openMenu === "sort" ? "#AA6E00" : "#BDBDBD" }}
           >
             Sắp xếp theo
           </button>
@@ -165,7 +166,7 @@ export function SavedToolbar({
                     setOpenMenu(null);
                   }}
                   className="flex w-full items-center justify-between rounded-lg px-3 py-2 text-left text-sm"
-                  style={{ color: sortBy === sort.key ? "#009b8c" : "#252525" }}
+                  style={{ color: sortBy === sort.key ? "#AA6E00" : "#252525" }}
                 >
                   {sort.label}
                   {sortBy === sort.key && <CheckIcon className="h-4 w-4" />}

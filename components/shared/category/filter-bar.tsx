@@ -13,7 +13,7 @@ const chipStyle = (active: boolean): CSSProperties => ({
 });
 
 const CHIP_CLASS =
-  "flex shrink-0 items-center justify-center gap-1 rounded-[32px] border bg-white px-[13px] py-1 text-xs whitespace-nowrap transition-colors duration-150";
+  "flex shrink-0 items-center justify-center gap-1 rounded-[32px] border bg-transparent px-[13px] py-1 text-xs whitespace-nowrap transition-colors duration-150";
 
 export function FilterBar({
   scope,

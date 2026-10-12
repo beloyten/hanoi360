@@ -1,23 +1,23 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import { CardItem } from "../shared/card-item";
 import { CategoryFilter, toggleInSet } from "../shared/category/category-filter";
 import { CategoryLayout } from "../shared/category/category-layout";
 import { FilterBar } from "../shared/category/filter-bar";
-import { VenueList } from "../vui-choi/venue-list";
-import { CATEGORIES, VENUES, type VenueCategory } from "../vui-choi/venues";
+import { CATEGORIES, ENTERTAINMENTS, type EntertainmentCategory } from "./entertainment";
 
 const HERO = {
   title: "GIẢI TRÍ\nĐA DẠNG",
   gradientFrom: "#009B8C",
   gradientTo: "#004942",
   illustration: { src: "/figma/hero-giai-tri.png", width: 395, height: 181.7, hasTitle: true },
-  searchPlaceholder: "Tìm điểm vui chơi, giải trí...",
+  searchPlaceholder: "Tìm địa điểm bạn muốn đến",
 };
 
 const CHIPS = [
   { key: "500m", label: "<500m" },
-  { key: "1000m", label: "<1000m" },
+  { key: "1km", label: "<1km" },
 ];
 
 const SHEET_SECTIONS = [
@@ -25,8 +25,6 @@ const SHEET_SECTIONS = [
     title: "Lọc theo",
     options: [
       { key: "discount", label: "Có mã giảm giá" },
-      { key: "under-12", label: "Dành cho trẻ em dưới 12 tuổi" },
-      { key: "12-18", label: "Dành cho trẻ em 12 - 18 tuổi" },
       { key: "open-now", label: "Đang mở cửa" },
     ],
   },
@@ -35,11 +33,11 @@ const SHEET_SECTIONS = [
 const CATEGORY_ITEMS = CATEGORIES.map(({ key, label, icon }) => ({ key, label, image: icon }));
 
 export function GiaiTriScreen() {
-  const [active, setActive] = useState<Set<VenueCategory>>(new Set());
+  const [active, setActive] = useState<Set<EntertainmentCategory>>(new Set());
 
-  const venues = useMemo(() => {
-    if (active.size === 0) return VENUES;
-    return VENUES.filter((venue) => active.has(venue.category));
+  const items = useMemo(() => {
+    if (active.size === 0) return ENTERTAINMENTS;
+    return ENTERTAINMENTS.filter((item) => active.has(item.category));
   }, [active]);
 
   return (
@@ -53,7 +51,18 @@ export function GiaiTriScreen() {
         </>
       }
     >
-      <VenueList venues={venues} hrefPrefix="/giai-tri" />
+      {/* Figma Giải trí uses the horizontal "card list_2" (logo tile + name + address). */}
+      <div className="flex flex-col gap-1 px-3 pb-6">
+        {items.map((item) => (
+          <CardItem
+            key={item.id}
+            layout="horizontal"
+            item={{ ...item, description: item.address }}
+            savedKey={`entertainment:${item.id}`}
+            href={`/giai-tri/${item.id}`}
+          />
+        ))}
+      </div>
     </CategoryLayout>
   );
 }

@@ -16,7 +16,8 @@ export const EXHIBITS: Exhibit[] = [
   {
     slug: "giao-chi",
     name: "BST Giao Chỉ - Hình khối nguyên sơ của một ký ức",
-    photo: "/home/banner-2.png",
+    // Not one of the Figma event pages and has no Home banner; hero uses its own product photo.
+    photo: "/home/banner-2/img-1.png",
     address: "Bát Tràng Museum Atelier, Số 1, đường 1-5, thôn 2, xã Bát Tràng, Hà Nội",
   },
   {
@@ -32,9 +33,15 @@ export const EXHIBITS: Exhibit[] = [
     address: "The Muse Artspace, 47 Tràng Tiền, Hà Nội",
   },
   {
+    slug: "nha-hat-ke-chuyen",
+    name: "115 năm Nhà hát kể chuyện",
+    photo: "/home/banner-5.png",
+    address: "Nhà Hát Lớn Hà Nội, Số 1 - Tràng Tiền",
+  },
+  {
     slug: "van-gogh",
     name: "Triển lãm đa giác quan Van Gogh Timeless",
-    photo: "/home/banner-5.png",
+    photo: "/figma/van-gogh-hero.webp",
     address: "Tầng 1, Tòa B - UDIC Westlake Building, Đ. Võ Chí Công, P. Phú Thượng, Hà Nội",
   },
 ];

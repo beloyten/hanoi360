@@ -10,7 +10,7 @@ const HERO = {
   gradientFrom: "#DDB86B",
   gradientTo: "#AA6E00",
   illustration: { src: "/figma/hero-am-thuc.png", width: 394.3, height: 171, hasTitle: true },
-  searchPlaceholder: "Tìm địa điểm, quán ăn, nhà hàng...",
+  searchPlaceholder: "Tìm địa điểm bạn muốn đến",
 };
 
 const CHIPS = [

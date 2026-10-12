@@ -26,8 +26,13 @@ export function ImageFilterButton({
       className="flex w-[82px] shrink-0 flex-col items-center gap-1 select-none"
     >
       <span className="relative block size-20 shrink-0">
-        <span
-          className="absolute inset-1 rounded-[6px] border-2 border-[#AA6E00] transition-opacity duration-150"
+        {/* Figma "selected stroke" (310:29177): 72px #AA6E00 frame at 4px. */}
+        <Image
+          src="/figma/filter-selected.svg"
+          alt=""
+          width={72}
+          height={72}
+          className="absolute top-1 left-1 transition-opacity duration-150"
           style={{ opacity: active ? 1 : 0 }}
         />
         <span
@@ -38,7 +43,7 @@ export function ImageFilterButton({
         </span>
       </span>
       <span
-        className="w-[71px] text-center text-xs leading-[15px] whitespace-pre-line transition-colors duration-150"
+        className="-mx-[3.5px] w-[89px] text-center text-xs leading-[15px] whitespace-pre-line transition-colors duration-150"
         style={{ color: active ? "#AA6E00" : "#27314D" }}
       >
         {label}
@@ -57,7 +62,7 @@ export function CategoryFilter<K extends string>({
   onToggle: (key: K) => void;
 }) {
   return (
-    <FilterSection gapClassName="gap-0" className="pb-2">
+    <FilterSection gapClassName="gap-0 justify-between" className="pb-2">
       {items.map((item) => (
         <ImageFilterButton
           key={item.key}

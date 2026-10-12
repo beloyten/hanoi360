@@ -2,7 +2,7 @@
 
 import { useSavedKeys } from "@/lib/store/use-saved-store";
 import { CardItem } from "../shared/card-item";
-import { CheckIconV2, SavedIcon } from "../home/icons";
+import { CheckIconV2 } from "../home/icons";
 import { parseDistanceMeters, resolveSavedItem, type SavedDisplayItem } from "./saved-items";
 import type { FilterType, SortBy } from "./saved-toolbar";
 
@@ -79,11 +79,8 @@ export function SavedList({
 
   if (items.length === 0) {
     return (
-      <div className="flex flex-col items-center gap-3 px-6 py-20 text-center">
-        <SavedIcon className="h-9 w-9 text-[#c7c7c6]" />
-        <p className="text-base font-semibold text-[#252525]">Chưa có địa điểm nào được lưu</p>
-        <p className="text-sm text-[#58585c]">Nhấn biểu tượng bookmark trên một địa điểm để lưu lại tại đây.</p>
-      </div>
+      // Figma empty state: a single centered line, 116px under the toolbar.
+      <p className="px-4 pt-[116px] text-center text-sm text-[#27314D]">Chưa có địa điểm nào được lưu</p>
     );
   }
 

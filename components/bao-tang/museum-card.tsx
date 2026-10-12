@@ -3,7 +3,7 @@ import type { Museum } from "./museums";
 
 export function MuseumList({ museums }: { museums: Museum[] }) {
   return (
-    <div className="flex flex-col gap-4 px-4 pb-6">
+    <div className="flex flex-col gap-1 px-3 pb-6">
       {museums.map((museum) => (
         <CardItem
           key={museum.id}

@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { useSavedKeys, useToggleSaved } from "@/lib/store/use-saved-store";
 import { BottomNav } from "../home/bottom-nav";
+import { TopBar } from "../shared/top-bar";
 import { resolveSavedItem, type SavedDisplayItem } from "./saved-items";
 import { SavedList } from "./saved-list";
 import { SavedToolbar, type FilterType, type SortBy } from "./saved-toolbar";
@@ -59,11 +60,10 @@ export function DaLuuScreen() {
           background: "linear-gradient(rgb(250, 248, 245) 0%, rgb(239, 236, 231) 100%)",
         }}
       >
-        <div
-          className="sticky top-0 z-20 bg-[#faf8f5]"
-          style={{ paddingTop: "calc(16px + env(safe-area-inset-top))" }}
-        >
-          <h1 className="pb-3 text-center text-lg font-bold text-[#252525]">Đã lưu</h1>
+        {/* Figma "Layout 2_Saved" (424:13764): 52px centered top bar, toolbar row at y 116. */}
+        <div className="sticky top-0 z-20 bg-white pb-2">
+          <TopBar title="Đã lưu" align="center" showBack={false} color="#27314D" height={52} />
+          <div className="h-16" />
 
           <SavedToolbar
             disabled={keys.length === 0}

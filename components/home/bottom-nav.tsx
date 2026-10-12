@@ -17,7 +17,7 @@ export function BottomNav() {
 
   return (
     <nav
-      className="fixed inset-x-0 bottom-0 z-40 flex items-start justify-between rounded-t-2xl bg-white px-6 pt-3"
+      className="fixed inset-x-0 bottom-0 z-40 flex items-stretch gap-1 rounded-t-2xl bg-white px-6 pt-2"
       style={{
         height: "calc(67px + env(safe-area-inset-bottom))",
         paddingBottom: "calc(12px + env(safe-area-inset-bottom))",
@@ -32,10 +32,11 @@ export function BottomNav() {
             key={key}
             type="button"
             onClick={() => href && router.push(href)}
-            className={`flex flex-col items-center gap-1 ${color}`}
+            // Full-height column = larger tap target (client: icons were hard to hit).
+            className={`flex flex-1 flex-col items-center gap-1 ${color}`}
           >
             <Icon className="h-7 w-7" filled={isActive} />
-            <span className={`text-[12px] ${isActive ? "font-medium text-[#9e6c1a]" : ""}`}>{label}</span>
+            <span className={`text-xs leading-[15px] ${isActive ? "text-[#AA7709]" : ""}`}>{label}</span>
           </button>
         );
       })}

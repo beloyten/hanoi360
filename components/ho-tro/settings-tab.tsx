@@ -23,10 +23,10 @@ function LocationToggle() {
   };
 
   return (
-    <div className="flex items-center justify-between gap-4 bg-white px-4 py-4">
+    <div className="flex items-center justify-between gap-4 rounded bg-white p-3">
       <div className="min-w-0">
         <p className="text-sm font-medium text-[#252525]">Cho phép truy cập vị trí của bạn</p>
-        <p className="mt-0.5 text-xs text-[#58585c]">Dùng để gợi ý các địa điểm gần bạn nhất</p>
+        <p className="mt-0.5 text-xs text-[#58585c]">Cho phép truy cập vị trí của bạn</p>
       </div>
 
       <Switch
@@ -47,7 +47,7 @@ export function SettingsTab() {
     <div className="flex flex-col">
       <LocationToggle />
 
-      <div className="mt-1 flex flex-col bg-white">
+      <div className="mt-1 flex flex-col rounded bg-white px-3">
         {LANGUAGES.map((lang) => {
           const isActive = language === lang.key;
           return (
@@ -56,9 +56,9 @@ export function SettingsTab() {
               type="button"
               disabled={!lang.enabled}
               onClick={() => setLanguage(lang.key)}
-              className="flex items-center justify-between gap-2 border-b border-[#ececec] px-4 py-3.5 text-left last:border-b-0 disabled:opacity-40"
+              className="flex h-[50px] items-center justify-between gap-2 border-b border-[#D5D5D5] text-left last:border-b-0 disabled:opacity-40"
             >
-              <span className="text-sm" style={{ color: isActive ? "#aa6e00" : "#252525", fontWeight: isActive ? 600 : 400 }}>
+              <span className="pl-1.5 text-sm" style={{ color: isActive ? "#aa6e00" : "#252525" }}>
                 {lang.label}
               </span>
               {isActive && <CheckIcon className="h-4 w-4 text-[#aa6e00]" />}

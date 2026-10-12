@@ -6,9 +6,9 @@ import { ImageFilterButton } from "../shared/category/category-filter";
 const PICKS = [
   { label: "Đồ uống", photo: "/am-thuc/quick-picks/do-uong.png" },
   { label: "Cơm", photo: "/am-thuc/quick-picks/com.jpg" },
+  { label: "Bánh mỳ", photo: "/am-thuc/quick-picks/banh-mi.png" },
   { label: "Phở", photo: "/am-thuc/quick-picks/pho.png" },
   { label: "Bún", photo: "/am-thuc/quick-picks/bun.png" },
-  { label: "Bánh mỳ", photo: "/am-thuc/quick-picks/banh-mi.png" },
 ];
 
 export function QuickPicks() {
