@@ -131,7 +131,8 @@ export function Banner() {
                 inset: isActive ? 4 : 0,
                 width: isActive ? CARD_W - 8 : CARD_W,
                 height: isActive ? CARD_H - 8 : CARD_H,
-                borderRadius: isActive ? 0 : 4 / SIDE_SCALE,
+                // Figma "Banner 5" (client 15/10 "có bo góc"): 8px radius inside the square frame.
+                borderRadius: isActive ? 8 : 4 / SIDE_SCALE,
                 transition: `inset 320ms ${EASE}, width 320ms ${EASE}, height 320ms ${EASE}, border-radius 320ms ${EASE}`,
               }}
             />

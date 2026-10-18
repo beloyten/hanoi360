@@ -68,7 +68,7 @@ export function BanDoScreen() {
       style={{ background: "linear-gradient(180deg, #F3F3F3 0%, #E3E2E0 100%)" }}
     >
       <div className="absolute inset-x-0 top-0 z-30">
-        <TopBar title="Bản đồ" tone="dark" />
+        <TopBar title="Bản đồ" align="center" showBack={false} color="#27314D" height={64} />
         <div className="mx-3 mt-[3px] flex h-10 items-center gap-3 rounded bg-[#E3E2E0] px-2">
           <SearchIcon className="size-5 shrink-0 text-[#19264E]" />
           <span className="truncate text-xs text-[#19264E]/70">Tìm địa điểm, quán ăn, nhà hàng...</span>
@@ -77,7 +77,7 @@ export function BanDoScreen() {
 
       <div
         className="absolute inset-x-0 bottom-0 overflow-hidden"
-        style={{ top: "calc(98px + env(safe-area-inset-top))" }}
+        style={{ top: "calc(106px + env(safe-area-inset-top))" }}
         onClick={() => setMenuOpen(false)}
       >
         <Image src="/ban-do/map.webp" alt="" fill priority className="object-cover" sizes="100vw" />

@@ -32,10 +32,13 @@ export function CardItemVertical({
   item,
   savedKey,
   href,
+  onToggleSaved,
 }: {
   item: VerticalCardItem;
   savedKey: string;
   href?: string;
+  /** Replaces the default save toggle (Đã lưu asks for confirmation first). */
+  onToggleSaved?: () => void;
 }) {
   const saved = useIsSaved(savedKey);
   const showDistance = useShowDistance();
@@ -81,7 +84,8 @@ export function CardItemVertical({
           onClick={(e) => {
             e.preventDefault();
             e.stopPropagation();
-            toggleSaved(savedKey);
+            if (onToggleSaved) onToggleSaved();
+            else toggleSaved(savedKey);
           }}
           aria-label={saved ? "Bỏ lưu địa điểm" : "Lưu địa điểm"}
           aria-pressed={saved}
@@ -181,12 +185,14 @@ export function CardItemHorizontal({
 
 export function CardItem(
   props: { savedKey: string } & (
-    | { layout: "vertical"; item: VerticalCardItem; href?: string }
+    | { layout: "vertical"; item: VerticalCardItem; href?: string; onToggleSaved?: () => void }
     | { layout: "horizontal"; item: HorizontalCardItem; href: string; directionsIconClassName?: string }
   )
 ) {
   if (props.layout === "vertical") {
-    return <CardItemVertical item={props.item} savedKey={props.savedKey} href={props.href} />;
+    return (
+      <CardItemVertical item={props.item} savedKey={props.savedKey} href={props.href} onToggleSaved={props.onToggleSaved} />
+    );
   }
   return (
     <CardItemHorizontal

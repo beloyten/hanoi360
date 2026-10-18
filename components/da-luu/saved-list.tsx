@@ -11,11 +11,13 @@ function SavedCard({
   selectMode,
   selected,
   onToggleSelect,
+  onRemove,
 }: {
   item: SavedDisplayItem;
   selectMode: boolean;
   selected: boolean;
   onToggleSelect: () => void;
+  onRemove: () => void;
 }) {
   return (
     <div className={`relative ${selectMode ? "rounded-lg border border-[#aa6e00]" : ""}`}>
@@ -30,6 +32,7 @@ function SavedCard({
         }}
         savedKey={item.key}
         href={selectMode ? undefined : item.href}
+        onToggleSaved={onRemove}
       />
 
       {selectMode && (
@@ -58,12 +61,14 @@ export function SavedList({
   selectMode,
   selectedKeys,
   onToggleSelect,
+  onRemove,
 }: {
   filterType: FilterType;
   sortBy: SortBy;
   selectMode: boolean;
   selectedKeys: Set<string>;
   onToggleSelect: (key: string) => void;
+  onRemove: (key: string) => void;
 }) {
   const keys = useSavedKeys();
   let items = keys.map(resolveSavedItem).filter((item) => item !== null);
@@ -93,6 +98,7 @@ export function SavedList({
           selectMode={selectMode}
           selected={selectedKeys.has(item.key)}
           onToggleSelect={() => onToggleSelect(item.key)}
+          onRemove={() => onRemove(item.key)}
         />
       ))}
     </div>

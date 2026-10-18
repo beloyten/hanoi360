@@ -155,7 +155,7 @@ export function LichSuScreen() {
           </p>
 
           {/* Equal-width era chips (client: "thẻ lọc có width = nhau"); tap scrolls to that era. */}
-          <div className="sticky top-14 z-20 -mx-3 px-3">
+          <div className="sticky top-14 z-20 -mx-3 -my-2 bg-[#F3F3F3] px-3 py-2">
             <div className="flex h-8 gap-1 overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
               {ERAS.map((era) => {
                 const isActive = active === era.key;

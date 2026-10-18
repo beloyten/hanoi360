@@ -6,6 +6,8 @@ export type HeroIllustration = {
   height: number;
   /** The Figma artwork already contains the Headline 1 title, so the text is kept for screen readers only. */
   hasTitle?: boolean;
+  /** Top offset in px (default 56, Figma artwork y). */
+  top?: number;
 };
 
 type HeroProps = {
@@ -34,8 +36,8 @@ export function Hero({ title, hideTitle, gradientFrom, gradientTo, illustration 
           height={illustration.height}
           unoptimized
           priority
-          className="pointer-events-none absolute top-14 -left-px max-w-none select-none"
-          style={{ width: illustration.width, height: illustration.height }}
+          className="pointer-events-none absolute -left-px max-w-none select-none"
+          style={{ top: illustration.top ?? 56, width: illustration.width, height: illustration.height }}
         />
       )}
       {illustration?.hasTitle || hideTitle ? (

@@ -2,6 +2,7 @@ import { notFound } from "next/navigation";
 import { DetailScreen } from "@/components/shared/detail-screen";
 import { getMuseum } from "@/components/bao-tang/museums";
 import { getMuseumContent } from "@/components/bao-tang/museum-content";
+import { AUDIO_GUIDE_SRC } from "@/lib/vr-tours";
 
 export default async function MuseumDetailPage(props: PageProps<"/bao-tang/[id]">) {
   const { id } = await props.params;
@@ -25,7 +26,7 @@ export default async function MuseumDetailPage(props: PageProps<"/bao-tang/[id]"
       savedKey={`museum:${museum.id}`}
       // Figma "Chi tiet/bao tang" (413:36662) shows Bảo tàng Lịch sử Quân sự with 360 + audio guide.
       vrTour={museum.id === 5 ? "bao-tang-quan-su" : undefined}
-      audio={museum.id === 5 ? {} : undefined}
+      audio={museum.id === 5 ? { src: AUDIO_GUIDE_SRC } : undefined}
     />
   );
 }

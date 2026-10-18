@@ -16,7 +16,8 @@ export function DaLuuScreen() {
   const [sortBy, setSortBy] = useState<SortBy>("recent");
   const [selectMode, setSelectMode] = useState(false);
   const [selectedKeys, setSelectedKeys] = useState<Set<string>>(new Set());
-  const [confirmOpen, setConfirmOpen] = useState(false);
+  // Keys waiting for the delete confirmation (bulk selection or a single bookmark tap).
+  const [pendingRemove, setPendingRemove] = useState<string[] | null>(null);
 
   const toggleSelectMode = () => {
     setSelectMode((v) => !v);
@@ -44,11 +45,11 @@ export function DaLuuScreen() {
     setSelectedKeys(allSelected ? new Set() : new Set(visibleKeys));
   };
 
-  const bulkRemove = () => {
-    selectedKeys.forEach((key) => toggleSaved(key));
+  const confirmRemove = () => {
+    pendingRemove?.forEach((key) => toggleSaved(key));
     setSelectedKeys(new Set());
     setSelectMode(false);
-    setConfirmOpen(false);
+    setPendingRemove(null);
   };
 
   return (
@@ -60,10 +61,10 @@ export function DaLuuScreen() {
           background: "linear-gradient(rgb(250, 248, 245) 0%, rgb(239, 236, 231) 100%)",
         }}
       >
-        {/* Figma "Layout 2_Saved" (424:13764): 52px centered top bar, toolbar row at y 116. */}
-        <div className="sticky top-0 z-20 bg-white pb-2">
-          <TopBar title="Đã lưu" align="center" showBack={false} color="#27314D" height={52} />
-          <div className="h-16" />
+        {/* Same 64px centered header as Cẩm nang / Hỗ trợ (client 15/10: equal, shorter headers).
+            z-30 keeps the select-mode card checkboxes (z-20) from scrolling over the toolbar. */}
+        <div className="sticky top-0 z-30 bg-white pb-2">
+          <TopBar title="Đã lưu" align="center" showBack={false} color="#27314D" height={64} />
 
           <SavedToolbar
             disabled={keys.length === 0}
@@ -76,7 +77,7 @@ export function DaLuuScreen() {
             selectedCount={selectedKeys.size}
             allSelected={allSelected}
             onSelectAll={toggleSelectAll}
-            onBulkRemove={() => setConfirmOpen(true)}
+            onBulkRemove={() => setPendingRemove([...selectedKeys])}
           />
         </div>
 
@@ -86,15 +87,16 @@ export function DaLuuScreen() {
           selectMode={selectMode}
           selectedKeys={selectedKeys}
           onToggleSelect={toggleSelectKey}
+          onRemove={(key) => setPendingRemove([key])}
         />
       </main>
 
       <BottomNav />
 
-      {confirmOpen && (
+      {pendingRemove && (
         <div
           className="fixed inset-0 z-[100] flex items-center justify-center bg-black/20 px-6"
-          onClick={() => setConfirmOpen(false)}
+          onClick={() => setPendingRemove(null)}
         >
           <div
             role="dialog"
@@ -103,19 +105,19 @@ export function DaLuuScreen() {
             onClick={(e) => e.stopPropagation()}
           >
             <p className="flex flex-1 items-center text-center text-sm text-[#252525]">
-              Bạn muốn xoá {selectedKeys.size} nội dung?
+              Bạn muốn xoá {pendingRemove.length} nội dung?
             </p>
             <div className="flex gap-2.5">
               <button
                 type="button"
-                onClick={() => setConfirmOpen(false)}
+                onClick={() => setPendingRemove(null)}
                 className="flex h-8 w-[124px] items-center justify-center rounded border border-[#9b9b9b] bg-white px-3 py-1.5 text-sm font-medium text-[#252525]"
               >
                 Huỷ
               </button>
               <button
                 type="button"
-                onClick={bulkRemove}
+                onClick={confirmRemove}
                 className="flex h-8 w-[124px] items-center justify-center rounded border border-[#aa6e00] bg-[#aa6e00] px-3 py-1.5 text-sm font-medium text-white"
               >
                 Xoá

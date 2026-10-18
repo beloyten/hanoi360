@@ -106,7 +106,7 @@ export function SavedToolbar({
             color: "#27314D",
           }}
         >
-          <FilterIcon className="h-5 w-5 text-[#141E3F] opacity-70" />
+          <FilterIcon className="h-5 w-5 text-[#141E3F]" />
           Lọc theo
         </button>
 

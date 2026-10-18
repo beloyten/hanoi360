@@ -9,7 +9,6 @@ import { CATEGORIES, MUSEUMS, type MuseumCategory } from "./museums";
 
 const HERO = {
   title: "DẠO BƯỚC\nQUA KÝ ỨC",
-  hideTitle: true,
   gradientFrom: "#009B8C",
   gradientTo: "#004942",
   illustration: { src: "/figma/hero-bao-tang.png", width: 394, height: 171 },

@@ -9,7 +9,6 @@ import { CATEGORIES, SHOPS, type ShopCategory } from "./shops";
 
 const HERO = {
   title: "MUA SẮM\nTHOẢ THÍCH",
-  hideTitle: true,
   gradientFrom: "#DDB86B",
   gradientTo: "#AA6E00",
   illustration: { src: "/figma/hero-mua-sam.png", width: 394, height: 171 },

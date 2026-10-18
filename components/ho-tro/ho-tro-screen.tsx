@@ -31,10 +31,10 @@ export function HoTroScreen() {
       >
         <div className="sticky top-0 z-20 bg-white">
           {/* Figma "Top bar / Lưu" instance in Layout 10_Them: 52px, centered #27314D title. */}
-          <TopBar title="Hỗ trợ" align="center" showBack={false} color="#27314D" height={52} />
+          <TopBar title="Hỗ trợ" align="center" showBack={false} color="#27314D" height={64} />
 
           {/* Figma Layout 10_Them: 3 x 116px tabs at y 96, 21px side margins, content from y 181. */}
-          <div className="px-[21px] pt-[44px] pb-[21px]">
+          <div className="px-[21px] pb-[21px]">
             <div className="flex items-center justify-center">
               {TABS.map(({ key, label, Icon }) => {
                 const isActive = tab === key;

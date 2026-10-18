@@ -11,7 +11,8 @@ const HERO = {
   title: "GIẢI TRÍ\nĐA DẠNG",
   gradientFrom: "#009B8C",
   gradientTo: "#004942",
-  illustration: { src: "/figma/hero-giai-tri.png", width: 395, height: 181.7, hasTitle: true },
+  // Client 15/10: the art sat lower than other pages; lift it so the title lines up with Ẩm thực.
+  illustration: { src: "/figma/hero-giai-tri.png", width: 395, height: 181.7, hasTitle: true, top: 30 },
   searchPlaceholder: "Tìm địa điểm bạn muốn đến",
 };
 

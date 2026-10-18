@@ -9,7 +9,6 @@ import { FacilityList } from "./facility-list";
 
 const HERO = {
   title: "Y TẾ\nCHUYÊN\nNGHIỆP",
-  hideTitle: true,
   gradientFrom: "#009B8C",
   gradientTo: "#004942",
   illustration: { src: "/figma/hero-co-so-y-te.png", width: 394, height: 172 },
