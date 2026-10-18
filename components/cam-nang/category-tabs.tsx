@@ -1,12 +1,14 @@
 "use client";
 
-import { FoodTourIcon, HeritageIcon, ItineraryIcon, SeasonFestivalIcon } from "./icons";
+import Image from "next/image";
 
+// Figma icon sets "icon lich trinh goi y" etc. (425:40995...): 68px default, 72px selected with the grey frame
+// baked in. Icons live in public/cam-nang/tabs/{key}(-active).png (@3x exports).
 const TABS = [
-  { key: "itinerary", label: "Lịch trình\ngợi ý", Icon: ItineraryIcon },
-  { key: "heritage", label: "Hành trình\ndi sản", Icon: HeritageIcon },
-  { key: "season", label: "Mùa và\nlễ hội", Icon: SeasonFestivalIcon },
-  { key: "food", label: "Ẩm thực\ntour", Icon: FoodTourIcon },
+  { key: "itinerary", label: "Lịch trình\ngợi ý" },
+  { key: "heritage", label: "Hành trình\ndi sản" },
+  { key: "season", label: "Mùa và\nlễ hội" },
+  { key: "food", label: "Ẩm thực\ntour" },
 ] as const;
 
 export function CategoryTabs({
@@ -22,7 +24,7 @@ export function CategoryTabs({
     // Figma: tab row 361px wide (16px margins), 12px gaps, 8px bottom padding; labels 12px #141E3F.
     <div className="px-4 pb-2">
       <div className="relative flex gap-3">
-        {TABS.map(({ key, label, Icon }) => {
+        {TABS.map(({ key, label }) => {
           const isActive = key === activeCategory;
           return (
             <button
@@ -32,11 +34,15 @@ export function CategoryTabs({
               className="flex flex-1 flex-col items-center pb-1"
             >
               <div className="grid size-18 shrink-0 place-items-center">
-                <div className={`grid place-items-center ${isActive ? "size-18 bg-[#9B9B9B] p-0.5 animate-[tab-pop_0.3s_ease-in-out]" : "size-17 bg-transparent"}`}>
-                  <div className="size-full rounded-lg bg-white">
-                    <Icon className="h-full w-full" />
-                  </div>
-                </div>
+                <Image
+                  key={isActive ? "on" : "off"}
+                  src={`/cam-nang/tabs/${key}${isActive ? "-active" : ""}.png`}
+                  alt=""
+                  width={isActive ? 72 : 68}
+                  height={isActive ? 72 : 68}
+                  unoptimized
+                  className={isActive ? "size-18 animate-[tab-pop_0.3s_ease-in-out]" : "size-17"}
+                />
               </div>
               <span
                 className="flex-1 text-center text-xs leading-[15px] whitespace-pre-line text-[#141E3F]"

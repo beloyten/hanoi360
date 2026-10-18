@@ -34,7 +34,7 @@ function Header({ title, scrollContainerRef }: { title: string; scrollContainerR
         className="flex h-10 w-10 items-center justify-center transition-colors duration-200"
         style={{ color: fg }}
       >
-        <BackIcon className="h-6 w-6" />
+        <BackIcon className="size-8" />
       </button>
       <span className="text-base leading-6 font-semibold tracking-normal transition-colors duration-200" style={{ color: scrolled ? "#19264E" : "#ffffff" }}>
         {title}

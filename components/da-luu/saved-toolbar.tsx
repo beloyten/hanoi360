@@ -65,7 +65,7 @@ export function SavedToolbar({
           aria-label="Đóng"
           className="flex h-8 w-8 shrink-0 items-center justify-center text-[#19264e]"
         >
-          <CloseIcon className="h-[21.79px] w-[21.79px]" />
+          <CloseIcon className="size-8" />
         </button>
 
         <div className="ml-auto flex items-center gap-2.5">

@@ -39,7 +39,7 @@ export function VrScreen({ title, url, back }: { title: string; url: string; bac
             aria-label="Đóng"
             className="pointer-events-auto flex size-10 items-center justify-center text-[#FAF8F5]"
           >
-            <CloseIcon className="size-[22px]" />
+            <CloseIcon className="size-8" />
           </button>
           <span className="ml-[22px] min-w-0 truncate text-base leading-6 font-semibold text-[#FAF8F5]">{title}</span>
         </div>

@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { useIsSaved, useToggleSaved } from "@/lib/store/use-saved-store";
-import { BookmarkIcon, CalendarIcon, FacebookIcon, InstagramIcon, PinIconV2 } from "../home/icons";
+import { BookmarkIcon, TimeIcon, FacebookIcon, InstagramIcon, PinIconV2 } from "../home/icons";
 import { DirectionsButton } from "./directions-button";
 import { DetailContent, type DetailBlock } from "./detail-content";
 import Link from "next/link";
@@ -134,7 +134,7 @@ export function DetailScreen({
                 {item.hours && (
                   <div className="w-1/2 shrink-0">
                     <div className="flex items-center gap-1.5">
-                      <CalendarIcon className="h-5 w-5 text-[#19264E]" />
+                      <TimeIcon className="h-5 w-5 text-[#19264E]" />
                       <span className="text-xs leading-none font-semibold text-[#141E3F]">Mở cửa</span>
                     </div>
                     <p className="mt-2 text-sm leading-[17px] whitespace-pre-line text-[#141E3F]">{item.hours}</p>
@@ -164,7 +164,7 @@ export function DetailScreen({
                 aria-pressed={saved}
                 className="flex h-10 w-10 items-center justify-center text-[#27314D] transition-transform duration-150 select-none active:scale-90"
               >
-                <BookmarkIcon className="h-5 w-5" filled={saved} />
+                <BookmarkIcon className="size-8" filled={saved} />
               </button>
               <div className="flex items-center gap-3 text-[#27314D]">
                 <InstagramIcon className="h-8 w-8" />
@@ -181,7 +181,7 @@ export function DetailScreen({
               aria-pressed={saved}
               className="flex h-10 w-10 items-center justify-center text-[#27314D] transition-transform duration-150 select-none active:scale-90"
             >
-              <BookmarkIcon className="h-5 w-5" filled={saved} />
+              <BookmarkIcon className="size-[26px]" filled={saved} />
             </button>
           )}
         </div>

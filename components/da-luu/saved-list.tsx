@@ -2,7 +2,7 @@
 
 import { useSavedKeys } from "@/lib/store/use-saved-store";
 import { CardItem } from "../shared/card-item";
-import { CheckIconV2 } from "../home/icons";
+import { CheckboxIcon } from "../home/icons";
 import { parseDistanceMeters, resolveSavedItem, type SavedDisplayItem } from "./saved-items";
 import type { FilterType, SortBy } from "./saved-toolbar";
 
@@ -43,12 +43,8 @@ function SavedCard({
           aria-pressed={selected}
           className="absolute inset-0 z-20"
         >
-          <span
-            className="absolute top-3 left-3 flex h-5 w-5 items-center justify-center border border-[#9b9b9b] transition-colors"
-            style={{ backgroundColor: selected ? "#aa6e00" : "#ffffff" }}
-          >
-            {selected && <CheckIconV2 className="h-3 w-3 text-[#f2d79f]" />}
-          </span>
+          {/* Figma "check box" (393:34160 / 393:34243). */}
+          <CheckboxIcon className="absolute top-3 left-3 size-5" checked={selected} />
         </button>
       )}
     </div>

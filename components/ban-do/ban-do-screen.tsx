@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { useState } from "react";
 import { BottomNav } from "../home/bottom-nav";
-import { SearchIcon } from "../home/icons";
+import { CaretUpIcon, SearchIcon } from "../home/icons";
 import { DirectionsButton } from "../shared/directions-button";
 import { TopBar } from "../shared/top-bar";
 import { useShowDistance } from "../home/use-geo-permission";
@@ -33,11 +33,11 @@ function MyLocationIcon({ className }: { className?: string }) {
 }
 
 function CaretIcon({ open }: { open: boolean }) {
-  // Figma: caret points up while closed, down while the list is open.
+  // Figma "ico_up" / "ico_down": caret points up while closed, down while the list is open.
   return (
-    <svg className="size-5" viewBox="0 0 20 20" fill="none" style={{ transform: open ? "rotate(180deg)" : undefined }}>
-      <path d="M4 13L10 7L16 13H4Z" fill="currentColor" />
-    </svg>
+    <span className="block size-5 transition-transform" style={{ transform: open ? "rotate(180deg)" : undefined }}>
+      <CaretUpIcon className="size-5" />
+    </span>
   );
 }
 

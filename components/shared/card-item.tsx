@@ -91,7 +91,7 @@ export function CardItemVertical({
           aria-pressed={saved}
           className="absolute top-[46px] right-4 flex size-10 items-center justify-center text-[#27314D] transition-transform duration-150 select-none active:scale-90"
         >
-          <BookmarkIcon className="h-[22.3px] w-[18px]" filled={saved} />
+          <BookmarkIcon className="size-7" filled={saved} />
         </button>
       </div>
     </>
@@ -153,7 +153,7 @@ export function CardItemHorizontal({
           aria-label="Lưu địa điểm"
           className="relative z-10 -mt-1 -ml-1 flex h-8 w-8 shrink-0 items-center justify-center self-start text-[#27314D]"
         >
-          <BookmarkIcon className="h-4 w-4" filled={saved} />
+          <BookmarkIcon className="size-[26px]" filled={saved} />
         </button>
         <p className="truncate text-base leading-6 font-semibold text-[#27314D]">{item.name}</p>
 

@@ -75,7 +75,7 @@ export function FilterSheet({
           className="flex h-9 w-9 items-center justify-center"
           style={{ color: "#252525" }}
         >
-          <CloseIcon className="h-5 w-5" />
+          <CloseIcon className="size-8" />
         </button>
 
         <button
