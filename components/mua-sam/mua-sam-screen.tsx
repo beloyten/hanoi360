@@ -11,7 +11,7 @@ const HERO = {
   title: "MUA SẮM\nTHOẢ THÍCH",
   gradientFrom: "#DDB86B",
   gradientTo: "#AA6E00",
-  illustration: { src: "/figma/hero-mua-sam.png", width: 394, height: 171 },
+  illustration: { src: "/figma/hero-mua-sam.png", width: 394, height: 170, hasTitle: true },
   searchPlaceholder: "Tìm địa điểm bạn muốn đến",
 };
 

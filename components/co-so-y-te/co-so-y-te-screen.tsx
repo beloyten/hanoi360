@@ -11,7 +11,7 @@ const HERO = {
   title: "Y TẾ\nCHUYÊN\nNGHIỆP",
   gradientFrom: "#009B8C",
   gradientTo: "#004942",
-  illustration: { src: "/figma/hero-co-so-y-te.png", width: 394, height: 172 },
+  illustration: { src: "/figma/hero-co-so-y-te.png", width: 394, height: 170, hasTitle: true },
   searchPlaceholder: "Tìm địa điểm bạn muốn đến",
 };
 

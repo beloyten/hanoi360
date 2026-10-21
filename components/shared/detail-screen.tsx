@@ -15,7 +15,7 @@ const CTA_CLASS =
   "flex h-12 w-full items-center justify-center rounded-lg bg-[#AA6E00] text-base font-semibold text-white transition-transform duration-150 select-none active:scale-[0.98]";
 
 const HERO_HEIGHT = 392;
-const BAR_HEIGHT = 56;
+const BAR_HEIGHT = 48;
 // Figma "Top bar / chi tiet" (556:51864) fill, 112px tall over the hero photo.
 const DETAIL_BAR_GRADIENT =
   "linear-gradient(180deg, rgba(39, 39, 45, 1) 0%, rgba(18, 18, 21, 0.32) 54%, rgba(0, 0, 0, 0) 100%)";
@@ -90,7 +90,7 @@ export function DetailScreen({
         title={pastHero ? item.name : undefined}
         tone={pastHero ? "dark" : "light"}
         background={pastHero ? "#F3F3F3" : DETAIL_BAR_GRADIENT}
-        height={pastHero ? BAR_HEIGHT : 112}
+        height={pastHero ? BAR_HEIGHT : 104}
         className="pointer-events-none fixed inset-x-0 top-0 z-40"
       />
 

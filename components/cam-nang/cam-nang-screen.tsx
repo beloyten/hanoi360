@@ -20,7 +20,7 @@ export function CamNangScreen() {
       >
         <div className="sticky top-0 z-20 bg-white">
           {/* Figma "Top bar / Lưu" in Layout 2_Cẩm nang: 64px, centered #27314D title. */}
-          <TopBar title="Cẩm nang du lịch Hà Nội" align="center" showBack={false} color="#27314D" height={64} />
+          <TopBar title="Cẩm nang du lịch Hà Nội" align="center" showBack={false} color="#27314D" height={56} />
           <CategoryTabs activeCategory={activeCategory} onCategoryChange={setActiveCategory} />
           {/* Part of the sticky header so cards never touch the tabs while scrolling (Figma: list at y 9). */}
           <div className="h-[9px] bg-[#E3E2E0]" />

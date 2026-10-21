@@ -19,8 +19,8 @@ export function BottomNav() {
     <nav
       className="fixed inset-x-0 bottom-0 z-40 flex items-stretch gap-1 rounded-t-2xl bg-white px-6 pt-2"
       style={{
-        height: "calc(67px + env(safe-area-inset-bottom))",
-        paddingBottom: "calc(12px + env(safe-area-inset-bottom))",
+        height: "calc(59px + env(safe-area-inset-bottom))",
+        paddingBottom: "calc(4px + env(safe-area-inset-bottom))",
         boxShadow: "0 -8px 24px rgba(0,0,0,0.08)",
       }}
     >

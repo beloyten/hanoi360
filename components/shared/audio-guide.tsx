@@ -20,13 +20,7 @@ function SkipButton({ direction, onClick }: { direction: "back" | "forward"; onC
       aria-label={direction === "back" ? "Lùi 10 giây" : "Tới 10 giây"}
       className="relative flex size-10 items-center justify-center"
     >
-      <Image src={direction === "back" ? "/figma/audio-back10.svg" : "/figma/audio-fwd10.svg"} alt="" width={19} height={26} />
-      <span
-        className="absolute top-[18px] text-[9px] leading-none font-semibold text-[#646572]"
-        style={direction === "back" ? { left: 14 } : { left: 18 }}
-      >
-        10
-      </span>
+      <Image src={direction === "back" ? "/figma/audio-back10.svg" : "/figma/audio-fwd10.svg"} alt="" width={32} height={32} />
     </button>
   );
 }
@@ -97,7 +91,15 @@ export function AudioGuide({ src }: { src?: string }) {
     <div className="relative h-36 w-full rounded-lg bg-[#E5DBC6]/70 px-7">
       {src && <audio ref={audioRef} src={src} preload="metadata" />}
 
-      <Image src="/figma/audio-wave.svg" alt="" width={63} height={24} className="absolute top-2.5 left-1/2 -translate-x-1/2" />
+      {/* Client's 34-frame "beat" PNG sequence as an animated WebP; the first frame stands still while paused. */}
+      <Image
+        src={playing ? "/figma/audio-wave.webp" : "/figma/audio-wave-still.png"}
+        alt=""
+        width={63}
+        height={24}
+        unoptimized
+        className="absolute top-2.5 left-1/2 -translate-x-1/2"
+      />
 
       <div
         ref={trackRef}

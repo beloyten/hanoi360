@@ -64,7 +64,7 @@ export function DaLuuScreen() {
         {/* Same 64px centered header as Cẩm nang / Hỗ trợ (client 15/10: equal, shorter headers).
             z-30 keeps the select-mode card checkboxes (z-20) from scrolling over the toolbar. */}
         <div className="sticky top-0 z-30 bg-white pb-2">
-          <TopBar title="Đã lưu" align="center" showBack={false} color="#27314D" height={64} />
+          <TopBar title="Đã lưu" align="center" showBack={false} color="#27314D" height={56} />
 
           <SavedToolbar
             disabled={keys.length === 0}

@@ -21,13 +21,13 @@ export function CategoryHeader({
   }, [scrollContainerRef]);
 
   // Over the hero the bar is transparent with white content; once scrolled it takes the
-  // Figma category state (#F3F3F3, #19264E). 56px keeps it flush with the sticky search bar (top-14).
+  // Figma category state (#F3F3F3, #19264E). 48px keeps it flush with the sticky search bar (top-12).
   return (
     <TopBar
       title={title}
       tone={scrolled ? "dark" : "light"}
       background={scrolled ? "#F3F3F3" : "transparent"}
-      height={56}
+      height={48}
       className="fixed inset-x-0 top-0 z-40"
     />
   );

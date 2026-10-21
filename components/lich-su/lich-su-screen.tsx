@@ -63,7 +63,7 @@ const ERAS: Era[] = [
   },
 ];
 
-const BAR_HEIGHT = 56;
+const BAR_HEIGHT = 48;
 const HERO_HEIGHT = 392;
 const DETAIL_BAR_GRADIENT =
   "linear-gradient(180deg, rgba(39, 39, 45, 1) 0%, rgba(18, 18, 21, 0.32) 54%, rgba(0, 0, 0, 0) 100%)";
@@ -128,7 +128,7 @@ export function LichSuScreen() {
         title={pastHero ? "Lịch sử Hà Nội" : undefined}
         tone={pastHero ? "dark" : "light"}
         background={pastHero ? "#F3F3F3" : DETAIL_BAR_GRADIENT}
-        height={pastHero ? BAR_HEIGHT : 112}
+        height={pastHero ? BAR_HEIGHT : 104}
         className="pointer-events-none fixed inset-x-0 top-0 z-40"
       />
 
@@ -155,7 +155,7 @@ export function LichSuScreen() {
           </p>
 
           {/* Equal-width era chips (client: "thẻ lọc có width = nhau"); tap scrolls to that era. */}
-          <div className="sticky top-14 z-20 -mx-3 -my-2 bg-[#F3F3F3] px-3 py-2">
+          <div className="sticky top-12 z-20 -mx-3 -my-2 bg-[#F3F3F3] px-3 py-2">
             <div className="flex h-8 gap-1 overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
               {ERAS.map((era) => {
                 const isActive = active === era.key;

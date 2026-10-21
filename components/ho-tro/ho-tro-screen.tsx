@@ -31,10 +31,10 @@ export function HoTroScreen() {
       >
         <div className="sticky top-0 z-20 bg-white">
           {/* Figma "Top bar / Lưu" instance in Layout 10_Them: 52px, centered #27314D title. */}
-          <TopBar title="Hỗ trợ" align="center" showBack={false} color="#27314D" height={64} />
+          <TopBar title="Hỗ trợ" align="center" showBack={false} color="#27314D" height={56} />
 
-          {/* Figma Layout 10_Them: 3 x 116px tabs at y 96, 21px side margins, content from y 181. */}
-          <div className="px-[21px] pb-[21px]">
+          {/* Figma "Tap top" (472:67265, 21/10): 3 x 116x68 tabs, icon 24 + 4 + label centred; level with the Cẩm nang tab icons. */}
+          <div className="px-[21px] pt-0.5 pb-[21px]">
             <div className="flex items-center justify-center">
               {TABS.map(({ key, label, Icon }) => {
                 const isActive = tab === key;
@@ -44,9 +44,9 @@ export function HoTroScreen() {
                     key={key}
                     type="button"
                     onClick={() => setTab(key)}
-                    className={`flex flex-1 p-0.5 transition-colors ${isActive ? "bg-[#9B9B9B]" : "bg-transparent"}`}
+                    className={`flex h-[68px] flex-1 p-0.5 transition-colors ${isActive ? "bg-[#9B9B9B]" : "bg-transparent"}`}
                   >
-                    <span className="flex flex-1 flex-col items-center gap-1.5 rounded bg-white px-2 py-3">
+                    <span className="flex flex-1 flex-col items-center justify-center gap-1 rounded bg-white px-2">
                       <span style={{ color }}>
                         <Icon className="h-6 w-6" filled={isActive} />
                       </span>

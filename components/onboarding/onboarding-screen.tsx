@@ -7,9 +7,8 @@ import { CheckIcon } from "./icons";
 import { LogoAnimation } from "./logo-animation";
 
 type Slide = {
+  /** Pre-cropped to the Figma welcome frame (393x736, exported @3x) so the framing matches the design. */
   image: string;
-  /** object-position matching the crop in the Figma welcome frames. */
-  position: string;
   alt: string;
   heading: [string, string];
   subheading: string;
@@ -18,28 +17,24 @@ type Slide = {
 const SLIDES: Slide[] = [
   {
     image: "/onboarding/slide-1.webp",
-    position: "55% 58%",
     alt: "Hoàng hôn trên Hồ Tây với chùa Trấn Quốc",
     heading: ["Chào mừng", "đến với Hà Nội"],
     subheading: "Bắt đầu hành trình của bạn",
   },
   {
     image: "/onboarding/slide-2.webp",
-    position: "64% 50%",
     alt: "Một bát phở bò Hà Nội truyền thống",
     heading: ["Nếm vị", "của Hà Nội"],
     subheading: "Từ gánh phở sớm mai đến ly cà phê phố Cổ",
   },
   {
     image: "/onboarding/slide-3.webp",
-    position: "42% 43%",
     alt: "Khuê Văn Các tại Văn Miếu - Quốc Tử Giám",
     heading: ["Chạm vào", "ngàn năm văn hiến"],
     subheading: "Mỗi địa danh kể một câu chuyện",
   },
   {
     image: "/onboarding/slide-4.webp",
-    position: "66% 50%",
     alt: "Cầu Long Biên với dòng người qua lại",
     heading: ["Hoà vào", "nhịp sống phố thị"],
     subheading: "Nơi truyền thống và hiện đại cùng hiện diện",
@@ -63,7 +58,7 @@ type RGBA = { r: number; g: number; b: number; a: number };
 const DOT_INACTIVE: RGBA = { r: 150, g: 152, b: 171, a: 1 };
 const DOT_ACTIVE: RGBA = { r: 242, g: 215, b: 159, a: 1 };
 const PILL_START: RGBA = { r: 170, g: 110, b: 0, a: 1 };
-const PILL_END: RGBA = { r: 128, g: 83, b: 0, a: 1 };
+const PILL_END: RGBA = PILL_START;
 
 const clamp01 = (t: number) => Math.min(Math.max(t, 0), 1);
 const lerp = (a: number, b: number, t: number) => a + (b - a) * t;
@@ -293,7 +288,6 @@ export function OnboardingScreen() {
                 priority={i === 0}
                 draggable={false}
                 className="object-cover"
-                style={{ objectPosition: slide.position }}
               />
               {/* Figma: gradient from y 415 of 736, transparent to black 90% at 85%. */}
               <div
@@ -374,7 +368,7 @@ export function OnboardingScreen() {
               className="absolute top-1 left-1 flex h-[54px] shrink-0 cursor-grab touch-none items-center justify-center overflow-hidden rounded-[43px] text-sm whitespace-nowrap text-[#f3ebd9] active:cursor-grabbing"
               style={{
                 width: pillWidth,
-                backgroundColor: isConfirmed ? "#805300" : mixRGBA(PILL_START, PILL_END, pillProgress),
+                backgroundColor: isConfirmed ? "#AA6E00" : mixRGBA(PILL_START, PILL_END, pillProgress),
                 transform: `translateX(${pillOffset}px) scale(${isConfirmed ? 1.06 : 1 + pillProgress * 0.04})`,
                 transition: isPillDragging
                   ? "background-color 80ms linear"
@@ -388,7 +382,7 @@ export function OnboardingScreen() {
                   transition: isPillDragging ? "none" : "opacity 200ms",
                 }}
               >
-                Khám phá ngay
+                {isLast ? "Bắt đầu" : "Khám phá ngay"}
               </span>
               <span
                 className="absolute inset-0 flex items-center justify-center text-[#f3ebd9]"

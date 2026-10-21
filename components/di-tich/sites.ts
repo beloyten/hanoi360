@@ -17,6 +17,19 @@ export function getSite(id: number) {
 }
 
 export const SITES: Site[] = [
+  // Client 21/10: Hoàng Thành Thăng Long leads the list.
+  {
+    id: 9,
+    name: "Hoàng Thành Thăng Long",
+    subtitle: "Phường Ba Đình.",
+    distance: "1.1km",
+    photo: "/figma/hoang-thanh-hero.webp",
+    address: "19c Hoàng Diệu, Điện Biên, Ba Đình, Hà Nội",
+    hours: "S: 7h00 - 11h30\nC: 13h00 - 16h30",
+    hoursNote: "Thứ 3, 4, 5, 7, CN",
+    vrTour: "hoang-thanh",
+    hasAudio: true,
+  },
   {
     id: 1,
     name: "Hồ Tây",
@@ -72,18 +85,6 @@ export const SITES: Site[] = [
     subtitle: "Thị xã Sơn Tây",
     distance: "44km",
     photo: "/di-tich-lich-su/lang-co-duong-lam.png",
-  },
-  {
-    id: 9,
-    name: "Hoàng Thành Thăng Long",
-    subtitle: "Phường Ba Đình.",
-    distance: "1.1km",
-    photo: "/figma/hoang-thanh-hero.webp",
-    address: "19c Hoàng Diệu, Điện Biên, Ba Đình, Hà Nội",
-    hours: "S: 7h00 - 11h30\nC: 13h00 - 16h30",
-    hoursNote: "Thứ 3, 4, 5, 7, CN",
-    vrTour: "hoang-thanh",
-    hasAudio: true,
   },
   {
     id: 10,

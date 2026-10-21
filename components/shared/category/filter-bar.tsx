@@ -39,7 +39,7 @@ export function FilterBar({
 
   return (
     <>
-      <FilterSection className="pt-1 pb-2">
+      <FilterSection className="pt-3 pb-2">
         <button type="button" onClick={() => setSheetOpen(true)} className={CHIP_CLASS} style={chipStyle(sortActive)}>
           <FilterIcon className="h-5 w-5" />
           Lọc theo

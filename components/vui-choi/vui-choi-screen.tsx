@@ -11,7 +11,7 @@ const HERO = {
   title: "TRẢI NGHIỆM\nVUI CHƠI\nHẤP DẪN",
   gradientFrom: "#009B8C",
   gradientTo: "#004942",
-  illustration: { src: "/figma/hero-vui-choi.png", width: 396.3, height: 175.7, hasTitle: true },
+  illustration: { src: "/figma/hero-vui-choi.png", width: 394, height: 170, hasTitle: true },
   searchPlaceholder: "Tìm địa điểm bạn muốn đến",
 };
 

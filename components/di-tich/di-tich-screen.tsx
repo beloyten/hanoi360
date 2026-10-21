@@ -9,7 +9,7 @@ const HERO = {
   title: "TÌM HIỂU\nLỊCH SỬ\nHÀ NỘI",
   gradientFrom: "#DDB86B",
   gradientTo: "#AA6E00",
-  illustration: { src: "/figma/hero-di-tich.png", width: 397.7, height: 173.7 },
+  illustration: { src: "/figma/hero-di-tich.png", width: 394, height: 170, hasTitle: true },
   searchPlaceholder: "Tìm địa điểm bạn muốn đến",
 };
 
