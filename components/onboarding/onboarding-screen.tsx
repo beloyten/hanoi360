@@ -7,7 +7,7 @@ import { CheckIcon } from "./icons";
 import { LogoAnimation } from "./logo-animation";
 
 type Slide = {
-  /** Pre-cropped to the Figma welcome frame (393x736, exported @3x) so the framing matches the design. */
+  /** Client export (22/10): 1206x1980, the 402x660 web area of Safari on iPhone @3x, bottom shade baked in. */
   image: string;
   alt: string;
   heading: [string, string];
@@ -54,11 +54,14 @@ const EDGE_RESISTANCE = 0.35;
 
 type RGBA = { r: number; g: number; b: number; a: number };
 
-// Figma "Layout 1_welcome" (369:7574): dots #F2D79F / #9698AB; the pill darkens to #805300 while pressed.
+// Figma "Layout 1_welcome" (369:7574): dots #F2D79F / #9698AB; the pill is #AA6E00 and darkens to #805300 while
+// pressed. Figma "done" (795:510996, client 22/10): the pill goes away and the circle turns #009B8C with a #00F2DB tick.
 const DOT_INACTIVE: RGBA = { r: 150, g: 152, b: 171, a: 1 };
 const DOT_ACTIVE: RGBA = { r: 242, g: 215, b: 159, a: 1 };
-const PILL_START: RGBA = { r: 170, g: 110, b: 0, a: 1 };
-const PILL_END: RGBA = PILL_START;
+const PILL_COLOR = "#AA6E00";
+const PILL_PRESSED = "#805300";
+const DONE_CIRCLE = "#009B8C";
+const DONE_TICK = "#00F2DB";
 
 const clamp01 = (t: number) => Math.min(Math.max(t, 0), 1);
 const lerp = (a: number, b: number, t: number) => a + (b - a) * t;
@@ -289,11 +292,6 @@ export function OnboardingScreen() {
                 draggable={false}
                 className="object-cover"
               />
-              {/* Figma: gradient from y 415 of 736, transparent to black 90% at 85%. */}
-              <div
-                className="absolute inset-x-0 bottom-0 h-[59%]"
-                style={{ background: "linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.9) 85%)" }}
-              />
             </div>
           );
         })}
@@ -352,8 +350,17 @@ export function OnboardingScreen() {
               WebkitBackdropFilter: "blur(6.9px)",
             }}
           >
-            <div className="pointer-events-none absolute top-1 right-[5px] flex size-13.5 items-center justify-center rounded-full bg-[rgba(217,217,217,0.36)]">
-              <Image src="/onboarding/chevron.svg" alt="" width={13} height={8} />
+            <div
+              className="pointer-events-none absolute top-1 right-[5px] flex size-13.5 items-center justify-center rounded-full transition-colors duration-200"
+              style={{ backgroundColor: isConfirmed ? DONE_CIRCLE : "rgba(217,217,217,0.36)" }}
+            >
+              {isConfirmed ? (
+                <span style={{ color: DONE_TICK }}>
+                  <CheckIcon width={18} height={18} />
+                </span>
+              ) : (
+                <Image src="/onboarding/chevron.svg" alt="" width={13} height={8} />
+              )}
             </div>
 
             <button
@@ -368,11 +375,12 @@ export function OnboardingScreen() {
               className="absolute top-1 left-1 flex h-[54px] shrink-0 cursor-grab touch-none items-center justify-center overflow-hidden rounded-[43px] text-sm whitespace-nowrap text-[#f3ebd9] active:cursor-grabbing"
               style={{
                 width: pillWidth,
-                backgroundColor: isConfirmed ? "#AA6E00" : mixRGBA(PILL_START, PILL_END, pillProgress),
-                transform: `translateX(${pillOffset}px) scale(${isConfirmed ? 1.06 : 1 + pillProgress * 0.04})`,
+                backgroundColor: isPillDragging ? PILL_PRESSED : PILL_COLOR,
+                opacity: isConfirmed ? 0 : 1,
+                transform: `translateX(${pillOffset}px) scale(${1 + pillProgress * 0.04})`,
                 transition: isPillDragging
                   ? "background-color 80ms linear"
-                  : `transform 320ms ${BOUNCE_EASE}, width 320ms ${MORPH_EASE}, background-color 200ms`,
+                  : `transform 320ms ${BOUNCE_EASE}, width 320ms ${MORPH_EASE}, background-color 200ms, opacity 200ms`,
               }}
             >
               <span

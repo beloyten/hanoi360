@@ -32,8 +32,8 @@ export function BottomNav() {
             key={key}
             type="button"
             onClick={() => href && router.push(href)}
-            // Full-height column = larger tap target (client: icons were hard to hit).
-            className={`flex flex-1 flex-col items-center gap-1 ${color}`}
+            // Full-height column = larger tap target (client: icons were hard to hit); fades while pressed (client 22/10).
+            className={`flex flex-1 flex-col items-center gap-1 transition-opacity active:opacity-50 ${color}`}
           >
             <Icon className="h-7 w-7" filled={isActive} />
             <span className={`text-xs leading-[15px] ${isActive ? "text-[#AA7709]" : ""}`}>{label}</span>

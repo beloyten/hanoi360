@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import { SearchIcon } from "./icons";
 
 // Figma "Top bar / home" (392:11222): 68px gradient bar; logo 48px, search 233x32, VNE 48x32, 16px gaps.
@@ -15,12 +16,14 @@ export function Header() {
         <span className="truncate text-xs leading-none text-[#27314D]/70">Tìm địa điểm bạn muốn đến</span>
       </div>
 
-      <button
-        type="button"
-        className="flex h-8 w-12 shrink-0 items-center justify-center rounded border border-[#F2D79F] text-sm text-white"
+      {/* Client 22/10: the language button opens Hỗ trợ, whose default Cài đặt tab holds the language list. */}
+      <Link
+        href="/ho-tro"
+        aria-label="Đổi ngôn ngữ"
+        className="flex h-8 w-12 shrink-0 items-center justify-center rounded border border-[#F2D79F] text-sm text-white transition-opacity active:opacity-50"
       >
         VNE
-      </button>
+      </Link>
     </header>
   );
 }

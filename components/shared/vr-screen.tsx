@@ -2,20 +2,28 @@
 
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { canGoBackInApp } from "@/lib/navigation-history";
 import { CloseIcon } from "../home/icons";
 
 /**
  * Figma "Chi tiet / 360" (720:27147): the tour fills the whole screen; the "Lưu" top bar variant
- * (close icon + #FAF8F5 title) floats on top, with a "Kéo để tham quan" hint until the first touch.
+ * (close icon + #FAF8F5 title) floats on top, with a "Kéo để tham quan" hint for the first 5s (client 22/10).
  */
+const HINT_MS = 5000;
+
 export function VrScreen({ title, url, back }: { title: string; url: string; back: string }) {
   const router = useRouter();
   const [hintVisible, setHintVisible] = useState(true);
 
+  // Touches inside the cross-origin tour iframe never reach this page, so the hint fades out on a timer.
+  useEffect(() => {
+    const id = window.setTimeout(() => setHintVisible(false), HINT_MS);
+    return () => window.clearTimeout(id);
+  }, []);
+
   return (
-    <div className="fixed inset-0 bg-[#19264E]" onPointerDownCapture={() => setHintVisible(false)}>
+    <div className="fixed inset-0 bg-[#19264E]">
       <iframe
         src={url}
         title={`Tour 360° ${title}`}
@@ -46,7 +54,7 @@ export function VrScreen({ title, url, back }: { title: string; url: string; bac
       </div>
 
       <div
-        className="pointer-events-none absolute inset-0 z-10 flex flex-col items-center justify-center gap-2 transition-opacity duration-300"
+        className="pointer-events-none absolute inset-0 z-10 flex flex-col items-center justify-center gap-2 transition-opacity duration-500"
         style={{ opacity: hintVisible ? 1 : 0 }}
       >
         <Image src="/figma/drag-360.svg" alt="" width={78} height={78} />
