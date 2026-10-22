@@ -168,9 +168,10 @@ export function CardItemHorizontal({
         )}
       </div>
 
+      {/* Figma "card list_2" (client 21/10 + 23/10): the button sits 8px from the card's right and bottom edges. */}
       <DirectionsButton
         query={`${item.name}${item.address ? `, ${item.address}` : ""}, Hà Nội`}
-        className="absolute right-1.5 bottom-1 z-10"
+        className="absolute right-2 bottom-2 z-10"
         iconClassName={directionsIconClassName ?? "text-[#727273]"}
       />
     </>

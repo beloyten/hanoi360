@@ -1,6 +1,7 @@
 "use client";
 
 import { usePathname, useRouter } from "next/navigation";
+import { useState } from "react";
 import { GuideIcon, HomeIcon, MapIcon, SavedIcon, SupportIcon } from "./icons";
 
 const NAV_ITEMS = [
@@ -14,6 +15,9 @@ const NAV_ITEMS = [
 export function BottomNav() {
   const pathname = usePathname();
   const router = useRouter();
+  // Client 22-23/10: the pressed tab fades and shrinks. Tracked in state because a quick tap on iOS ends before a
+  // CSS :active transition is visible; the change applies instantly and eases back on release.
+  const [pressed, setPressed] = useState<string | null>(null);
 
   return (
     <nav
@@ -27,13 +31,21 @@ export function BottomNav() {
       {NAV_ITEMS.map(({ key, label, Icon, href }) => {
         const isActive = href ? pathname === href : false;
         const color = isActive ? "text-[#aa6e00]" : "text-[#27314D]";
+        const isPressed = pressed === key;
         return (
           <button
             key={key}
             type="button"
             onClick={() => href && router.push(href)}
-            // Full-height column = larger tap target (client: icons were hard to hit); fades while pressed (client 22/10).
-            className={`flex flex-1 flex-col items-center gap-1 transition-opacity active:opacity-50 ${color}`}
+            onPointerDown={() => setPressed(key)}
+            onPointerUp={() => setPressed(null)}
+            onPointerLeave={() => setPressed(null)}
+            onPointerCancel={() => setPressed(null)}
+            // Full-height column = larger tap target (client: icons were hard to hit).
+            className={`flex flex-1 flex-col items-center gap-1 ${color} ${
+              isPressed ? "scale-90 opacity-50" : "transition-[opacity,transform] duration-200"
+            }`}
+            style={{ WebkitTapHighlightColor: "transparent" }}
           >
             <Icon className="h-7 w-7" filled={isActive} />
             <span className={`text-xs leading-[15px] ${isActive ? "text-[#AA7709]" : ""}`}>{label}</span>
