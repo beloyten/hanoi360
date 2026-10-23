@@ -33,15 +33,28 @@ export function CategoryTabs({
               onClick={() => onCategoryChange(key)}
               className="flex flex-1 flex-col items-center pb-1"
             >
-              <div className="grid size-18 shrink-0 place-items-center">
+              {/* Both states stay mounted and only swap visibility (client 23/10): changing the src made iOS Safari
+                  reload the PNG, so the tapped and the previously selected icons blanked out for a moment. */}
+              <div
+                className={`grid size-18 shrink-0 place-items-center ${isActive ? "animate-[tab-pop_0.3s_ease-in-out]" : ""}`}
+              >
                 <Image
-                  key={isActive ? "on" : "off"}
-                  src={`/cam-nang/tabs/${key}${isActive ? "-active" : ""}.png`}
+                  src={`/cam-nang/tabs/${key}.png`}
                   alt=""
-                  width={isActive ? 72 : 68}
-                  height={isActive ? 72 : 68}
+                  width={68}
+                  height={68}
                   unoptimized
-                  className={isActive ? "size-18 animate-[tab-pop_0.3s_ease-in-out]" : "size-17"}
+                  priority
+                  className={`col-start-1 row-start-1 size-17 ${isActive ? "invisible" : ""}`}
+                />
+                <Image
+                  src={`/cam-nang/tabs/${key}-active.png`}
+                  alt=""
+                  width={72}
+                  height={72}
+                  unoptimized
+                  priority
+                  className={`col-start-1 row-start-1 size-18 ${isActive ? "" : "invisible"}`}
                 />
               </div>
               <span
